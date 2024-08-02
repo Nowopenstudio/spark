@@ -1,0 +1,67 @@
+export default {
+    name:"articles",
+    type:"document",
+    title:'Articles',
+    fields:[
+        {
+            type:'string',
+            name:'title',
+            title:'Title'
+        },
+        {
+            type:'slug',
+            name:'slug',
+            title:'Slug',
+            options:{
+                source:'title'
+            }
+
+        },
+        {
+            type:"Object",
+            name:"author",
+            title:'Author',
+            to:[{
+                type:'authors'
+            }]
+        },
+        {
+            type:'array',
+            name:'intro',
+            of:[{
+                type:'block'
+            }]
+        },
+        {
+            type:'array',
+            name:'content',
+            title: 'Article',
+            of:[{
+                type:'object',
+                name:'sections',
+                title:'Sections',
+                fields:[
+                    {
+                        type:'string',
+                        name:'header',
+                        title:'Header'
+                    },
+                    {
+                        type:'array',
+                        name:'content',
+                        of:[{
+                            type:'block'
+                        }]
+                    }
+            ]
+            }]
+        },
+        {
+            type:"image",
+            name:"cover",
+            title:'Cover'
+
+        }
+
+    ]
+}

@@ -1,0 +1,59 @@
+export default {
+    name:"projects",
+    type:"document",
+    title:'Project',
+    fields:[
+        {
+            type:'string',
+            name:'title',
+            title:'Title'
+        },
+        {
+            type:'slug',
+            name:'slug',
+            title:'Slug',
+            options:{
+                source:'title'
+            }
+
+        },
+        {
+            type:'array',
+            name:'intro',
+            of:[{
+                type:'block'
+            }]
+        },
+        {
+            type:'array',
+            name:'content',
+            title: 'Article',
+            of:[{
+                type:'object',
+                name:'sections',
+                title:'Sections',
+                fields:[
+                    {
+                        type:'string',
+                        name:'header',
+                        title:'Header'
+                    },
+                    {
+                        type:'array',
+                        name:'content',
+                        of:[{
+                            type:'block'
+                        }]
+                    }
+            ]
+            }]
+        },
+        {
+            type:"image",
+            name:"cover",
+            title:'Cover'
+
+        }
+
+    ]
+}
