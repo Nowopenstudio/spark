@@ -10,6 +10,15 @@ export default {
             title:'Title'
         },
         {
+            type:'slug',
+            name:'catSlug',
+            title:'Category Slug',
+            options:{
+                source:'title'
+            }
+
+        },
+        {
             type:'string',
             name:'string',
             title:'color'

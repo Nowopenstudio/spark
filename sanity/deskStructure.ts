@@ -33,16 +33,16 @@ export const myStructure = (S:any) =>
             .items([
               S.listItem() 
                 .title('About')
-                .child(S.document().schemaType('about').documentId('about')),
+                .child(S.document().title('about').schemaType('about').documentId('about')),
               S.listItem('roadmap')
                 .title('Roadmap')
-                .child(S.document().schemaType('roadmap').documentId('roadmap')),
+                .child(S.document().title('Roadmap').schemaType('roadmap').documentId('roadmap')),
               S.listItem()
                 .title('Membership')
-                .child(S.document().schemaType('membership').documentId('membership')),
+                .child(S.document().title('Membership').schemaType('membership').documentId('membership')),
               S.listItem()
                 .title('Contact')
-                .child(S.document().schemaType('contact').documentId('contact')),
+                .child(S.document().title('Contact').schemaType('contact').documentId('contact')),
               
               
             ])
