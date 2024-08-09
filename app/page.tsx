@@ -6,7 +6,7 @@ import { client } from "./lib/sanity";
 
 export default async function Home() {
   return (
-    <main className="w-full">
+    <main className="w-full z-10">
         
      
     </main>
