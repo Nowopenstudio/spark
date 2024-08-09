@@ -8,7 +8,7 @@ const CustomGeometryParticles = (props) => {
   const { count, shape } = props;
 
   // This reference gives us direct access to our points
-  const points = useRef();
+  const points = useRef(null!);
 
   
 
