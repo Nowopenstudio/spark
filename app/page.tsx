@@ -1,5 +1,5 @@
 import Navbar from "./components/navbar";
-import { client } from "./lib/sanity";
+import { client } from "./lib/utils-sanity";
 
 
 
