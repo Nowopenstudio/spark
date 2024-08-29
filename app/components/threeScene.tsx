@@ -1,23 +1,50 @@
 'use client'
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, useGLTF, MeshTransmissionMaterial, Environment, Lightformer } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useMemo, useRef, useEffect } from "react";
 import * as THREE from "three";
 import { spherePointToUV, sampleImage, initImage } from "../lib/utils-canvas";
+import FlowChart from "./nodes/flowChart";
+import { EffectComposer, Bloom, LUT, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
+import {  ToneMappingMode } from 'postprocessing'
 
 
+export default function Logo(props) {
+  const groupRef = useRef()
+  const { nodes, materials } = useGLTF('/models/logo.gltf')
+  const standard = new THREE.MeshStandardMaterial
 
-// const Sphere = (props)=>{
-//   const meshRef = useRef(null!)
-//   useFrame((state, delta) => (meshRef.current.rotation.y += (delta*.25)))
-//   return(
-//     <mesh {...props} visible ref={meshRef}>
-//       <directionalLight intensity={0.5} />
-//       <sphereGeometry  args={[props.size[0], props.size[1], props.size[2]]} />
-//       <meshStandardMaterial color="#000000"/>
-//     </mesh>
-//  )
-// }
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime()
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, Math.cos(t / 2) / 20 + 0.25, 0.1)
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, Math.sin(t / 4) / 20, 0.1)
+    groupRef.current.rotation.z = THREE.MathUtils.lerp(groupRef.current.rotation.z, Math.sin(t / 8) / 20, 0.1)
+    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, (Math.sin(t /2)) / 8, 0.1)
+  })
+  console.log(nodes)
+  return (
+    <group ref={groupRef} {...props} dispose={null} position={[0,0,0]}>
+      <mesh geometry={nodes.Remesh.geometry} scale={.028} material-emissive="red" material-roughness={1}>
+      <MeshTransmissionMaterial
+          backside
+          backsideThickness={1}
+          samples={16}
+          thickness={0.2}
+          anisotropicBlur={0.1}
+          iridescence={1}
+          iridescenceIOR={1}
+          iridescenceThicknessRange={[0, 1400]}
+          clearcoat={1}
+          envMapIntensity={0.5}
+        />
+      </mesh>
+  
+     
+    </group>
+  )
+}
+
+
 
 const Light = (props)=>{
 
@@ -50,9 +77,9 @@ const Init =()=>{
 const Dots =({imageData})=>{
   console.log(imageData)
   const meshRef = useRef(null!)
-  const DOT_DENSITY = 12;
+  const DOT_DENSITY = 10;
   const RADIUS = 2
-  const LATITUDE_COUNT = 190
+  const LATITUDE_COUNT = 240
   let dotCount=[]
   let dotGeometries = new Float32Array(19232*6)
   const vector = new THREE.Vector3();
@@ -91,11 +118,11 @@ const Dots =({imageData})=>{
         // Push the positioned geometry into the array.
         dotGeometries.set([vector.x, vector.y, vector.z], (currCount * 3));
         dotCount.push(dotGeometry)
+        currCount += 1
       }
 
       // dotGeometries.set([vector.x, vector.y, vector.z], (currCount * 3));
       // dotCount.push(dotGeometry)
-      currCount += 1
 
       
 
@@ -113,7 +140,7 @@ const Dots =({imageData})=>{
       meshRef.current.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.001;
       meshRef.current.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.001;
     }
-
+    
     meshRef.current.geometry.attributes.position.needsUpdate = true;
     meshRef.current.rotation.y += (delta*.1)
   });
@@ -130,7 +157,7 @@ const Dots =({imageData})=>{
         itemSize={3}
       />
     </bufferGeometry>
-    <pointsMaterial size={0.01} color="#87BFEF" sizeAttenuation depthWrite={false} />
+    <pointsMaterial size={0.007} color="#87BFEF" sizeAttenuation depthWrite={false} />
   </points>
  
   )
@@ -144,7 +171,7 @@ export function Test() {
 
 
   return (
-    <div className='w-full h-full fixed z-0 pointer-events-none bg-black'>
+    <div className='w-full h-full fixed z-0 pointer-events-none bg-[var(--dark)]'>
     
             <Canvas id="sphere">
             <ambientLight intensity={0.5} />
@@ -152,7 +179,24 @@ export function Test() {
               <Light position={[10,15,10]} color={"F6F5E1"} angle={0.28} intensity={.75} decay={.1}/>
               <Light position={[-10,15,10]} color={"BDA9FF"} angle={0.22} intensity={.5} decay={.2}/>
               <Light position={[-2,15,-5]} color={"FF8000"} angle={0.45} intensity={.75} decay={.3}/>
+              <Environment files="/texture/bg.hdr" resolution={512}>
+                <group rotation={[0, 0, 0]}>
+                  <Lightformer form="circle" intensity={10} position={[2, 6, -10]} scale={30} onUpdate={(self) => self.lookAt(0, 0, 0)} />
+                  <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-0, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
+                  <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
+                  <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-20, 1, 0]} scale={[20, 100, 1]} />
+                </group>
+              </Environment>
               <Init />
+              <FlowChart />
+              <Logo/>
+        
+              <EffectComposer disableNormalPass>
+                <Bloom mipmapBlur luminanceThreshold={1} intensity={1} />
+                <BrightnessContrast brightness={0} contrast={0.01} />
+                <HueSaturation hue={0} saturation={-0.25} />
+                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+              </EffectComposer>
       
            
           </Canvas>

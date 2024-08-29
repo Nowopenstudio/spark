@@ -22,7 +22,7 @@ export default async function RootLayout({
     <html lang="en">
       <body>
       <Test/>
-      <Navbar info={data[0]}/>
+      {/* <Navbar info={data[0]}/> */}
        <div className="z-99 relative "> {children}</div>
         </body>
     </html>
