@@ -1,16 +1,19 @@
 'use client'
+
 import { OrbitControls, useGLTF, MeshTransmissionMaterial, Environment, Lightformer } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { useMemo, useRef, useEffect } from "react";
 import * as THREE from "three";
-import { spherePointToUV, sampleImage, initImage } from "../lib/utils-canvas";
+import { TextureLoader } from "three";
+import { spherePointToUV, sampleImage } from "../lib/utils-canvas";
 import FlowChart from "./nodes/flowChart";
+
 import { EffectComposer, Bloom, LUT, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
 
 
-export default function Logo(props) {
-  const groupRef = useRef()
+export default function Logo(props:any) {
+  const groupRef = useRef<any>(null!)
   const { nodes, materials } = useGLTF('/models/logo.gltf')
   const standard = new THREE.MeshStandardMaterial
 
@@ -24,7 +27,7 @@ export default function Logo(props) {
   console.log(nodes)
   return (
     <group ref={groupRef} {...props} dispose={null} position={[0,0,0]}>
-      <mesh geometry={nodes.Remesh.geometry} scale={.028} material-emissive="red" material-roughness={1}>
+      <mesh geometry={nodes.Remesh.geometry || []} scale={.028} material-emissive="red" material-roughness={1}>
       <MeshTransmissionMaterial
           backside
           backsideThickness={1}
@@ -46,7 +49,7 @@ export default function Logo(props) {
 
 
 
-const Light = (props)=>{
+const Light = (props:any)=>{
 
   return(
     
@@ -58,7 +61,17 @@ const Light = (props)=>{
 
 const Init =()=>{
   
-  const imageData= initImage('/texture/map.png')
+  const source = '/texture/map.png'
+  const wMap = useLoader(TextureLoader, source)
+  
+  const tempCanvas = document.createElement("canvas");
+  
+  tempCanvas.width = wMap.image.width;
+  tempCanvas.height = wMap.image.height;
+  
+  const ctx = tempCanvas.getContext("2d");
+  ctx!.drawImage(wMap.image, 0, 0);
+  const imageData = ctx!.getImageData(0, 0, wMap.image.width, wMap.image.height);
 
   
 
@@ -74,9 +87,8 @@ const Init =()=>{
 }
 
 
-const Dots =({imageData})=>{
-  console.log(imageData)
-  const meshRef = useRef(null!)
+const Dots =({imageData}: any)=>{
+  const meshRef = useRef<any>(null!)
   const DOT_DENSITY = 10;
   const RADIUS = 2
   const LATITUDE_COUNT = 240
@@ -191,7 +203,7 @@ export function Test() {
               <FlowChart />
               <Logo/>
         
-              <EffectComposer disableNormalPass>
+              <EffectComposer >
                 <Bloom mipmapBlur luminanceThreshold={1} intensity={1} />
                 <BrightnessContrast brightness={0} contrast={0.01} />
                 <HueSaturation hue={0} saturation={-0.25} />
