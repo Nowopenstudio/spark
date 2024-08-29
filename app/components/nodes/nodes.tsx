@@ -5,7 +5,7 @@ import { QuadraticBezierLine} from '@react-three/drei'
 import { useDrag } from '@use-gesture/react'
 import { Marker } from './markers'
 
-const context = createContext(1)
+const context = createContext(null!)
 const Circle = forwardRef(({ children, opacity = 0 , radius = 0, segments = 0, color = '#87BFEF', ...props }:any, ref:any) => (
   <mesh ref={ref} {...props}>
     <circleGeometry args={[radius, segments]} />
@@ -17,6 +17,7 @@ const Circle = forwardRef(({ children, opacity = 0 , radius = 0, segments = 0, c
 export function Nodes({ children }:any) {
   const group = useRef<any>()
   const [nodes, set] = useState<any[]>([])
+
   const lines = useMemo(() => {
     const lines:object[] = []
     for (let node of nodes)
@@ -25,6 +26,7 @@ export function Nodes({ children }:any) {
         .forEach(([start, end]:any) => lines.push({ start: start.clone().add({ x: 0.35, y: 0, z: 0 }), end: end.clone().add({ x: -0.35, y: 0, z: 0 }) }))
     return lines
   }, [nodes])
+
   useFrame((_, delta) => group.current.children.forEach((group:any) => (group.children[0].material.uniforms.dashOffset.value -= delta * 10)))
   return (
     <context.Provider value={set}>
@@ -48,7 +50,7 @@ export function Nodes({ children }:any) {
 }
 
 export const Node = forwardRef(({ color = 'black', name, connectedTo = [], position = [0, 0, 0], ...props }:any, ref) => {
-  const set = useContext(context)
+  const set = useContext<any>(null!)
   const { size, camera } = useThree()
   const [pos, setPos] = useState(() => new THREE.Vector3(...position))
   const state = useMemo(() => ({ position: pos, connectedTo }), [pos, connectedTo])
