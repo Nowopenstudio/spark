@@ -16,7 +16,7 @@ export function urlFor(source: any){
     return builder.image(source)
 }
 
-export const getData = (async (query) =>{
+export const getData = (async (query:any) =>{
    
     const initQuery = query
     

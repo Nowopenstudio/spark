@@ -5,7 +5,7 @@ import { QuadraticBezierLine} from '@react-three/drei'
 import { useDrag } from '@use-gesture/react'
 import { Marker } from './markers'
 
-const context = createContext(null!)
+const context = createContext(1)
 const Circle = forwardRef(({ children, opacity = 0 , radius = 0, segments = 0, color = '#87BFEF', ...props }:any, ref:any) => (
   <mesh ref={ref} {...props}>
     <circleGeometry args={[radius, segments]} />
@@ -50,7 +50,7 @@ export function Nodes({ children }:any) {
 }
 
 export const Node = forwardRef(({ color = 'black', name, connectedTo = [], position = [0, 0, 0], ...props }:any, ref) => {
-  const set = useContext<any>(null!)
+  const set = useContext()
   const { size, camera } = useThree()
   const [pos, setPos] = useState(() => new THREE.Vector3(...position))
   const state = useMemo(() => ({ position: pos, connectedTo }), [pos, connectedTo])
