@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/navbar";
 import {getData} from "./lib/utils-sanity";
-import { Test } from "./components/threeScene";
+// import { Test } from "./components/threeScene";
 
 
 
@@ -21,7 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-      <Test/>
+      {/* <Test/> */}
       {/* <Navbar info={data[0]}/> */}
        <div className="z-99 relative "> {children}</div>
         </body>
