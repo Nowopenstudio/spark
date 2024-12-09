@@ -88,7 +88,7 @@ const Init =()=>{
 
 
 const Dots =({imageData}: any)=>{
-  const meshRef = useRef<any>({})
+  const meshRef = useRef<any>(null)
   const DOT_DENSITY = 10;
   const RADIUS = 2
   const LATITUDE_COUNT = 240
@@ -97,7 +97,7 @@ const Dots =({imageData}: any)=>{
   const vector = new THREE.Vector3();
 // A hexagon with a radius of 2 pixels looks like a circle
 
-  var currCount = 0
+  let currCount = 0
 
 
   for (let lat = 0; lat < LATITUDE_COUNT;lat ++ ) {
@@ -142,17 +142,17 @@ const Dots =({imageData}: any)=>{
   useFrame((state, delta) => {
     const { clock } = state;
     
-    // for (let i = 0; i < currCount; i++) {
-    //   const i3 = i * 3;
+    for (let i = 0; i < currCount; i++) {
+      const i3 = i * 3;
 
 
-    //   meshRef.current.geometry.attributes.position.array[i3] += Math.sin(clock.elapsedTime + Math.random() * 10) * 0.001;
-    //   meshRef.current.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.001;
-    //   meshRef.current.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.001;
-    // }
+      meshRef.current!.geometry.attributes.position.array[i3] += Math.sin(clock.elapsedTime + Math.random() * 10) * 0.001;
+      meshRef.current!.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.001;
+      meshRef.current!.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.001;
+    }
     
-    meshRef.current.geometry.attributes.position.needsUpdate = true;
-    meshRef.current.rotation.y += (delta*.1)
+    meshRef.current!.geometry.attributes.position.needsUpdate = true;
+    meshRef.current!.rotation.y += (delta*.1)
   });
 
 
