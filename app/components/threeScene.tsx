@@ -100,7 +100,7 @@ const Dots =({imageData}: any)=>{
   var currCount = 0
 
 
-  for (let lat = 0; lat < LATITUDE_COUNT;lat +=1 ) {
+  for (let lat = 0; lat < LATITUDE_COUNT;lat ++ ) {
   const radius =Math.cos((-90 + (180 / LATITUDE_COUNT) * lat) * (Math.PI / 180)) * RADIUS;
   const latitudeCircumference = radius * Math.PI * 2 * 2;
   const latitudeDotCount = Math.ceil(latitudeCircumference * DOT_DENSITY);
@@ -142,14 +142,14 @@ const Dots =({imageData}: any)=>{
   useFrame((state, delta) => {
     const { clock } = state;
     
-    for (let i = 0; i < currCount; i++) {
-      const i3 = i * 3;
+    // for (let i = 0; i < currCount; i++) {
+    //   const i3 = i * 3;
 
 
-      meshRef.current.geometry.attributes.position.array[i3] += Math.sin(clock.elapsedTime + Math.random() * 10) * 0.001;
-      meshRef.current.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.001;
-      meshRef.current.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.001;
-    }
+    //   meshRef.current.geometry.attributes.position.array[i3] += Math.sin(clock.elapsedTime + Math.random() * 10) * 0.001;
+    //   meshRef.current.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.001;
+    //   meshRef.current.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.001;
+    // }
     
     meshRef.current.geometry.attributes.position.needsUpdate = true;
     meshRef.current.rotation.y += (delta*.1)
