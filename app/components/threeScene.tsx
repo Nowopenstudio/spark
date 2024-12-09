@@ -1,12 +1,12 @@
 'use client'
 
-import { OrbitControls, useGLTF, MeshTransmissionMaterial, Environment, Lightformer } from "@react-three/drei";
+import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer } from "@react-three/drei";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { useMemo, useRef, useEffect } from "react";
+import { useRef} from "react";
 import * as THREE from "three";
 import { TextureLoader } from "three";
 import { spherePointToUV, sampleImage } from "../lib/utils-canvas";
-import FlowChart from "./nodes/flowChart";
+
 
 import { EffectComposer, Bloom, LUT, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
@@ -92,17 +92,15 @@ const Dots =({imageData}: any)=>{
   const DOT_DENSITY = 10;
   const RADIUS = 2
   const LATITUDE_COUNT = 240
-  let dotCount=[]
-  let dotGeometries = new Float32Array(19232*6)
+  const dotCount=[]
+  const dotGeometries = new Float32Array(19232*6)
   const vector = new THREE.Vector3();
-  console.log('START')
- 
 // A hexagon with a radius of 2 pixels looks like a circle
 
   var currCount = 0
 
 
-  for (let lat = 0; lat < LATITUDE_COUNT;lat +=1 ) {
+  for (var lat = 0; lat < LATITUDE_COUNT;lat +=1 ) {
   const radius =Math.cos((-90 + (180 / LATITUDE_COUNT) * lat) * (Math.PI / 180)) * RADIUS;
   const latitudeCircumference = radius * Math.PI * 2 * 2;
   const latitudeDotCount = Math.ceil(latitudeCircumference * DOT_DENSITY);
