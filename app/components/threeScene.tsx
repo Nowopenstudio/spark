@@ -119,7 +119,7 @@ const Dots =({imageData}: any)=>{
       dotGeometry.computeBoundingSphere();
 
       const uv = spherePointToUV(
-        dotGeometry.boundingSphere.center,
+        dotGeometry.boundingSphere!.center,
         new THREE.Vector3()
       );
       const sampledPixel = sampleImage(imageData, uv);
@@ -200,7 +200,7 @@ export function Test() {
                 </group>
               </Environment>
               <Init />
-              <FlowChart />
+              {/* <FlowChart /> */}
               <Logo/>
         
               <EffectComposer >

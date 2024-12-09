@@ -9,7 +9,7 @@ export default async function Home({params}:{params:{catSlug:string}}) {
     const { data } = await getData(`*[_type=='articles' && '${params.catSlug}' == category->catSlug.current]{title,slug,author->{firstName},category->{slug,title}}`)
   return (
     <main className="w-full flex justify-center">
-        {data.map((item,i)=>{
+        {data.map((item:any,i:number)=>{
             return(
                 <Link key={`resource-${i}`} href={`/resources/${params.catSlug}/${item.slug.current}`} className="w-1/4 px-5 py-4 border border-white border-solid m-2 pointer-events-auto" >
                  <div className="border border-white border-solid py-11"></div>

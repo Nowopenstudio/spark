@@ -16,7 +16,7 @@ export default async function Home({params}:{params:{slug:string}}) {
                         <h1>{data[0].title}</h1>
                         {data[0]._createdAt}
                     </div>
-                    {data[0].content.map((item,i)=>{
+                    {data[0].content.map((item:any,i:number)=>{
                         return(
                           <div className="intro w-3/4 text-2xl mx-auto mb-5" key={`content-${i}`}>
                             <div className="secHead"><p>{item.title}</p></div>
