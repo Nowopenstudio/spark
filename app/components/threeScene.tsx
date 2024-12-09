@@ -88,7 +88,7 @@ const Init =()=>{
 
 
 const Dots =({imageData}: any)=>{
-  const meshRef = useRef<any>(null!)
+  const meshRef = useRef<any>({})
   const DOT_DENSITY = 10;
   const RADIUS = 2
   const LATITUDE_COUNT = 240
@@ -100,7 +100,7 @@ const Dots =({imageData}: any)=>{
   var currCount = 0
 
 
-  for (var lat = 0; lat < LATITUDE_COUNT;lat +=1 ) {
+  for (let lat = 0; lat < LATITUDE_COUNT;lat +=1 ) {
   const radius =Math.cos((-90 + (180 / LATITUDE_COUNT) * lat) * (Math.PI / 180)) * RADIUS;
   const latitudeCircumference = radius * Math.PI * 2 * 2;
   const latitudeDotCount = Math.ceil(latitudeCircumference * DOT_DENSITY);
