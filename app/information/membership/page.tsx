@@ -12,7 +12,7 @@ export default async function Home({params}:{params:{slug:string}}) {
   return (
     <main className="w-full py-10">
           
-                          <div className="intro w-3/4 text-2xl mx-auto mb-5" >
+                          <div className="infoCard intro w-3/4 text-2xl mx-auto mb-5" >
                             <div className="secHead"><h1>{data.header}</h1></div>
                           <PortableText value={data.text}/>
                         </div>

@@ -3,6 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import { myStructure } from './deskStructure'
+import { muxInput } from 'sanity-plugin-mux-input'
 import { dataset, projectId, token } from '../env.js'
 
 export default defineConfig({
@@ -14,7 +15,7 @@ export default defineConfig({
 
   plugins: [structureTool({
     structure: myStructure
-  }), visionTool()],
+  }), visionTool(),muxInput()],
 
   schema: {
     types: schemaTypes,
