@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import {getData} from "./lib/utils-sanity";
 import { Test } from "./components/threeScene";
+import SmoothScrolling from "./components/util/SmoothScrolling";
 
 
 
@@ -24,11 +25,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-[--dark]">
-      <Test/>
-      <Navbar categories={categories}/>
-     {children}
-        </body>
+      <SmoothScrolling>
+        <body className="bg-[--dark]">
+        <Test/>
+        <Navbar categories={categories}/>
+       {children}
+          </body>
+      </SmoothScrolling>
     </html>
   );
 }
