@@ -79,7 +79,7 @@ export default function Navbar({ categories}:any){
    const [nodeGap,setGap] = useState(40);
 
     const newNodes =(nodeX:any, nodeGap:any, slug:any, opt:number)=>{
-      let getNodes:any = [] 
+      const getNodes:any = [] 
       categories.map((item:any,i:any)=>{
         const singleNode = {
           id: `${i+4}`,
@@ -94,7 +94,7 @@ export default function Navbar({ categories}:any){
     }
 
     const newEdges =(source:number)=>{
-      let getEdges:any = []
+      const getEdges:any = []
       categories.map((item:any,i:any)=>{
         const singleEdge = {
           id: `${source}-${i+4}`,
@@ -123,8 +123,8 @@ export default function Navbar({ categories}:any){
 }
 
 const changeTri=(sec:number, opt:number, slug:any)=>{
-  let getTri:any = []
-  let getTriEdge:any=[]
+  const getTri:any = []
+  const getTriEdge:any=[]
   categories[sec].articles.map((item:any,i:any)=>{
     const singleNode = {
       id: `${i+4+categories.length}`,
