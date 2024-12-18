@@ -1,6 +1,6 @@
 'use client'
 
-import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer } from "@react-three/drei";
+import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer, CameraControls,Points, Point, PointMaterial } from "@react-three/drei";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { useRef} from "react";
 import * as THREE from "three";
@@ -8,7 +8,7 @@ import { TextureLoader } from "three";
 import { spherePointToUV, sampleImage } from "../lib/utils-canvas";
 
 
-import { EffectComposer, Bloom, LUT, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
+import { EffectComposer, Bloom, BrightnessContrast, HueSaturation, Noise, ToneMapping, Scanline} from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
 
 
@@ -26,19 +26,19 @@ export default function Logo(props:any) {
   })
   console.log(nodes)
   return (
-    <group ref={groupRef} {...props} dispose={null} position={[0,0,0]}>
-      <mesh geometry={nodes.Remesh.geometry || []} scale={.028} material-emissive="red" material-roughness={1}>
+    <group ref={groupRef} {...props} dispose={null} position={[0,0,2]}>
+      <mesh geometry={nodes.Remesh.geometry || []} scale={.018} material-emissive="red" material-roughness={1}>
       <MeshTransmissionMaterial
           backside
           backsideThickness={1}
-          samples={16}
-          thickness={0.2}
-          anisotropicBlur={0.1}
-          iridescence={1}
+          samples={8}
+          thickness={0.5}
+          anisotropicBlur={0.5}
+          iridescence={.8}
           iridescenceIOR={1}
           iridescenceThicknessRange={[0, 1400]}
           clearcoat={1}
-          envMapIntensity={0.5}
+          envMapIntensity={0.1}
         />
       </mesh>
   
@@ -167,7 +167,15 @@ const Dots =({imageData}: any)=>{
         itemSize={3}
       />
     </bufferGeometry>
-    <pointsMaterial size={0.007} color="#87BFEF" sizeAttenuation depthWrite={false} />
+    <PointMaterial
+          transparent
+          color="#284361"
+          size={10}
+          sizeAttenuation={false}
+          depthTest={true}
+          toneMapped={false}
+        />
+    
   </points>
  
   )
@@ -189,23 +197,29 @@ export function Test() {
               <Light position={[10,15,10]} color={"F6F5E1"} angle={0.28} intensity={.75} decay={.1}/>
               <Light position={[-10,15,10]} color={"BDA9FF"} angle={0.22} intensity={.5} decay={.2}/>
               <Light position={[-2,15,-5]} color={"FF8000"} angle={0.45} intensity={.75} decay={.3}/>
-              <Environment files="/texture/bg.hdr" resolution={512}>
+              <Environment files="/texture/bg.hdr" resolution={128}>
                 <group rotation={[0, 0, 0]}>
                   <Lightformer form="circle" intensity={10} position={[2, 6, -10]} scale={30} onUpdate={(self) => self.lookAt(0, 0, 0)} />
                   <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-0, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
-                  <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
+                  <Lightformer intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
                   <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-20, 1, 0]} scale={[20, 100, 1]} />
                 </group>
               </Environment>
               <Init />
-              {/* <FlowChart /> */}
+          
               <Logo/>
         
               <EffectComposer >
-                <Bloom mipmapBlur luminanceThreshold={1} intensity={1} />
-                <BrightnessContrast brightness={0} contrast={0.01} />
-                <HueSaturation hue={0} saturation={-0.25} />
+              
+                <Bloom mipmapBlur luminanceThreshold={.3} intensity={2} />
+                <Scanline opacity={.2}/>
+                <BrightnessContrast brightness={-0.05} contrast={-.2}/>
+                <HueSaturation hue={0} saturation={-.2} />
+                
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+                <Noise opacity={.5} />
+                
+
               </EffectComposer>
       
            

@@ -17,13 +17,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const {data} = await getData(`*[_type=='info']`)
+  const query = await getData(`{
+    'categories':*[_type=='categories']|order(name){title,"slug":slug, color, "articles": *[ _type == "articles" && references(^._id)]{title,"slug":slug.current, intro, content, "cover":cover.asset->url,"author":author->{firstName,lastName}}}
+ }`)
+ const {categories} = query.data
+
   return (
     <html lang="en">
-      <body>
+      <body className="bg-[--dark]">
       <Test/>
-      <Navbar info={data[0]}/>
-       <div className="z-99 relative "> {children}</div>
+      <Navbar categories={categories}/>
+     {children}
         </body>
     </html>
   );

@@ -11,7 +11,7 @@ export default {
         },
         {
             type:'slug',
-            name:'catSlug',
+            name:'slug',
             title:'Category Slug',
             options:{
                 source:'title'
@@ -20,7 +20,7 @@ export default {
         },
         {
             type:'string',
-            name:'string',
+            name:'color',
             title:'color'
         }
     ]

@@ -74,7 +74,36 @@ export default {
             name:"cover",
             title:'Cover'
 
-        }
+        },
+        {   name:'media',
+            type:'array',
+            title:'Content',
+            options:{sortable:true,layout:"grid"},
+            of:[{
+                name:"section",
+                type: "object",
+                title:'Image',
+                fields:[
+                    {
+                        name:"image",
+                        type:'image',
+                        title:"file"
+                    },
+                    {
+                        name:"video",
+                        type:'mux.video',
+                        title:"Video"
+                    },
+                    {
+                        name:"desc",
+                        type:'array',
+                        title:"Content",
+                        of:[{type:"block"}]
+                    }
+                ]
+            }]
+    
+         }
 
     ]
 }
