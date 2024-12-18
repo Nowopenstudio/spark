@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 
 import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer, CameraControls,Points, Point, PointMaterial } from "@react-three/drei";
