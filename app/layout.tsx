@@ -19,7 +19,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const query = await getData(`{
-    'categories':*[_type=='categories']|order(name){title,"slug":slug, color, "articles": *[ _type == "articles" && references(^._id)]{title,"slug":slug.current, intro, content, "cover":cover.asset->url,"author":author->{firstName,lastName}}}
+    'categories':*[_type=='categories']|order(name){title,"slug":slug, color, "articles": *[ _type == "articles" && references(^._id)]{title, _createdAt,"slug":slug.current, intro, content, "cover":cover.asset->url,"author":author->{firstName,lastName}}}
  }`)
  const {categories} = query.data
 
@@ -29,7 +29,7 @@ export default async function RootLayout({
         <body className="bg-[--dark]">
         <Test/>
         <Navbar categories={categories}/>
-       {children}
+          {children}
           </body>
       </SmoothScrolling>
     </html>

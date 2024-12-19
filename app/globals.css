@@ -26,15 +26,15 @@
 }
 
 body {
-  font-size:16pt;
+  font-size:12pt;
   font-family: "mono",Arial, Helvetica, sans-serif;
   color: var(--blue);
 }
 
 .fake {
-  font-size:16pt;
+  font-size:12pt;
   font-family: "fake",Arial, Helvetica, sans-serif;
-
+ 
 }
 
 .fakeSub{
@@ -50,6 +50,17 @@ body {
   position: relative;
 }
 
+.navTitle{
+  font-size:.5em;
+  font-family: "fake",Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-align: left;
+  position: relative;
+}
+.navTitle h1{
+  font-size: 1.5em;
+}
+
 
 .infoCard{
   background-color: var(--dark);
@@ -62,6 +73,14 @@ body {
   padding: 0;
   height: auto;
   width:120px;
+}
+
+.react-flow__node.react-flow__node-navTitle {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  width:15vw;
 }
 
 .react-flow__edge path{
@@ -90,6 +109,17 @@ body {
     animation: fadeOn 1s cubic-bezier(0.57, 0.06, 0.05, 0.95) forwards;
   }
 
+  .titleHolder{
+    padding: 10px;
+    background-color: rgb(135 191	239 / 20%);
+    backdrop-filter: blur(20px);
+    opacity: 0;
+    border-radius: 5px;
+    position: relative;
+    transform: translateX(20px);
+    animation: fadeOn 1s cubic-bezier(0.57, 0.06, 0.05, 0.95) forwards;
+  }
+
   .navBut::before{
     content: "+";
     color:var(--blue);
@@ -107,6 +137,8 @@ body {
     left:0;
     transform: translate(-50%,50%);
   }
+
+ 
 
   .navBut::after{
     content: "+";
