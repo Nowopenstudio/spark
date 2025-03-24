@@ -12,24 +12,27 @@ import NavTitle from "./nodes/NavTitle";
 
 const nodeTypes = { navBut: NavBut, navTitle: NavTitle};
 
-function Flow({ categories}:{categories:any}){
+function Flow({ categories, projects}:{categories:any,projects:any}){
    const initialNodes = [
       {
         id: '1',
         data: { label: <Link href={'/resources'} onClick={()=>changeSec(1)}><div className="navBut w-full h-full" style={{animationDelay:"0"}}><div>Resources</div></div></Link> },
+        type: 'navBut',
         position: { x: 0, y: 0 },
       },
      
       {
         id: '2',
+        type: 'navBut',
         // you can also pass a React component as a label
         data: { label: <Link href={'/projects'} onClick={()=>changeSec(2)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div>Projects</div></div></Link> },
-        position: { x: 140, y: 0 },
+        position: { x: 0, y: 40 },
       },
       {
         id: '3',
+        type: 'navBut',
         data:  { label: <Link href={'/info'} onClick={()=>changeSec(3)}><div className="navBut w-full h-full" style={{animationDelay:"300ms"}}><div>Info</div></div></Link> },
-        position: { x: 280, y: 0 },
+        position: { x: 0, y: 80 },
       },
     ];
 
@@ -89,16 +92,16 @@ function Flow({ categories}:{categories:any}){
       setCenter(x, y, { zoom:2, duration: 1000 });
     }
 
-    const newNodes =(nodeX:any, nodeGap:any, slug:any, opt:number)=>{
+    const newNodes =(items:any, nodeX:any, nodeGap:any, slug:any, opt:number)=>{
       setTitleEdges([])
       setTitleNodes([])
       const getNodes:any = [] 
-      categories.map((item:any,i:any)=>{
+      items.map((item:any,i:any)=>{
         const singleNode = {
           id: `${i+4}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug.current}`} key={`cat-${i}`} onClick={()=>changeTri(i,opt,`${slug}/${item.slug.current}`,-200,0)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
-          position: { x: ((nodeX + nodeGap)*opt), y: (categories.length*nodeGap)/2-(nodeGap*(i+.5)) },
+          data: { label: <Link href={`/${slug}/${item.slug.current}`} key={`cat-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug.current}`,-200,0)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
+          position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
       })
@@ -106,9 +109,9 @@ function Flow({ categories}:{categories:any}){
       return getNodes
     }
 
-    const newEdges =(source:number)=>{
+    const newEdges =(source:number, items:any)=>{
       const getEdges:any = []
-      categories.map((item:any,i:any)=>{
+      items.map((item:any,i:any)=>{
         const singleEdge = {
           id: `${source}-${i+4}`,
           type: 'smoothstep',
@@ -122,47 +125,77 @@ function Flow({ categories}:{categories:any}){
       return getEdges
     }
 
+
+  // Main Menu Section
   const changeSec=(sec:number)=>{
       
       setSec(sec)
       if(sec==0){
+        setResources([])
+        setSecEdges([])
+        setTriNodes([])
+        setTriEdges([])
          setNodes(initialNodes)
+         moveView(0,0)
       }
       else if(sec==1){
+        setResources([])
+        setSecEdges([])
+        setTriNodes([])
+        setTriEdges([])
+        setResources(newNodes(categories,nodeX,nodeGap,"resources",-1))
+        setSecEdges(newEdges(1,categories))
+        moveView(-100,0)
+       
+      }
+      else if(sec==2){
+        setResources([])
+        setSecEdges([])
+        setTriNodes([])
+        setTriEdges([])
+        setResources(newNodes(projects,nodeX,nodeGap,"projects",-1))
+        setSecEdges(newEdges(2,projects))
+        moveView(-100,0)
+       
+      }
+      else if(sec==3){
         
-        setResources(newNodes(nodeX,nodeGap,"resources",-1))
-        setSecEdges(newEdges(1))
+        setNodes(initialNodes)
         moveView(-100,0)
        
       }
 }
 
-const changeTri=(sec:number, opt:number, slug:any, x:number, y:number)=>{
+const changeTri=(items:any,item:any,sec:number, opt:number, slug:any, x:number, y:number)=>{
   moveView(x,y)
   
   const getTri:any = []
   const getTriEdge:any=[]
-  categories[sec].articles.map((item:any,i:any)=>{
-    const singleNode = {
-      id: `${i+4+categories.length}`,
-      type: 'navBut',
-      data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} onClick={()=>changeTitle(sec,i,opt,-500,100)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}} >{item.title}</div> </div></Link> },
-      position: { x: ((nodeX + nodeGap)*opt)*2.25, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
-    }
-    const singleEdge = {
-      id: `${sec+4}-${i+4+categories.length}`,
-      type: 'smoothstep',
-      animated:true,
-      source: `${sec+4}`,
-      target: `${i+4+categories.length}`,
-    }
-    getTri.push(singleNode)
-    getTriEdge.push(singleEdge)
-  })
-  setTitleEdges([])
+  if(item.articles){
+    items[sec].articles.map((item:any,i:any)=>{
+      const singleNode = {
+        id: `${i+4+categories.length}`,
+        type: 'navBut',
+        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} onClick={()=>changeTitle(sec,i,opt,-500,100)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}} >{item.title}</div> </div></Link> },
+        position: { x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
+      }
+      const singleEdge = {
+        id: `${sec+4}-${i+4+categories.length}`,
+        type: 'smoothstep',
+        animated:true,
+        source: `${sec+4}`,
+        target: `${i+4+categories.length}`,
+      }
+      getTri.push(singleNode)
+      getTriEdge.push(singleEdge)
+    })
+    setTitleEdges([])
   setTitleNodes([])
   setTriNodes(getTri)
   setTriEdges(getTriEdge)
+  }
+  
+  
 
   
 }
@@ -214,7 +247,7 @@ useEffect(()=>{
 
         
         <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false}>
-          <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(135, 191, 239, 0)'} nodeStrokeColor={"rgb(135, 191, 239, 1.0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable />
+          {/* <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(135, 191, 239, 0)'} nodeStrokeColor={"rgb(135, 191, 239, 1.0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable /> */}
         </ReactFlow>
 
 
@@ -223,12 +256,12 @@ useEffect(()=>{
 }
 
  
-export default function NavBar({categories}:{categories:any}){
+export default function NavBar({categories, projects}:{categories:any,projects:any}){
 
   return(
   <div className="fixed z-[50] w-[100vw] h-[100dvh]">
   <ReactFlowProvider>
-      <Flow categories={categories} />
+      <Flow categories={categories} projects={projects} />
   </ReactFlowProvider></div>
   )
 }

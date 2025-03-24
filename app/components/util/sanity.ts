@@ -19,7 +19,8 @@ export const client = createClient({
     dataset,
     apiVersion,
     token,
-    useCdn: false
+    useCdn: false,
+    perspective:'published'
 })
 
 const builder = imageUrlBuilder(client)

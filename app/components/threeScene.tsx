@@ -208,16 +208,16 @@ export function Test() {
               </Environment>
               <Init />
           
-              <Logo/>
+              {/* <Logo/> */}
         
               <EffectComposer >
               
                 <Bloom mipmapBlur luminanceThreshold={.3} intensity={2} />
                 <Scanline opacity={.2}/>
-                <BrightnessContrast brightness={-0.05} contrast={-.2}/>
+                {/* <BrightnessContrast brightness={-0.05} contrast={-.2}/> */}
                 <HueSaturation hue={0} saturation={-.2} />
                 
-                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+                {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}
                 <Noise opacity={.5} />
                 
 

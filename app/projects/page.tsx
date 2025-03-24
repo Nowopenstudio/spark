@@ -10,7 +10,7 @@ export default async function Home() {
     console.log(data)
   return (
     <main className="w-full flex justify-center">
-        {data.map((item:any,i:number)=>{
+        {/* {data.map((item:any,i:number)=>{
           return(
              <Link key={`project-${i}`} href={`/projects/${item.slug.current}`} className="infoCard w-1/4 px-5 py-4 border border-white border-solid m-2 pointer-events-auto" >
              <div className="border border-white border-solid py-11"></div>
@@ -19,7 +19,7 @@ export default async function Home() {
              </Link>
           )
         })}
-     
+      */}
     </main>
   );
 }

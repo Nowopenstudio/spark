@@ -4,6 +4,26 @@ export default {
     title:'Project',
     fields:[
         {
+            type:"object",
+            name:"cover",
+            title:'Cover',
+            fields:[
+                
+                    {
+                        name:"image",
+                        type:'image',
+                        title:"file"
+                    },
+                    {
+                        name:"video",
+                        type:'mux.video',
+                        title:"Video"
+                    }
+                
+            ]
+
+        },
+        {
             type:'string',
             name:'title',
             title:'Title'
@@ -17,43 +37,36 @@ export default {
             }
 
         },
-        {
+        {   name:'content',
             type:'array',
-            name:'intro',
+            title:'Content',
+            options:{sortable:true,layout:"list"},
             of:[{
-                type:'block'
-            }]
-        },
-        {
-            type:'array',
-            name:'content',
-            title: 'Article',
-            of:[{
-                type:'object',
-                name:'sections',
-                title:'Sections',
+                name:"section",
+                type: "object",
+                title:'Content',
                 fields:[
                     {
-                        type:'string',
-                        name:'header',
-                        title:'Header'
+                        name:"image",
+                        type:'image',
+                        title:"file"
                     },
                     {
+                        name:"video",
+                        type:'mux.video',
+                        title:"Video"
+                    },
+                    {
+                        name:"desc",
                         type:'array',
-                        name:'content',
-                        of:[{
-                            type:'block'
-                        }]
+                        title:"Content",
+                        of:[{type:"block"}]
                     }
-            ]
+                ]
             }]
-        },
-        {
-            type:"image",
-            name:"cover",
-            title:'Cover'
-
-        }
+    
+         },
+       
 
     ]
 }
