@@ -20,9 +20,9 @@ export default async function Home({params}:{params:{slug:string}}) {
                       {data.content?(
                         data.content.map((item:any,i:number)=>{
                           return(
-                            <div className="contentBlock col-span-full grid grid-cols-12">
+                            <div className="contentBlock col-span-full grid grid-cols-12" key={`content-${i}`}>
                               {item.desc?(
-                                <div className="intro col-span-6 col-start-4 mb-[20px]" key={`content-${i}`}>
+                                <div className="intro col-span-6 col-start-4 mb-[20px]">
                                 <div className="secHead"><p>{item.title}</p></div>
                               <PortableText value={item.desc}/>
                             </div>
