@@ -98,7 +98,6 @@ function Flow({ categories, projects,info}:{categories:any,projects:any,info:any
     const newNodes =(items:any, nodeX:any, nodeGap:any, slug:any, opt:number)=>{
       setTitleEdges([])
       setTitleNodes([])
-      setActive(false);
       const getNodes:any = [] 
       items.map((item:any,i:any)=>{
         const singleNode = {
@@ -262,6 +261,7 @@ const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:n
 // single
 const changeTitleSingle=(sec:number,cat:number, art:number,opt:number,slug:string, x:number, y:number)=>{
   moveView(x,y)
+  setActive(false)
   setTitleEdges([])
   setTitleNodes([])
   const getTri:any = []
