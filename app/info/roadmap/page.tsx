@@ -27,3 +27,4 @@ export default async function Home({params}:{params:{slug:string}}) {
     </main>
   );
 }
+

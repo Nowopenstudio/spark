@@ -4,6 +4,20 @@ export default {
     title:'Roadmap',
     fields:[
         {
+            type:"string",
+            name:'title',
+            title:'Title'
+        },
+        {
+        type:'slug',
+        name:'slug',
+        title:'Slug',
+        options:{
+            source:'title'
+        }
+
+    },
+        {
             type:'array',
             name:'roadmapItem',
             title:"Item",

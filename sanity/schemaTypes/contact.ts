@@ -5,8 +5,17 @@ export default {
     fields:[
         {
             type:"string",
-            name:'header',
-            title:'Header'
+            name:'title',
+            title:'Title'
+        },
+        {
+            type:'slug',
+            name:'slug',
+            title:'Slug',
+            options:{
+                source:'title'
+            }
+
         },
         {
             type:'array',
