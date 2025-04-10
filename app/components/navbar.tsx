@@ -8,12 +8,15 @@ import useResize from "./util/useResize";
 import NavBut from "./nodes/NavBut"
 import NavBack from "./nodes/NavBack";
 import NavTitle from "./nodes/NavTitle";
+import { useParams, usePathname } from "next/navigation";
+import { filterIndex } from "./util/sanity";
 
 
 
 const nodeTypes = { navBut: NavBut, navTitle: NavTitle, navBack:NavBack};
 
-function Flow({ categories, projects,info}:{categories:any,projects:any,info:any}){
+function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params:any,page:any,categories:any,projects:any,info:any,mobile:any,winX:any,winY:any}){
+ 
    const initialNodes = [
       {
         id: '1',
@@ -70,7 +73,7 @@ function Flow({ categories, projects,info}:{categories:any,projects:any,info:any
         id: '1-7'
       },
     ];
-   const {winX, winY, mobile} = useResize()
+  
    const [view, useView] = useState({x:winX/2,y:winY/2,zoom:2})
    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -85,17 +88,115 @@ function Flow({ categories, projects,info}:{categories:any,projects:any,info:any
    const [nodeX, setW] = useState(120) ;
    const [nodeGap,setGap] = useState(40);
    const {setCenter} = useReactFlow();
+   let timer:any = null
 
+
+   useEffect(()=>{
+    if(page.includes('resources')){
+      changeSec(1)
+      timer = window.setInterval(()=>moveView(-140,60), 500)
+      if(params.catSlug){
+        const index = filterIndex(categories,"slug",params.catSlug)
+        changeTri(categories,categories[index!],index!,-1,`resources/${categories[index!].slug}`,-320,60)
+        timer = window.setInterval(()=>moveView(-320,60), 1000)
+        if(params.slug){
+          const art = filterIndex(categories[index!].articles,"slug",params.slug)
+          changeTitle(1,sec,art!,-1,`resources/`,-500,220)
+         timer = window.setInterval(()=>moveView(-500,220), 1000)
+        }
+      }
+
+    }else if(page.includes('projects')){
+      changeSec(2)
+      timer = window.setInterval(()=>moveView(-140,60), 500)
+      if(params.slug){
+        const pro = filterIndex(projects,"slug",params.slug)
+        changeTitleSingle(projects,1,sec,pro!,-1,'projects',-320,200)
+        timer = window.setInterval(()=>moveView(-320,200), 500)
+      }
+    }else if(page.includes('info')){
+      changeSec(3)
+      timer = window.setInterval(()=>moveView(-140,60), 500)
+      const curr =  page.split('/')[2]
+      if(curr){
+        const pro = filterIndex(info,"slug",curr)
+        changeTitleSingle(info,1,sec,pro!,-1,'info',-320,200)
+        timer = window.setInterval(()=>moveView(-320,200), 500)
+      }
+    }
+  
+  },[])
 
 
     const moveView=(x:number,y:number)=>{
   
- 
+      clearInterval(timer)
       setCenter(x, y, { zoom:2, duration: 1000 });
     }
 
+    // Main Menu Section
+  const changeSec=(sec:number)=>{
+    setActive(true)
+    setSec(sec)
+    if(sec==0){
+      setResources([])
+      setSecEdges([])
+      setTriNodes([])
+      setTriEdges([])
+      setTitleEdges([])
+      setTitleNodes([])
+      
+       setNodes(initialNodes)
+       moveView(60,60)
+    }
+    else if(sec==1){
+      setResources([])
+      setSecEdges([])
+      setTriNodes([])
+      setTriEdges([])
+      setTitleEdges([])
+      setTitleNodes([])
+      setResources(newNodes(categories,nodeX,nodeGap,"resources",-1))
+      setSecEdges(newEdges(1,categories))
+      moveView(-140,60)
+     
+    }
+    else if(sec==2){
+      setResources([])
+      setSecEdges([])
+      setTriNodes([])
+      setTriEdges([])
+      setTitleEdges([])
+      setTitleNodes([])
+      setResources(newSingle(projects,nodeX,nodeGap,sec,"projects",-1))
+      setSecEdges(newEdges(2,projects))
+      moveView(-140,60)
+     
+    }
+    else if(sec==3){
+      setResources([])
+      setSecEdges([])
+      setTriNodes([])
+      setTriEdges([])
+      setTitleEdges([])
+      setTitleNodes([])
+      setNodes(initialNodes)
+      moveView(-140,60)
+      setResources(newSingle(info,nodeX,nodeGap,sec,"info",-1))
+      setSecEdges(newEdges(3,info))
+     
+    }
+    
+}
+
+const changeActive=(sec:number,x:number,y:number,active:boolean)=>{
+moveView(x,y)
+setActive(active)
+
+}
     // newResources
     const newNodes =(items:any, nodeX:any, nodeGap:any, slug:any, opt:number)=>{
+      setActive(true)
       setTitleEdges([])
       setTitleNodes([])
       const getNodes:any = [] 
@@ -108,12 +209,32 @@ function Flow({ categories, projects,info}:{categories:any,projects:any,info:any
         }
         getNodes.push(singleNode)
       })
-      console.log('new',getNodes)
+      if(mobile){
+        const backNode = {
+          id: `${4+(items.length)}`,
+          type: 'navBut',
+          data: { label: <Link href={`/${slug}`} key={`cat-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>→</div> </div></Link> },
+          position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap+1)/2-(nodeGap*((-1)+.5))},
+        }
+        getNodes.push(backNode)
+      }
       return getNodes
     }
 
     const newEdges =(source:number, items:any)=>{
       const getEdges:any = []
+    
+      if(mobile){
+        const backEdge = {
+          id: `${source}-${(items.length)+4}`,
+          type: 'smoothstep',
+          animated:true,
+          source: `${source}`,
+          target: `${(items.length)+4}`,
+        }
+        getEdges.push(backEdge)
+      }
+     
       items.map((item:any,i:any)=>{
         const singleEdge = {
           id: `${source}-${i+4}`,
@@ -124,6 +245,7 @@ function Flow({ categories, projects,info}:{categories:any,projects:any,info:any
         }
         getEdges.push(singleEdge)
       })
+
    
       return getEdges
     }
@@ -131,95 +253,84 @@ function Flow({ categories, projects,info}:{categories:any,projects:any,info:any
     const newSingle =(items:any, nodeX:any, nodeGap:any,sec:number, slug:any, opt:number)=>{
       setTitleEdges([])
       setTitleNodes([])
+      setActive(true)
       const getNodes:any = [] 
       items.map((item:any,i:any)=>{
         const singleNode = {
           id: `${i+4}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-${i}`} onClick={()=>changeTitleSingle(1,sec,i,opt,slug,-640,200)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-${i}`} onClick={()=>changeTitleSingle(items,1,sec,i,opt,slug,-320,200)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
       })
+      if(mobile){
+        const backNode = {
+          id: `${items.length+4}`,
+          type: 'navBut',
+          data: { label: <Link href={`/${slug}`} key={`single-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>→</div> </div></Link> },
+          position: {  x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(-1+.5))},
+        }
+        getNodes.push(backNode)
+      }
       console.log('new',getNodes)
       return getNodes
     }
 
 
-  // Main Menu Section
-  const changeSec=(sec:number)=>{
-      
-      setSec(sec)
-      if(sec==0){
-        setResources([])
-        setSecEdges([])
-        setTriNodes([])
-        setTriEdges([])
-         setNodes(initialNodes)
-         moveView(0,0)
-      }
-      else if(sec==1){
-        setResources([])
-        setSecEdges([])
-        setTriNodes([])
-        setTriEdges([])
-        setResources(newNodes(categories,nodeX,nodeGap,"resources",-1))
-        setSecEdges(newEdges(1,categories))
-        moveView(-160,60)
-       
-      }
-      else if(sec==2){
-        setResources([])
-        setSecEdges([])
-        setTriNodes([])
-        setTriEdges([])
-        setResources(newSingle(projects,nodeX,nodeGap,sec,"projects",-1))
-        setSecEdges(newEdges(2,projects))
-        moveView(-160,60)
-       
-      }
-      else if(sec==3){
-        setResources([])
-        setSecEdges([])
-        setTriNodes([])
-        setTriEdges([])
-        setNodes(initialNodes)
-        moveView(-160,60)
-        setResources(newSingle(info,nodeX,nodeGap,sec,"info",-1))
-        setSecEdges(newEdges(3,info))
-       
-      }
-}
-
-const changeActive=(sec:number,x:number,y:number,active:boolean)=>{
-  moveView(x,y)
-  setActive(active)
-
-}
+  
 
 const changeTri=(items:any,item:any,sec:number, opt:number, slug:any, x:number, y:number)=>{
+  setTitleEdges([])
+  setTitleNodes([])
+  setTriEdges([])
+  setTitleEdges([])
   moveView(x,y)
+  setActive(true)
   
   const getTri:any = []
   const getTriEdge:any=[]
   if(item.articles){
     items[sec].articles.map((item:any,i:any)=>{
       const singleNode = {
-        id: `${i+4+categories.length}`,
+        id: `${i+4+categories.length+mobile}`,
         type: 'navBut',
-        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} onClick={()=>changeTitle(1,sec,i,opt,slug,-640,200)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}} >{item.title}</div> </div></Link> },
+        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} onClick={()=>changeTitle(1,sec,i,opt,slug,-500,220)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}} >{item.title}</div> </div></Link> },
         position: { x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
       }
       const singleEdge = {
-        id: `${sec+4}-${i+4+categories.length}`,
+        id: `${sec+4}-${i+4+categories.length+mobile}`,
         type: 'smoothstep',
         animated:true,
         source: `${sec+4}`,
-        target: `${i+4+categories.length}`,
+        target: `${i+4+categories.length+mobile}`,
       }
       getTri.push(singleNode)
       getTriEdge.push(singleEdge)
     })
+    if(mobile || (items[sec].articles.length == 0)){
+     
+    
+        const backNode = {
+          id: `${items.length+4+categories.length}`,
+          type: 'navBut',
+          data: { label: <Link href={`/${slug}`} key={`tri-back`} onClick={()=>moveView(-140,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>{`${items[sec].articles.length?"":"0 ENTRIES "}`}→</div> </div></Link> },
+          position: {  x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(-1+.5))},
+        }
+        getTri.push(backNode)
+
+        const backEdge = {
+          id: `${sec+4}-${items.length+4+categories.length}`,
+          type: 'smoothstep',
+          animated:true,
+          source: `${sec+4}`,
+          target: `${items.length+4+categories.length}`,
+        }
+        getTriEdge.push(backEdge)
+
+      
+    }
+
     setTitleEdges([])
   setTitleNodes([])
   setTriNodes(getTri)
@@ -240,18 +351,18 @@ const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:n
   const getTriEdge:any=[]
   const item = categories[cat].articles[art]
   const titleNode={
-    id: `${art+4+categories.length}`,
+    id: `${art+4+categories.length+mobile}`,
     type: 'navBack',
-    data: {label:<Link href={`/${slug}`}  onClick={()=>changeActive(cat,-320,0,true)}><div className="navBut w-full h-full" ><div >{`Back to ${categories[cat].title}`}</div> </div></Link>},
-    position: { x: ((nodeX + nodeGap*3)*opt)*3, y: (categories[cat].articles.length*nodeGap)/2},
+    data: {label:<Link href={`/${slug}`}  onClick={()=>changeActive(cat,-320,100,true)}><div className="navBut w-full h-full" ><div >{`${categories[cat].title} →`}</div> </div></Link>},
+    position: { x: ((nodeX + nodeGap*4)*opt)*2, y: 60},
   }
 
   const titleEdge = {
-    id: `${cat+4}${art+4+categories.length}`,
+    id: `${cat+4}-${art+4+categories.length+mobile}`,
     type: 'smoothstep',
     animated:true,
     source: `${cat+4}`,
-    target: `${art+4+categories.length}`,
+    target: `${art+4+categories.length+mobile}`,
   }
   getTri.push(titleNode)
   getTriEdge.push(titleEdge)
@@ -259,7 +370,7 @@ const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:n
   setTitleNodes(getTri)
 }
 // single
-const changeTitleSingle=(sec:number,cat:number, art:number,opt:number,slug:string, x:number, y:number)=>{
+const changeTitleSingle=(items:any,sec:number,cat:number, art:number,opt:number,slug:string, x:number, y:number)=>{
   moveView(x,y)
   setActive(false)
   setTitleEdges([])
@@ -269,8 +380,8 @@ const changeTitleSingle=(sec:number,cat:number, art:number,opt:number,slug:strin
   const titleNode={
     id: `${4+art}`,
     type: 'navBack',
-    data: {label:<Link href={`/${slug}`}  onClick={()=>changeActive(cat,nodeX/2,60,true)}><div className="navBut w-full h-full" ><div >{`Back to ${slug}`}</div> </div></Link>},
-    position: { x: ((nodeX + nodeGap*2.5)*2.5*opt), y: (art*nodeGap)/2},
+    data: {label:<Link href={`/${slug}`}  onClick={()=>changeSec(cat)}><div className="navBut w-full h-full" ><div >{`${slug} →`}</div> </div></Link>},
+    position: { x:((nodeX + nodeGap*2)*opt)*2, y:  80},
   }
 
   const titleEdge = {
@@ -295,7 +406,7 @@ useEffect(()=>{
       setNodes([...initialNodes,...resources,...triNodes])
       setEdges([...secEdges,...triEdges])
     }
-  console.log(edges)
+
   
 },[resources, secEdges, triEdges, triNodes, titleNodes, titleEdges])
      
@@ -303,9 +414,12 @@ useEffect(()=>{
     return(
 
       <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"":'pointer-events-none'}`}>
-        <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false}>
-          {/* <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(135, 191, 239, 0)'} nodeStrokeColor={"rgb(135, 191, 239, 1.0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable /> */}
-        </ReactFlow>
+        {mobile!==null?(
+            <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false}>
+            {/* <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(135, 191, 239, 0)'} nodeStrokeColor={"rgb(135, 191, 239, 1.0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable /> */}
+          </ReactFlow>
+        ):('')}
+      
         </div>
 
 
@@ -315,11 +429,18 @@ useEffect(()=>{
 
  
 export default function NavBar({categories, projects,info}:{categories:any,projects:any,info:any}){
+  const {winX, winY, mobile} = useResize()
+  const page = usePathname()
+  const params = useParams()
+
 
   return(
   <div className="fixed z-[50] w-[100vw] h-[100dvh]">
-  <ReactFlowProvider>
-      <Flow categories={categories} projects={projects} info={info}/>
-  </ReactFlowProvider></div>
+    {mobile!==null && winY && winX?(
+        <ReactFlowProvider>
+        <Flow categories={categories} page={page} params={params} projects={projects} info={info} winX={winX} winY={winY} mobile={mobile}/>
+    </ReactFlowProvider>
+    ):('')}
+</div>
   )
 }

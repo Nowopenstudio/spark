@@ -14,6 +14,16 @@ export const filterKey =((array:any,sec:any,term:any)=>{
       return results
     })
 
+    export const filterIndex =((array:any,sec:any,term:any)=>{
+      var curr
+    array.map((item:any,i:number)=>{
+      if(item[sec] == term){
+        curr = i
+      }
+    })
+    return curr
+  });
+   
 export const client = createClient({
     projectId,
     dataset,

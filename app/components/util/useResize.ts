@@ -7,22 +7,20 @@ import React, { useState, useEffect } from 'react';
 export default function useResize() {
     const [winX, setWidth] = useState<any>();
     const [winY,setHeight] = useState<any>();
-    const [mobile,setMobile] = useState<any>(false);
+    const [mobile,setMobile] = useState<any>(null);
 
     const onResize=()=>{
       setWidth(window.innerWidth)
       setHeight(window.innerHeight)
       if(window.innerWidth <= 850){
-        setMobile(true)
+        setMobile(1)
       }else{
-        setMobile(false)
+        setMobile(0)
       }
     }
 
   
     useEffect(() => {
-      setWidth(window.innerWidth)
-      setHeight(window.innerHeight)
       onResize();
       window.addEventListener("resize", onResize);
       return () => {
