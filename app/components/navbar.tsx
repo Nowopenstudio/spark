@@ -139,6 +139,7 @@ function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params
     setActive(true)
     setSec(sec)
     if(sec==0){
+      setEdges([])
       setResources([])
       setSecEdges([])
       setTriNodes([])
@@ -150,6 +151,7 @@ function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params
        moveView(60,60)
     }
     else if(sec==1){
+      setEdges([])
       setResources([])
       setSecEdges([])
       setTriNodes([])
@@ -162,6 +164,7 @@ function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params
      
     }
     else if(sec==2){
+      setEdges([])
       setResources([])
       setSecEdges([])
       setTriNodes([])
@@ -197,6 +200,8 @@ setActive(active)
     // newResources
     const newNodes =(items:any, nodeX:any, nodeGap:any, slug:any, opt:number)=>{
       setActive(true)
+      setTriEdges([])
+      setTriNodes([])
       setTitleEdges([])
       setTitleNodes([])
       const getNodes:any = [] 
@@ -251,6 +256,8 @@ setActive(active)
     }
 
     const newSingle =(items:any, nodeX:any, nodeGap:any,sec:number, slug:any, opt:number)=>{
+      setTriEdges([])
+      setTriNodes([])
       setTitleEdges([])
       setTitleNodes([])
       setActive(true)
@@ -281,8 +288,6 @@ setActive(active)
   
 
 const changeTri=(items:any,item:any,sec:number, opt:number, slug:any, x:number, y:number)=>{
-  setTitleEdges([])
-  setTitleNodes([])
   setTriEdges([])
   setTitleEdges([])
   moveView(x,y)
@@ -331,7 +336,7 @@ const changeTri=(items:any,item:any,sec:number, opt:number, slug:any, x:number, 
       
     }
 
-    setTitleEdges([])
+  setTitleEdges([])
   setTitleNodes([])
   setTriNodes(getTri)
   setTriEdges(getTriEdge)
@@ -343,10 +348,9 @@ const changeTri=(items:any,item:any,sec:number, opt:number, slug:any, x:number, 
 }
 
 const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:number, y:number)=>{
+  console.log(titleEdges)
   moveView(x,y)
   setActive(false)
-  setTitleEdges([])
-  setTitleNodes([])
   const getTri:any = []
   const getTriEdge:any=[]
   const item = categories[cat].articles[art]
@@ -358,12 +362,13 @@ const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:n
   }
 
   const titleEdge = {
-    id: `${cat+4}-${art+4+categories.length+mobile}`,
+    id: `${cat+4}-${art+4+categories.length+mobile}-title`,
     type: 'smoothstep',
     animated:true,
     source: `${cat+4}`,
     target: `${art+4+categories.length+mobile}`,
   }
+
   getTri.push(titleNode)
   getTriEdge.push(titleEdge)
   setTitleEdges(getTriEdge)
@@ -399,12 +404,13 @@ const changeTitleSingle=(items:any,sec:number,cat:number, art:number,opt:number,
 
 useEffect(()=>{
  
-  if(titleEdges.length === 1){
+  if(titleEdges.length){
     setNodes([...initialNodes,...resources,...triNodes,...titleNodes])
     setEdges([...secEdges,...triEdges,titleEdges[0]])}
     else{
       setNodes([...initialNodes,...resources,...triNodes])
       setEdges([...secEdges,...triEdges])
+      console.log('no title')
     }
 
   
