@@ -15,7 +15,7 @@ export const filterKey =((array:any,sec:any,term:any)=>{
     })
 
     export const filterIndex =((array:any,sec:any,term:any)=>{
-      var curr
+      let curr
     array.map((item:any,i:number)=>{
       if(item[sec] == term){
         curr = i
