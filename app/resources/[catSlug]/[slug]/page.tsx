@@ -4,24 +4,30 @@ import Link from "next/link";
 import Image from 'next/image';
 import { Reveal } from "@/app/components/util/reveal";
 import { SwitchContent } from "@/app/components/util/contentSwitch";
+import { getDate } from "@/app/components/util/sanity";
 
 
 
 
 export default async function Home({params}:{params:{slug:string}}) {
-    const { data } = await getData(`*[_type=='articles' && slug.current == '${params.slug}'][0]{title,_createdAt,"author":author->{firstName},slug,'imageUrl': cover.asset->url, intro, content[]{desc,'image':image.asset->url,'vid':video.asset->{playbackId}},cover{'image':image.asset->url,'vid':video.asset->{playbackId}}}`)
-    console.log(data[0])
+    const { data } = await getData(`*[_type=='articles' && slug.current == '${params.slug}'][0]{title,_createdAt,"author":author->{firstName},"color":category->color.hex,slug,'imageUrl': cover.asset->url, intro, content[]{desc,'image':image.asset->url,'vid':video.asset->{playbackId}},cover{'image':image.asset->url,'vid':video.asset->{playbackId}}}`)
+    console.log(data)
   return (
-    <Reveal styleSet="w-[100vw] min-h-[100dvh] pb-[60px] grid grid-cols-12 articleStage text-white relative">
-                   <div className="w-full col-span-full min-h-[50vh] pb-[60px]">
+    <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
+                   <div className="w-full grid grid-cols-12 articleStage relative text-[white] pb-[60px]" style={{backgroundColor:data.color}}>
+                   <div className="col-span-8 col-start-3 pt-[--xl] pb-[--med] text-center uppercase">
+                      <h1>{data.title}</h1>
+                      <h2>{getDate(data._createdAt)}</h2>
+                   </div>
+                   <div className="w-full col-span-full min-h-[50vh]">
                     {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
                   
                    </div>
                     {data.content.map((item:any,i:number)=>{
                         return(
-                          <div className="contentBlock col-span-full grid grid-cols-12" key={`content-${i}`}>
+                          <div className="contentBlock col-span-full grid grid-cols-12" key={`content-${i}`} >
                             {item.desc?(
-                              <div className="intro col-span-6 col-start-4 mb-[20px]">
+                              <div className="intro col-span-8 col-start-3 py-[--med] rich-text">
                               <div className="secHead"><p>{item.title}</p></div>
                             <PortableText value={item.desc}/>
                           </div>
@@ -34,6 +40,7 @@ export default async function Home({params}:{params:{slug:string}}) {
                           
                         )
                       })}
+                      </div>
      
     </Reveal>
   );

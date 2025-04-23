@@ -3,7 +3,7 @@ export default {
     type:"document",
     title:'About',
     fields:[
-        {
+        {   
             type:"object",
             name:"cover",
             title:'Cover',

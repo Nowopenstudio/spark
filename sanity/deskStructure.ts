@@ -88,6 +88,9 @@ export const myStructure = (S:any) =>
               ])
           ),
         S.divider(),
+        S.listItem() 
+        .title('Donations')
+        .child(S.document().title('Donations').schemaType('donate').documentId('donate')),
 
-      ...S.documentTypeListItems().filter(listItem => !['categories','authors','about','roadmap','membership','contact','articles'].includes(listItem.getId())),
+      ...S.documentTypeListItems().filter(listItem => !['donate','categories','authors','about','roadmap','membership','contact','articles'].includes(listItem.getId())),
 ])

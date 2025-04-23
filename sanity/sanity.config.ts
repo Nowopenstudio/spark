@@ -4,7 +4,8 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import { myStructure } from './deskStructure'
 import { muxInput } from 'sanity-plugin-mux-input'
-import { dataset, projectId, token } from '../env.js'
+import {colorInput} from '@sanity/color-input'
+
 
 export default defineConfig({
   name: 'default',
@@ -15,7 +16,7 @@ export default defineConfig({
 
   plugins: [structureTool({
     structure: myStructure
-  }), visionTool(),muxInput()],
+  }), visionTool(),muxInput(),colorInput()],
 
   schema: {
     types: schemaTypes,

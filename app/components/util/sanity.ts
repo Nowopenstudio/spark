@@ -24,6 +24,22 @@ export const filterKey =((array:any,sec:any,term:any)=>{
     return curr
   });
    
+
+  export const getDate=((date:any)=>{
+    const newdate = new Date(date)
+    const options: Intl.DateTimeFormatOptions = {
+      month: "2-digit",
+      day: "2-digit",
+      year:"2-digit"
+    };
+    const dateTimeFormat = new Intl.DateTimeFormat("en-US", options);
+    
+    const parts = dateTimeFormat.formatToParts(newdate);
+    const partValues = parts.map((p) => p.value);
+    console.log(partValues)
+    return(`${partValues[0]}.${partValues[2]}.${partValues[4]}`);
+  })
+
 export const client = createClient({
     projectId,
     dataset,

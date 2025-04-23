@@ -22,7 +22,7 @@ export default async function Home({params}:{params:{slug:string}}) {
                           return(
                             <div className="contentBlock col-span-full grid grid-cols-12" key={`content-${i}`}>
                               {item.desc?(
-                                <div className="intro col-span-6 col-start-4 mb-[20px]">
+                                <div className="intro col-span-8 col-start-3 py-[--med] text-[--blue]">
                                 <div className="secHead"><p>{item.title}</p></div>
                               <PortableText value={item.desc}/>
                             </div>

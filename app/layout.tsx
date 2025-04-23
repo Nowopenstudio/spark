@@ -19,18 +19,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const query = await getData(`{
-    'categories':*[_type=='categories']|order(name){title,"slug":slug.current, color, "articles": *[ _type == "articles" && references(^._id)]{title, _createdAt,"slug":slug.current, intro, content, "cover":cover.asset->url,"author":author->{firstName,lastName}}},
+    'categories':*[_type=='categories']|order(name){title,"slug":slug.current, 'color':color.hex, "articles": *[ _type == "articles" && references(^._id)]{title, _createdAt,"slug":slug.current, intro, content, "cover":cover.asset->url,"author":author->{firstName,lastName}}},
     'projects': *[_type=='projects']{title,'slug':slug.current},
-    'info':[*[_type=='about'][0]{title,'slug':slug.current},*[_type=='roadmap'][0]{title,'slug':slug.current}, *[_type=='membership'][0]{title,'slug':slug.current},*[_type=='contact'][0]{title,'slug':slug.current}]
+    'info':[*[_type=='contact'][0]{title,'slug':slug.current},*[_type=='roadmap'][0]{title,'slug':slug.current},*[_type=='membership'][0]{title,'slug':slug.current},*[_type=='about'][0]{title,'slug':slug.current},]
  }`)
  const {categories,projects,info} = query.data
- console.log(info)
+ console.log(categories)
 
   return (
     <html lang="en">
       <SmoothScrolling>
-        <body className="bg-[--dark]">
-        <Test/>
+        <body className="bg-[white]">
+        {/* <Test/> */}
         <Navbar categories={categories} projects={projects} info={info}/>
           {children}
           </body>

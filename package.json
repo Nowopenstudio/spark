@@ -25,6 +25,7 @@
     "next-sanity": "^9.4.3",
     "react": "^18",
     "react-dom": "^18",
+    "sanity-plugin-simpler-color-input": "^3.0.1",
     "three": "^0.167.1"
   },
   "devDependencies": {

@@ -6,9 +6,17 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --blue: #87bfef;
+  --blue: #2c86d0;
   --dark: #181926;
+  --white:#fcf4dd;
   --xy-edge-stroke-width-default: 0;
+  --2xs:8px;
+  --xs: 16px;
+  --sm: 30px;
+  --med: 60px;
+  --lrg: 90px;
+  --xl:180px;
+  --2xl:360px;
 }
 
 @font-face {
@@ -26,9 +34,15 @@
 }
 
 body {
-  font-size:12pt;
+  font-size:16pt;
   font-family: "mono",Arial, Helvetica, sans-serif;
   color: var(--blue);
+}
+
+h1{
+  font-size: 5rem;
+  font-family: 'fake', arial;
+  line-height: 1.125em;
 }
 
 .fake {
@@ -101,7 +115,7 @@ body {
 
   .navBut div{
     padding: 5px;
-    background-color: rgb(24 25 38 / 10%);
+    background-color: rgba(252, 244, 221, 0.1);
     backdrop-filter: blur(5px);
     opacity: 0;
     position: relative;
@@ -124,7 +138,6 @@ body {
 
   .navBut::before{
     content: "+";
-    color:var(--blue);
     position: absolute;
     top:0;
     left:0;
@@ -133,7 +146,6 @@ body {
 
   .navBut div:first-child:before{
     content: "+";
-    color:var(--blue);
     position: absolute;
     bottom:0;
     left:0;
@@ -144,7 +156,6 @@ body {
 
   .navBut::after{
     content: "+";
-    color:var(--blue);
     position: absolute;
     top:0;
     right:0;
@@ -153,7 +164,6 @@ body {
 
   .navBut div:first-child::after{
     content: "+";
-    color:var(--blue);
     position: absolute;
     bottom:0;
     right:0;
