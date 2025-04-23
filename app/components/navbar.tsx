@@ -425,7 +425,7 @@ useEffect(()=>{
       <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"":'pointer-events-none'}`}>
         {mobile!==null?(
             <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={2} maxZoom={2}>
-            <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(135, 191, 239, 1)'} nodeStrokeColor={"rgb(135, 191, 239, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable />
+            <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(0, 0, 0, .2)'} nodeStrokeColor={"rgb(0, 0, 0, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable />
           </ReactFlow>
         ):('')}
       
