@@ -15,7 +15,7 @@ export default async function Home({params}:{params:{slug:string}}) {
         <div className="flex col-span-full flex-wrap-none items-start">
           {data.roadmapItem.map((item:any,i:number)=>{
             return(
-              <Reveal styleSet="w-[33vw] p-[--sm]" count={i}>
+              <Reveal styleSet="w-[33vw] p-[--sm]" count={i} key={`roadmap-${i}`}>
                 <h1>{item.title}</h1>
                 <div className="richText">
                   <PortableText value={item.text}/>
