@@ -13,11 +13,12 @@ import NavTitle from "./nodes/NavTitle";
 import { useParams, usePathname } from "next/navigation";
 import { filterIndex } from "./util/sanity";
 import { style } from "framer-motion/client";
+import { getRootState } from "@react-three/fiber";
 
 
 
 const nodeTypes = { navBut: NavBut, navTitle: NavTitle, navBack:NavBack, navButAlt:NavButAlt, navBackAlt:NavBackAlt};
-function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params:any,page:any,categories:any,projects:any,info:any,mobile:any,winX:any,winY:any}){
+function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:{donate:any,params:any,page:any,categories:any,projects:any,info:any,mobile:any,winX:any,winY:any}){
  
    const initialNodes = [
       {
@@ -40,6 +41,14 @@ function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params
         data:  { label: <Link href={'/about'} onClick={()=>changeSec(3)}><div className="navBut w-full h-full" style={{animationDelay:"300ms"}}><div>About</div></div></Link> },
         position: { x: 0, y: 0 },
       },
+      {
+        id: '4',
+        type: 'navButAlt',
+        // you can also pass a React component as a label
+        data: { label: <Link href={'/donate'} onClick={()=>changeSec(4)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div>Donate</div></div></Link> },
+        position: { x: 0, y: 120 },
+      },
+      
     ];
 
 
@@ -47,34 +56,7 @@ function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params
    {},{}
     ];
 
-    const resourceEdges = [
-      {
-        type: 'smoothstep',
-        animated:true,
-        source: '1',
-        target: '4',
-        id: '1-4'
-      },
-      {
-        type: 'smoothstep',
-        animated:true,
-        source: '1',
-        target: '5',
-        id: '1-5'
-      },{
-        type: 'smoothstep',
-        animated:true,
-        source: '1',
-        target: '6',
-        id: '1-6'
-      },{
-        type: 'smoothstep',
-        animated:true,
-        source: '1',
-        target: '7',
-        id: '1-7'
-      },
-    ];
+    
   
    const [view, useView] = useState({x:winX/2,y:winY/2,zoom:2})
    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -91,6 +73,7 @@ function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params
    const [nodeGap,setGap] = useState(40);
    const {setCenter} = useReactFlow();
    let timer:any = null
+   const root = 5;
 
 
    useEffect(()=>{
@@ -191,6 +174,17 @@ function Flow({page, params, categories, projects,info,mobile,winX,winY}:{params
       setSecEdges(newEdges(3,info))
      
     }
+    else if(sec==4){
+      setEdges([])
+      setResources([])
+      setSecEdges([])
+      setTriNodes([])
+      setTriEdges([])
+      setTitleEdges([])
+      setTitleNodes([])
+    changeTitleDonate(460,300)
+     
+    }
     
 }
 
@@ -209,7 +203,7 @@ setActive(active)
       const getNodes:any = [] 
       items.map((item:any,i:any)=>{
         const singleNode = {
-          id: `${i+4}`,
+          id: `${i+root}`,
           type: 'navBut',
           data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-320,60)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`,color:item.color}}>{item.title}</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
@@ -218,7 +212,7 @@ setActive(active)
       })
       if(mobile){
         const backNode = {
-          id: `${4+(items.length)}`,
+          id: `${root+(items.length)}`,
           type: 'navBut',
           data: { label: <Link href={`/${slug}`} key={`cat-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>→</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap+1)/2-(nodeGap*((-1)+.5))},
@@ -233,22 +227,22 @@ setActive(active)
     
       if(mobile){
         const backEdge = {
-          id: `${source}-${(items.length)+4}`,
+          id: `${source}-${(items.length)+root}`,
           type: 'smoothstep',
           animated:true,
           source: `${source}`,
-          target: `${(items.length)+4}`,
+          target: `${(items.length)+root}`,
         }
         getEdges.push(backEdge)
       }
      
       items.map((item:any,i:any)=>{
         const singleEdge = {
-          id: `${source}-${i+4}`,
+          id: `${source}-${i+root}`,
           type: 'smoothstep',
           animated:true,
           source: `${source}`,
-          target: `${i+4}`,
+          target: `${i+root}`,
         }
         getEdges.push(singleEdge)
       })
@@ -266,7 +260,7 @@ setActive(active)
       const getNodes:any = [] 
       items.map((item:any,i:any)=>{
         const singleNode = {
-          id: `${i+4}`,
+          id: `${i+root}`,
           type: `navBut${opt>0?'Alt':''}`,
           data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-${i}`} onClick={()=>changeTitleSingle(items,1,sec,i,opt,slug,opt>0?460:-320,310)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
@@ -275,7 +269,7 @@ setActive(active)
       })
       if(mobile){
         const backNode = {
-          id: `${items.length+4}`,
+          id: `${items.length+root}`,
           type: 'navBut',
           data: { label: <Link href={`/${slug}`} key={`single-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>→</div> </div></Link> },
           position: {  x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(-1+.5))},
@@ -299,18 +293,18 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
   if(parent.articles){
     items[sec].articles.map((item:any,i:any)=>{
       const singleNode = {
-        id: `${i+4+categories.length+mobile}`,
+        id: `${i+root+categories.length+mobile}`,
         type: 'navBut',
         data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-500,270,parent)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`,color:item.color}} >{item.title}</div> </div></Link> },
         position: { x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
       }
       const singleEdge = {
-        id: `${sec+4}-${i+4+categories.length+mobile}`,
+        id: `${sec+root}-${i+root+categories.length+mobile}`,
         type: 'smoothstep',
         animated:true,
         style:{stroke:parent.color},
-        source: `${sec+4}`,
-        target: `${i+4+categories.length+mobile}`,
+        source: `${sec+root}`,
+        target: `${i+root+categories.length+mobile}`,
       }
       getTri.push(singleNode)
       getTriEdge.push(singleEdge)
@@ -319,7 +313,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
      
     
         const backNode = {
-          id: `${items.length+4+categories.length}`,
+          id: `${items.length+root+categories.length}`,
           type: 'navBut',
           data: { label: <Link href={`/${slug}`} key={`tri-back`} style={{color:parent.color}} onClick={()=>moveView(-140,60)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>{`${items[sec].articles.length?"":"0 ENTRIES "}`}→</div> </div></Link> },
           position: {  x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(-1+.5))},
@@ -327,12 +321,12 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
         getTri.push(backNode)
 
         const backEdge = {
-          id: `${sec+4}-${items.length+4+categories.length}`,
+          id: `${sec+root}-${items.length+root+categories.length}`,
           type: 'smoothstep',
           animated:true,
-          source: `${sec+4}`,
+          source: `${sec+root}`,
           style:{stroke:parent.color},
-          target: `${items.length+4+categories.length}`,
+          target: `${items.length+root+categories.length}`,
         }
         getTriEdge.push(backEdge)
 
@@ -356,19 +350,19 @@ const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:n
   const getTriEdge:any=[]
   const item = categories[cat].articles[art]
   const titleNode={
-    id: `${art+4+categories.length+mobile}`,
+    id: `${art+root+categories.length+mobile}`,
     type: 'navBack',
     data: {label:<Link href={`/${slug}`}  style={{color:parent.color}} onClick={()=>changeActive(cat,-320,100,true)}><div className="navBut w-full h-full" ><div >{`${categories[cat].title} →`}</div> </div></Link>},
-    position: { x: ((nodeX + nodeGap*4)*opt)*2, y: 60},
+    position: { x: ((nodeX + nodeGap*root)*opt)*2, y: 60},
   }
 
   const titleEdge = {
-    id: `${cat+4}-${art+4+categories.length+mobile}-title`,
+    id: `${cat+root}-${art+root+categories.length+mobile}-title`,
     type: 'smoothstep',
     animated:true,
     style:{stroke:parent.color},
-    source: `${cat+4}`,
-    target: `${art+4+categories.length+mobile}`,
+    source: `${cat+root}`,
+    target: `${art+root+categories.length+mobile}`,
   }
 
   getTri.push(titleNode)
@@ -386,18 +380,47 @@ const changeTitleSingle=(items:any,sec:number,cat:number, art:number,opt:number,
   const getTri:any = []
   const getTriEdge:any=[]
   const titleNode={
-    id: `${4+art}`,
+    id: `${root+art}`,
     type: `navBack${opt>0?'Alt':''}`,
     data: {label:<Link href={`/${slug}`}  onClick={()=>changeSec(cat)}><div className="navBut w-full h-full" ><div >{opt>0?`← ${slug}`:`${slug} →`}</div> </div></Link>},
     position: { x:((nodeX + nodeGap*2)*opt)*2, y:  100},
   }
 
   const titleEdge = {
-    id: `${4+art}`,
+    id: `${root+art}`,
     type: 'smoothstep',
     animated:true,
     source: `${cat}`,
-    target: `${4+art}`,
+    target: `${root+art}`,
+  }
+  getTri.push(titleNode)
+  getTriEdge.push(titleEdge)
+  setTitleEdges(getTriEdge)
+  setTitleNodes(getTri)
+}
+
+
+// single
+const changeTitleDonate=(x:number, y:number)=>{
+  moveView(x,y)
+  setActive(false)
+  setTitleEdges([])
+  setTitleNodes([])
+  const getTri:any = []
+  const getTriEdge:any=[]
+  const titleNode={
+    id: `${root}`,
+    type: `navBackAlt`,
+    data: {label:<Link href={`/`}  onClick={()=>changeSec(0)}><div className="navBut w-full h-full" ><div >← Back</div> </div></Link>},
+    position: { x:((nodeX + nodeGap*2))*2, y:  120},
+  }
+
+  const titleEdge = {
+    id: `${root-1}-${root}`,
+    type: 'smoothstep',
+    animated:true,
+    source: `${root-1}`,
+    target: `${root}`,
   }
   getTri.push(titleNode)
   getTriEdge.push(titleEdge)
@@ -437,7 +460,7 @@ useEffect(()=>{
 }
 
  
-export default function NavBar({categories, projects,info}:{categories:any,projects:any,info:any}){
+export default function NavBar({categories, projects,info,donate}:{donate:any,categories:any,projects:any,info:any}){
   const {winX, winY, mobile} = useResize()
   const page = usePathname()
   const params = useParams()
@@ -447,7 +470,7 @@ export default function NavBar({categories, projects,info}:{categories:any,proje
   <div className="fixed z-[50] w-[100vw] h-[100dvh]">
     {mobile!==null && winY && winX?(
         <ReactFlowProvider>
-        <Flow categories={categories} page={page} params={params} projects={projects} info={info} winX={winX} winY={winY} mobile={mobile}/>
+        <Flow categories={categories} donate={donate} page={page} params={params} projects={projects} info={info} winX={winX} winY={winY} mobile={mobile}/>
     </ReactFlowProvider>
     ):('')}
 </div>

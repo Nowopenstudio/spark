@@ -21,9 +21,10 @@ export default async function RootLayout({
   const query = await getData(`{
     'categories':*[_type=='categories']|order(name){title,"slug":slug.current, 'color':color.hex, "articles": *[ _type == "articles" && references(^._id)]{title, _createdAt,"slug":slug.current, intro, content, "cover":cover.asset->url,"author":author->{firstName,lastName}}},
     'projects': *[_type=='projects']{title,'slug':slug.current},
-    'info':[*[_type=='contact'][0]{title,'slug':slug.current},*[_type=='roadmap'][0]{title,'slug':slug.current},*[_type=='membership'][0]{title,'slug':slug.current},*[_type=='about'][0]{title,'slug':slug.current},]
+    'info':[*[_type=='contact'][0]{title,'slug':slug.current},*[_type=='roadmap'][0]{title,'slug':slug.current},*[_type=='membership'][0]{title,'slug':slug.current},*[_type=='about'][0]{title,'slug':slug.current}],
+    'donate':*[_type=='donate'][0]{"slug":slug.current,title,color,donations}
  }`)
- const {categories,projects,info} = query.data
+ const {categories,projects,info,donate} = query.data
  console.log(categories)
 
   return (
@@ -31,7 +32,7 @@ export default async function RootLayout({
       <SmoothScrolling>
         <body className="bg-[white]">
         {/* <Test/> */}
-        <Navbar categories={categories} projects={projects} info={info}/>
+        <Navbar categories={categories} projects={projects} info={info} donate={donate}/>
           {children}
           </body>
       </SmoothScrolling>
