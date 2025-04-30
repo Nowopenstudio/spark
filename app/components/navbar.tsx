@@ -86,7 +86,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
         timer = window.setInterval(()=>moveView(-320,60), 1000)
         if(params.slug){
           const art = filterIndex(categories[index!].articles,"slug",params.slug)
-          changeTitle(1,sec,art!,-1,`resources/`,-500,220,categories[index!])
+          changeTitle(1,sec,art!,-1,`resources/`,-500,(winY/2)/zoom,categories[index!])
          timer = window.setInterval(()=>moveView(-500,260), 1000)
         }
       }
@@ -97,16 +97,16 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
       if(params.slug){
         const pro = filterIndex(projects,"slug",params.slug)
         changeTitleSingle(projects,1,sec,pro!,1,'projects',460,200)
-        timer = window.setInterval(()=>moveView(460,310), 500)
+        timer = window.setInterval(()=>moveView(460,(winY/2)/zoom), 500)
       }
-    }else if(page.includes('info')){
+    }else if(page.includes('about')){
       changeSec(3)
       timer = window.setInterval(()=>moveView(-140,60), 500)
       const curr =  page.split('/')[2]
       if(curr){
         const pro = filterIndex(info,"slug",curr)
-        changeTitleSingle(info,1,sec,pro!,-1,'info',-320,200)
-        timer = window.setInterval(()=>moveView(-320,310), 500)
+        changeTitleSingle(info,1,sec,pro!,-1,'about',-320,200)
+        timer = window.setInterval(()=>moveView(-320,(winY/2)/zoom), 500)
       }
     }
   
@@ -295,7 +295,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
       const singleNode = {
         id: `${i+root+categories.length+mobile}`,
         type: 'navBut',
-        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-500,(winY/2)/zoom,parent)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`,color:item.color}} >{item.title}</div> </div></Link> },
+        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-560,(winY/2)/zoom,parent)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`,color:item.color}} >{item.title}</div> </div></Link> },
         position: { x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
       }
       const singleEdge = {
