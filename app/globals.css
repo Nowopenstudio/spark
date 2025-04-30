@@ -84,6 +84,11 @@ margin-bottom: var(--sm);
   position: relative;
 }
 
+button{
+  font-size:10pt;
+  font-family: "fake",Arial, Helvetica, sans-serif;
+}
+
 .navTitle{
   font-size:.5em;
   font-family: "fake",Arial, Helvetica, sans-serif;
@@ -195,11 +200,15 @@ margin-bottom: var(--sm);
   }
 
   .react-flow__minimap{
+    pointer-events: none !important;
     background-color: rgb(255 255 255 / 5%);
     backdrop-filter: blur(10px);
     width:150px;
     overflow: hidden;
-    border-radius:1000px;}
+    border-radius:1000px;
+    border:1px solid var(--light);
+  }
+  
 
     .react-flow__attribution{display:none}
 

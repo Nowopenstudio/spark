@@ -19,10 +19,13 @@ export default async function Home({params}:{params:{slug:string}}) {
                       <h1>{data.title}</h1>
                       <h2>{getDate(data._createdAt)}</h2>
                    </div>
-                   <div className="w-full col-span-full min-h-[50vh]">
-                    {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
-                  
-                   </div>
+                   {data.cover?(
+                        <div className="w-full col-span-full min-h-[50vh]">
+                        {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
+                      
+                       </div>
+                   ):("")}
+               
                     {data.content.map((item:any,i:number)=>{
                         return(
                           <div className="contentBlock col-span-full grid grid-cols-12" key={`content-${i}`} >
