@@ -11,7 +11,7 @@ export default async function Home({params}:{params:{slug:string}}) {
     const { data } = await getData(`*[_type=='contact'][0]`)
     console.log(data)
   return (
-    <main className="w-full py-10 grid grid-cols-12 py-[--lrg]">
+    <main className="w-full py-10 grid grid-cols-12 py-[--lrg] relative">
           
                         <div className="intro col-start-1 col-span-12 lg:col-span-6 lg:col-start-4 text-2xl px-[--sm]" >
                             <div className="secHead"><h1 className="mb-[--sm]">{data.header}</h1></div>
