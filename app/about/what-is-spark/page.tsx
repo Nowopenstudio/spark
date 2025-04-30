@@ -12,21 +12,21 @@ export default async function Home({params}:{params:{slug:string}}) {
   const { data } = await getData(`*[_type=='about'][0]{title,slug,'imageUrl': cover.asset->url, intro, content[]{desc,'image':image.asset->url,'vid':video.asset->{playbackId}},cover{'image':image.asset->url,'vid':video.asset->{playbackId}}}`)
   console.log(data[0])
   return (
-       <Reveal styleSet="w-[100vw] min-h-[100dvh] pb-[60px] grid grid-cols-12 articleStage text-white relative">
-                      <div className="w-full col-span-full min-h-[50vh] pb-[60px]">
+       <Reveal styleSet="w-[100vw] min-h-[100dvh] pb-[60px] grid grid-cols-12 articleStage text-white relative bg-[--dark]">
+                      <div className="w-full col-span-full min-h-[50vh] pb-[60px] bg-[--dark]">
                        {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
                      
                       </div>
                        {data.content.map((item:any,i:number)=>{
                            return(
-                             <div className="contentBlock col-span-full grid grid-cols-12" key={`content-${i}`}>
+                             <div className="contentBlock col-span-full grid grid-cols-12 bg-[--dark]" key={`content-${i}`}>
                                {item.desc?(
                                  <div className="intro col-span-6 col-start-4 mb-[20px]">
                                  <div className="secHead"><p>{item.title}</p></div>
                                <PortableText value={item.desc}/>
                              </div>
                                ):(
-                                 <div className="contentBlock col-span-full">
+                                 <div className="contentBlock col-span-full bg-[--dark]">
                                  <SwitchContent work={item} title={`header`}/>
                                  </div>
                                )}

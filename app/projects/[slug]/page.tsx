@@ -12,7 +12,7 @@ export default async function Home({params}:{params:{slug:string}}) {
     const { data } = await getData(`*[_type=='projects' && slug.current == '${params.slug}'][0]{title,content[]{desc,'image':image.asset->url,'vid':video.asset->{playbackId}},cover{'image':image.asset->url,'vid':video.asset->{playbackId}}}`)
     console.log(data)
   return (
-      <Reveal styleSet="w-[100vw] min-h-[100dvh] pb-[60px] grid grid-cols-12 articleStage text-white relative">
+      <Reveal styleSet="w-[100vw] min-h-[100dvh] pb-[60px] grid grid-cols-12 articleStage bg-[--dark] text-white relative">
                      <div className="w-full col-span-full min-h-[50vh] pb-[60px]">
                       {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
                     
@@ -22,7 +22,7 @@ export default async function Home({params}:{params:{slug:string}}) {
                           return(
                             <div className="contentBlock col-span-full grid grid-cols-12" key={`content-${i}`}>
                               {item.desc?(
-                                <div className="intro col-span-8 col-start-3 py-[--med] text-[--blue]">
+                                <div className="intro col-span-6 col-start-4 py-[--med] text-[--white]">
                                 <div className="secHead"><p>{item.title}</p></div>
                               <PortableText value={item.desc}/>
                             </div>

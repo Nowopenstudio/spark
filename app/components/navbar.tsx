@@ -58,7 +58,6 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
 
     
   
-   const [view, useView] = useState({x:winX/2,y:winY/2,zoom:2})
    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
    const [sec, setSec] = useState(0)
@@ -74,6 +73,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
    const {setCenter} = useReactFlow();
    let timer:any = null
    const root = 5;
+   const zoom = 2;
 
 
    useEffect(()=>{
@@ -116,7 +116,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
     const moveView=(x:number,y:number)=>{
   
       clearInterval(timer)
-      setCenter(x, y, { zoom:2, duration: 1000 });
+      setCenter(x, y, { zoom:zoom, duration: 1000 });
     }
 
     // Main Menu Section
@@ -182,7 +182,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
       setTriEdges([])
       setTitleEdges([])
       setTitleNodes([])
-    changeTitleDonate(460,300)
+    changeTitleDonate(460,(winY/2)/zoom)
      
     }
     
@@ -262,7 +262,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: `navBut${opt>0?'Alt':''}`,
-          data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-${i}`} onClick={()=>changeTitleSingle(items,1,sec,i,opt,slug,opt>0?460:-320,310)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-${i}`} onClick={()=>changeTitleSingle(items,1,sec,i,opt,slug,opt>0?460:-320,(winY/2)/zoom)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -270,8 +270,8 @@ setActive(active)
       if(mobile){
         const backNode = {
           id: `${items.length+root}`,
-          type: 'navBut',
-          data: { label: <Link href={`/${slug}`} key={`single-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>→</div> </div></Link> },
+          type: `navBut${opt>0?'Alt':''}`,
+          data: { label: <Link href={`/${slug}`} key={`single-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>{opt>0?'←':'→'}</div> </div></Link> },
           position: {  x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(-1+.5))},
         }
         getNodes.push(backNode)
@@ -295,7 +295,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
       const singleNode = {
         id: `${i+root+categories.length+mobile}`,
         type: 'navBut',
-        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-500,270,parent)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`,color:item.color}} >{item.title}</div> </div></Link> },
+        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-500,(winY/2)/zoom,parent)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`,color:item.color}} >{item.title}</div> </div></Link> },
         position: { x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
       }
       const singleEdge = {
@@ -352,8 +352,8 @@ const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:n
   const titleNode={
     id: `${art+root+categories.length+mobile}`,
     type: 'navBack',
-    data: {label:<Link href={`/${slug}`}  style={{color:parent.color}} onClick={()=>changeActive(cat,-320,100,true)}><div className="navBut w-full h-full" ><div >{`${categories[cat].title} →`}</div> </div></Link>},
-    position: { x: ((nodeX + nodeGap*root)*opt)*2, y: 60},
+    data: {label:<Link href={`/${slug}`}  style={{color:parent.color}} onClick={()=>changeActive(cat,-320,60,true)}><div className="navBut w-full h-full" ><div >{`${categories[cat].title} →`}</div> </div></Link>},
+    position: { x: ((nodeX + nodeGap*root)*opt)*2, y: 0},
   }
 
   const titleEdge = {
@@ -383,7 +383,7 @@ const changeTitleSingle=(items:any,sec:number,cat:number, art:number,opt:number,
     id: `${root+art}`,
     type: `navBack${opt>0?'Alt':''}`,
     data: {label:<Link href={`/${slug}`}  onClick={()=>changeSec(cat)}><div className="navBut w-full h-full" ><div >{opt>0?`← ${slug}`:`${slug} →`}</div> </div></Link>},
-    position: { x:((nodeX + nodeGap*2)*opt)*2, y:  100},
+    position: { x:((nodeX + nodeGap*2)*opt)*2, y:  0},
   }
 
   const titleEdge = {
@@ -412,7 +412,7 @@ const changeTitleDonate=(x:number, y:number)=>{
     id: `${root}`,
     type: `navBackAlt`,
     data: {label:<Link href={`/`}  onClick={()=>changeSec(0)}><div className="navBut w-full h-full" ><div >← Back</div> </div></Link>},
-    position: { x:((nodeX + nodeGap*2))*2, y:  120},
+    position: { x:((nodeX + nodeGap*2))*2, y:  0},
   }
 
   const titleEdge = {
@@ -447,7 +447,7 @@ useEffect(()=>{
 
       <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"":'pointer-events-none'}`}>
         {mobile!==null?(
-            <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={2} maxZoom={2}>
+            <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
             <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(0, 0, 0, .2)'} nodeStrokeColor={"rgb(0, 0, 0, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable />
           </ReactFlow>
         ):('')}
