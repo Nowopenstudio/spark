@@ -8,7 +8,8 @@
   --background-end-rgb: 255, 255, 255;
   --blue: #2c86d0;
   --dark: #000000;
-  --white:#fcf4dd;
+  /* --white:#fcf4dd; */
+  --white:#ffffff;
   --xy-edge-stroke-width-default: 0;
   --2xs:8px;
   --xs: 16px;
@@ -36,7 +37,7 @@
 body {
   font-size:18pt;
   font-family: "mono",Arial, Helvetica, sans-serif;
-  color: var(--dark);
+  color: var(--white);
 }
 
 h1{
@@ -123,7 +124,7 @@ button{
 }
 
 .react-flow__edge path{
-  stroke: var(--dark);
+  stroke: var(--white);
 }
 
   .react-flow__handle{

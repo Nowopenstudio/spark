@@ -170,7 +170,7 @@ const Dots =({imageData}: any)=>{
     </bufferGeometry>
     <PointMaterial
           transparent
-          color="#284361"
+          color="#539543"
           size={10}
           sizeAttenuation={false}
           depthTest={true}
