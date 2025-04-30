@@ -31,7 +31,7 @@ export default async function RootLayout({
     <html lang="en">
       <SmoothScrolling>
         <body className="bg-[white]">
-        {/* <Test/> */}
+        <Test/>
         <Navbar categories={categories} projects={projects} info={info} donate={donate}/>
           {children}
           </body>
