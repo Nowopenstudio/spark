@@ -27,7 +27,7 @@ export default function Logo(props:any) {
   })
   console.log(nodes)
   return (
-    <group ref={groupRef} {...props} dispose={null} position={[0,0,2]}>
+    <group ref={groupRef} {...props} dispose={null} position={[-1.25,0,2]}>
       <mesh geometry={nodes.Remesh.geometry || []} scale={.018} material-emissive="red" material-roughness={1}>
       <MeshTransmissionMaterial
           backside
