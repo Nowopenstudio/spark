@@ -212,7 +212,7 @@ const Dots =({imageData}: any)=>{
         vertexShader={vertexShader}
         uniforms={uniforms}
         transparent={true}
-        depthWrite={false}
+        depthWrite={true}
         depthTest={true}
       />
     
@@ -251,8 +251,8 @@ export function Test() {
         
               <EffectComposer >
               
-                <Bloom mipmapBlur luminanceThreshold={.3} intensity={2} />
-                <Scanline opacity={.2}/>
+                <Bloom mipmapBlur luminanceThreshold={.3} intensity={3} />
+                <Scanline opacity={.5}/>
                 
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
                 <Noise opacity={.5} />

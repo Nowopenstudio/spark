@@ -14,7 +14,7 @@ void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
  
     modelPosition.x += sin(modelPosition.x * 1.2 + ( uTime / 20.0 ) * 2.0) * 0.2;
-    modelPosition.y += sin(modelPosition.z * 2.0 + (uTime / 20.0) * 2.0) * 0.2 + (uProgress * 0.02);
+    //modelPosition.y += sin(modelPosition.z * 2.0 + (uTime / 20.0) * 2.0) * 0.2 + (uProgress * 0.02);
     modelPosition.z += uProgress * 0.02;
 
   vec4 viewPosition = viewMatrix * modelPosition;
