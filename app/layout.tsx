@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/navbar";
 import {getData} from "./lib/utils-sanity";
-import { Test } from "./components/threeScene";
+import { Test } from "./components/three/threeScene";
 import SmoothScrolling from "./components/util/SmoothScrolling";
 
 

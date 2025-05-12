@@ -23,6 +23,7 @@
     "lenis": "^1.1.18",
     "next": "^14.2.20",
     "next-sanity": "^9.4.3",
+    "raw-loader": "^4.0.2",
     "react": "^18",
     "react-dom": "^18",
     "resend": "^4.0.0",

@@ -3,14 +3,14 @@
 
 import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer, CameraControls,Points, Point, PointMaterial } from "@react-three/drei";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { useRef} from "react";
+import {useRef, useEffect,useState, useMemo, useCallback } from "react";
 import * as THREE from "three";
-import { TextureLoader } from "three";
-import { spherePointToUV, sampleImage } from "../lib/utils-canvas";
-
-
+import { TextureLoader, SRGBColorSpace, Vector2 } from "three";
+import { spherePointToUV, sampleImage } from "../../lib/utils-canvas";
 import { EffectComposer, Bloom, BrightnessContrast, HueSaturation, Noise, ToneMapping, Scanline} from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
+import vertexShader from "!!raw-loader!./vertexShader.glsl";
+import fragmentShader from "!!raw-loader!./fragmentShader.glsl";
 
 
 export default function Logo(props:any) {
@@ -90,15 +90,25 @@ const Init =()=>{
 
 const Dots =({imageData}: any)=>{
   const meshRef = useRef<any>(null)
-  const DOT_DENSITY = 10;
-  const RADIUS = 2
-  const LATITUDE_COUNT = 240
+  const DOT_DENSITY = 20;
+  const RADIUS = 1.5
+  const LATITUDE_COUNT = 90
   const dotCount=[]
-  const dotGeometries = new Float32Array(19232*6)
+  const dotGeometries = new Float32Array(3500*6)
   const vector = new THREE.Vector3();
+    const [currX,setX]=useState()
+  const [currY,setY]=useState()
+  const mousePosition = useRef({ x: 0, y: 0 });
+  const introProgress = useRef(100);
+
+  const updateMousePosition = useCallback((e) => {
+
+    mousePosition.current = { x: e.clientX, y: e.clientY };
+  }, []);
 // A hexagon with a radius of 2 pixels looks like a circle
 
   let currCount = 0
+
 
 
   for (let lat = 0; lat < LATITUDE_COUNT;lat ++ ) {
@@ -139,18 +149,47 @@ const Dots =({imageData}: any)=>{
 
   }
 }
+//   useEffect(() => {
+
+//   sprite.colorSpace = SRGBColorSpace
+// }, [])
+
+  const uniforms = useMemo(() => ({
+    uTime: {
+      value: 0.0
+    },
+    uProgress: {
+      value: 8.0
+    },
+    uMouse: { value: new Vector2(0, 0) },
+    uScreen: { value: new Vector2(window.innerWidth/2, window.innerHeight/2) },
+  }), [])
+  useEffect(() => {
+    window.addEventListener("mousemove", updateMousePosition, false);
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition, false);
+    };
+  }, [updateMousePosition]);
+
 
   useFrame((state, delta) => {
-    const { clock } = state;
+    const { clock,mouse} = state;
     
-    for (let i = 0; i < currCount; i++) {
-      const i3 = i * 3;
+    // for (let i = 0; i < currCount; i++) {
+    //   const i3 = i * 3;
+       meshRef.current.material.uniforms.uTime.value = clock.elapsedTime;
+    if(clock.elapsedTime < 3 )
+      {meshRef.current.material.uniforms.uProgress.value = clock.elapsedTime - 3}
+    meshRef.current.material.uniforms.uMouse.value = new Vector2(
+      mousePosition.current.x,
+      mousePosition.current.y
+    );
 
-
-      meshRef.current!.geometry.attributes.position.array[i3] += Math.sin(clock.elapsedTime + Math.random() * 10) * 0.001;
-      meshRef.current!.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.001;
-      meshRef.current!.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.001;
-    }
+    //   meshRef.current!.geometry.attributes.position.array[i3] += Math.sin(clock.elapsedTime + Math.random() * 10) * 0.001;
+    //   meshRef.current!.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.001;
+    //   meshRef.current!.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.001;
+    // }
     
     meshRef.current!.geometry.attributes.position.needsUpdate = true;
     meshRef.current!.rotation.y += (delta*.1)
@@ -159,7 +198,7 @@ const Dots =({imageData}: any)=>{
 
   return (
       
-  <points ref={meshRef} position={[0,0,2]}>
+  <points ref={meshRef} position={[0,0,3]}>
     <bufferGeometry>
       <bufferAttribute
         attach={"attributes-position"}
@@ -168,14 +207,14 @@ const Dots =({imageData}: any)=>{
         itemSize={3}
       />
     </bufferGeometry>
-    <PointMaterial
-          transparent
-          color="#539543"
-          size={10}
-          sizeAttenuation={false}
-          depthTest={true}
-          toneMapped={false}
-        />
+   <shaderMaterial
+        fragmentShader={fragmentShader}
+        vertexShader={vertexShader}
+        uniforms={uniforms}
+        transparent={true}
+        depthWrite={false}
+        depthTest={true}
+      />
     
   </points>
  
@@ -208,16 +247,14 @@ export function Test() {
               </Environment>
               <Init />
           
-              {/* <Logo/> */}
+              <Logo/>
         
               <EffectComposer >
               
                 <Bloom mipmapBlur luminanceThreshold={.3} intensity={2} />
                 <Scanline opacity={.2}/>
-                {/* <BrightnessContrast brightness={-0.05} contrast={-.2}/> */}
-                <HueSaturation hue={0} saturation={-.2} />
                 
-                {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}
+                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
                 <Noise opacity={.5} />
                 
 
