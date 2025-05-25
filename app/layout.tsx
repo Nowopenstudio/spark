@@ -25,7 +25,6 @@ export default async function RootLayout({
     'donate':*[_type=='donate'][0]{"slug":slug.current,title,color,donations}
  }`)
  const {categories,projects,info,donate} = query.data
- console.log(categories)
 
   return (
     <html lang="en">

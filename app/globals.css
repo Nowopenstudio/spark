@@ -57,6 +57,7 @@ margin-bottom: var(--sm);
 
 .contentBlock strong{
   font-family: "fake",Arial, Helvetica, sans-serif;
+  font-weight: 500;
 }
 
 .contentBlock em{
@@ -162,7 +163,7 @@ button{
     animation: fadeOn 1s cubic-bezier(0.57, 0.06, 0.05, 0.95) forwards;
   }
 
-  .navBut::before{
+  .navBut::before, .gridBox::before{
     content: "+";
     position: absolute;
     top:0;
@@ -170,7 +171,7 @@ button{
     transform: translate(-50%,-50%);
   }
 
-  .navBut div:first-child:before{
+  .navBut div:first-child:before,.gridBox div:first-child:before {
     content: "+";
     position: absolute;
     bottom:0;
@@ -180,7 +181,7 @@ button{
 
  
 
-  .navBut::after{
+  .navBut::after,  .gridBox::after {
     content: "+";
     position: absolute;
     top:0;
@@ -188,7 +189,7 @@ button{
     transform: translate(50%,-50%);
   }
 
-  .navBut div:first-child::after{
+  .navBut div:first-child::after, .gridBox div:first-child::after{
     content: "+";
     position: absolute;
     bottom:0;
@@ -242,10 +243,10 @@ button{
 
 @media (max-width:850px){
   h1{
-    font-size: 2.125rem;
+    font-size: 1.5rem;
   }
-  p{
-    font-size:16pt;
+  p,li{
+    font-size:12pt;
   }
 }
 

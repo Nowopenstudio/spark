@@ -20,7 +20,7 @@ void main() {
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
 
-  gl_Position = projectedPosition;
+  gl_Position = projectedPosition; 
  gl_PointSize = 8.0 + (( (-(uMouse.x - uScreen.x)/uScreen.x)) * modelPosition.x * 2.4) + (( (-(uMouse.y - uScreen.y)/uScreen.y)) * modelPosition.y * 2.4) + (uProgress*3.0);
 }
 

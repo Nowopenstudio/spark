@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client'
 
-import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer, CameraControls,Points, Point, PointMaterial } from "@react-three/drei";
+import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer, CameraControls,Points, Point, PointMaterial, useTexture } from "@react-three/drei";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import {useRef, useEffect,useState, useMemo, useCallback } from "react";
 import * as THREE from "three";
@@ -27,7 +27,7 @@ export default function Logo(props:any) {
   })
   console.log(nodes)
   return (
-    <group ref={groupRef} {...props} dispose={null} position={[-1.25,0,2]}>
+    <group ref={groupRef} {...props} dispose={null} position={[-1,0,2]}>
       <mesh geometry={nodes.Remesh.geometry || []} scale={.018} material-emissive="red" material-roughness={1}>
       <MeshTransmissionMaterial
           backside
@@ -107,9 +107,10 @@ const Dots =({imageData}: any)=>{
   }, []);
 // A hexagon with a radius of 2 pixels looks like a circle
 
+
   let currCount = 0
-
-
+  const texture = useTexture('/texture/map.png');
+console.log(texture)
 
   for (let lat = 0; lat < LATITUDE_COUNT;lat ++ ) {
   const radius =Math.cos((-90 + (180 / LATITUDE_COUNT) * lat) * (Math.PI / 180)) * RADIUS;
@@ -157,6 +158,9 @@ const Dots =({imageData}: any)=>{
   const uniforms = useMemo(() => ({
     uTime: {
       value: 0.0
+    },
+    uTexture:{
+      value:texture
     },
     uProgress: {
       value: 8.0
@@ -235,13 +239,13 @@ export function Test() {
             <ambientLight intensity={0.5} />
               {/* <Sphere size={[3,50,50]} position={[0,0,0]}/> */}
               <Light position={[10,15,10]} color={"F6F5E1"} angle={0.28} intensity={.75} decay={.1}/>
-              <Light position={[-10,15,10]} color={"BDA9FF"} angle={0.22} intensity={.5} decay={.2}/>
+              <Light position={[-10,15,10]} color={"BDA9FF"} angle={0.22} intensity={1.5} decay={.2}/>
               <Light position={[-2,15,-5]} color={"FF8000"} angle={0.45} intensity={.75} decay={.3}/>
               <Environment files="/texture/bg.hdr" resolution={128}>
                 <group rotation={[0, 0, 0]}>
                   <Lightformer form="circle" intensity={10} position={[2, 6, -10]} scale={30} onUpdate={(self) => self.lookAt(0, 0, 0)} />
                   <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-0, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
-                  <Lightformer intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
+                  <Lightformer intensity={0.5} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
                   <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-20, 1, 0]} scale={[20, 100, 1]} />
                 </group>
               </Environment>
@@ -251,11 +255,11 @@ export function Test() {
         
               <EffectComposer >
               
-                <Bloom mipmapBlur luminanceThreshold={.3} intensity={3} />
-                <Scanline opacity={.5}/>
+                <Bloom mipmapBlur luminanceThreshold={.3} intensity={3.0} />
+                {/* <Scanline opacity={.5}/> */}
                 
-                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-                <Noise opacity={.5} />
+                {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}
+                {/* <Noise opacity={.1} /> */}
                 
 
               </EffectComposer>
