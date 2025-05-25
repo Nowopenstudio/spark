@@ -249,7 +249,7 @@ export function Test() {
                   <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-20, 1, 0]} scale={[20, 100, 1]} />
                 </group>
               </Environment>
-              <Init />
+              {/* <Init /> */}
           
               <Logo/>
         
