@@ -17,8 +17,11 @@ export default async function Home({params}:{params:{slug:string}}) {
     <div className="w-full py-[--sm] min-h-[100dvh] articleStage bg-[--dark] relative">
       
            {data.cover?(
-                                  <div className="w-full  min-h-[100vh]">
+                                  <div className="w-full  min-h-[100vh] relative">
                                   {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
+                                  <div className={`absolute xy-center z-[20] w-full p-[--sm] text-center`}>
+                                    <h1>{data.title}</h1>
+                                  </div>
                                 
                                  </div>
                              ):("")}
