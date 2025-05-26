@@ -1,26 +1,34 @@
-uniform float uTime;
+  uniform float uTime;
 uniform float uProgress;
 uniform vec2 uMouse;
 uniform vec2 uScreen;
 
+attribute vec3 color;
+varying vec3 vColor;
 varying vec2 vUv;
+
+
+float random (vec2 st) {
+    return fract(sin(dot(st.xy,
+                         vec2(1.5,2.233)))*
+        0.003);
+}
 
 
 
 void main() {
-
   vUv = uv;
- 
-  vec4 modelPosition = modelMatrix * vec4(position, 1.0);
- 
-    modelPosition.x += sin(modelPosition.x * 1.2 + ( uTime / 20.0 ) * 2.0) * 0.2;
-    //modelPosition.y += sin(modelPosition.z * 2.0 + (uTime / 20.0) * 2.0) * 0.2 + (uProgress * 0.02);
-    modelPosition.z += uProgress * 0.02;
+  vColor = color;
 
+  vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+  vec2 st = modelPosition.xy;
+    modelPosition.x += random( st )*.05;
+  modelPosition.y +=  random( st )*.9 + (uProgress * 0.02);
+    modelPosition.z += fract(sin(modelPosition.z)*1.0)/10.0;
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
 
   gl_Position = projectedPosition; 
- gl_PointSize = 8.0 + (( (-(uMouse.x - uScreen.x)/uScreen.x)) * modelPosition.x * 2.4) + (( (-(uMouse.y - uScreen.y)/uScreen.y)) * modelPosition.y * 2.4) + (uProgress*3.0);
+ gl_PointSize = 25.5 + (( (-(uMouse.x - uScreen.x)/uScreen.x)) * modelPosition.x * 4.4) + (( (-(uMouse.y - uScreen.y)/uScreen.y)) * modelPosition.y * 4.4) + (uProgress*3.0);
 }
 

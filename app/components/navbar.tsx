@@ -182,7 +182,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
       setTriEdges([])
       setTitleEdges([])
       setTitleNodes([])
-    changeTitleDonate(460,(winY/2)/zoom)
+    changeTitleDonate(600,(winY/2)/zoom)
      
     }
     
@@ -205,7 +205,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-320,60)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`,color:item.color}}>{item.title}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-320,60)}><div className="navBut w-full h-full" style={{backgroundColor:item.color}} ><div style={{animationDelay:`${100*i}ms`,color:item.color}}><p className="text-[--white]">{item.title}</p></div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -295,7 +295,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
       const singleNode = {
         id: `${i+root+categories.length+mobile}`,
         type: 'navBut',
-        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-560,(winY/2)/zoom,parent)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`,color:item.color}} >{item.title}</div> </div></Link> },
+        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-560,(winY/2)/zoom,parent)}><div className="navBut w-full h-full" style={{backgroundColor:parent.color}} ><div style={{animationDelay:`${100*i}ms`,color:item.color}} ><p className="text-[--white]">{item.title}</p></div> </div></Link> },
         position: { x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
       }
       const singleEdge = {
@@ -412,7 +412,7 @@ const changeTitleDonate=(x:number, y:number)=>{
     id: `${root}`,
     type: `navBackAlt`,
     data: {label:<Link href={`/`}  onClick={()=>changeSec(0)}><div className="navBut w-full h-full" ><div >← Back</div> </div></Link>},
-    position: { x:((nodeX + nodeGap*2))*2, y:  0},
+    position: { x:((nodeX + nodeGap*2))*2.7, y:  0},
   }
 
   const titleEdge = {

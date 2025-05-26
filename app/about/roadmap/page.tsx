@@ -11,7 +11,7 @@ export default async function Home({params}:{params:{slug:string}}) {
     const { data } = await getData(`*[_type=='roadmap'] | order(_createdAt desc)[0]{roadmapItem}`)
     console.log(data.roadmapItem)
   return (
-        <div className="w-full py-[--sm] grid items-center grid-cols-1 h-[100dvh] relative">
+        <div className="w-full py-[--sm] grid items-center grid-cols-1 min-h-[100lvh] relative articleStage" style={{backgroundColor:`rgba(0,0,0,.7)`}}>
         <div className="flex col-span-full flex-wrap-none items-start">
           {data.roadmapItem.map((item:any,i:number)=>{
             return(

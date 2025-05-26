@@ -12,7 +12,7 @@ export default async function Home({params}:{params:{slug:string}}) {
   const { data } = await getData(`*[_type=='about'][0]{title,slug,'imageUrl': cover.asset->url, intro, content[]{desc,'image':image.asset->url,'vid':video.asset->{playbackId}},cover{'image':image.asset->url,'vid':video.asset->{playbackId}}}`)
   console.log(data[0])
   return (
-       <Reveal styleSet="w-[100vw] min-h-[100dvh] pb-[60px] grid grid-cols-12 articleStage text-white relative bg-[--dark]">
+       <Reveal styleSet="w-[100vw] min-h-[100lvh] pb-[60px] grid grid-cols-12 articleStage text-white relative" style={{backgroundColor:`rgba(0,0,0,.7)`}}>
                       <div className="w-full col-span-full min-h-[50vh] pb-[60px] bg-[--dark]">
                        {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
                      

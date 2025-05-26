@@ -35,7 +35,7 @@ export default function Logo(props:any) {
           samples={8}
           thickness={0.5}
           anisotropicBlur={0.5}
-          iridescence={.8}
+          iridescence={.9}
           iridescenceIOR={1}
           iridescenceThicknessRange={[0, 1400]}
           clearcoat={1}
@@ -62,7 +62,7 @@ const Light = (props:any)=>{
 
 const Init =()=>{
   
-  const source = '/texture/map.png'
+  const source = '/texture/green2.png'
   const wMap = useLoader(TextureLoader, source)
   
   const tempCanvas = document.createElement("canvas");
@@ -90,11 +90,13 @@ const Init =()=>{
 
 const Dots =({imageData}: any)=>{
   const meshRef = useRef<any>(null)
-  const DOT_DENSITY = 20;
+  const DOT_DENSITY = 30;
   const RADIUS = 1.5
-  const LATITUDE_COUNT = 90
+  const LATITUDE_COUNT = 150
   const dotCount=[]
-  const dotGeometries = new Float32Array(3500*6)
+  const colorCount=[]
+  const dotGeometries = new Float32Array(10000*6)
+  const dotColor = new Float32Array(10000*6)
   const vector = new THREE.Vector3();
     const [currX,setX]=useState()
   const [currY,setY]=useState()
@@ -110,7 +112,7 @@ const Dots =({imageData}: any)=>{
 
   let currCount = 0
   const texture = useTexture('/texture/map.png');
-console.log(texture)
+    const color = useTexture('/texture/green.png');
 
   for (let lat = 0; lat < LATITUDE_COUNT;lat ++ ) {
   const radius =Math.cos((-90 + (180 / LATITUDE_COUNT) * lat) * (Math.PI / 180)) * RADIUS;
@@ -139,7 +141,9 @@ console.log(texture)
       if (sampledPixel[3]) {
         // Push the positioned geometry into the array.
         dotGeometries.set([vector.x, vector.y, vector.z], (currCount * 3));
+        dotColor.set([sampledPixel[0]/255, sampledPixel[1]/255, sampledPixel[2]/255], (currCount * 3));
         dotCount.push(dotGeometry)
+        colorCount.push(dotColor)
         currCount += 1
       }
 
@@ -149,6 +153,8 @@ console.log(texture)
       
 
   }
+  console.log(dotColor)
+   
 }
 //   useEffect(() => {
 
@@ -160,7 +166,7 @@ console.log(texture)
       value: 0.0
     },
     uTexture:{
-      value:texture
+      value:color
     },
     uProgress: {
       value: 8.0
@@ -196,6 +202,7 @@ console.log(texture)
     // }
     
     meshRef.current!.geometry.attributes.position.needsUpdate = true;
+    meshRef.current!.geometry.attributes.color.needsUpdate = true;
     meshRef.current!.rotation.y += (delta*.1)
   });
 
@@ -210,15 +217,21 @@ console.log(texture)
         count={dotGeometries.length/3}
         itemSize={3}
       />
-    </bufferGeometry>
-   <shaderMaterial
-        fragmentShader={fragmentShader}
-        vertexShader={vertexShader}
-        uniforms={uniforms}
-        transparent={true}
-        depthWrite={true}
-        depthTest={true}
+       <bufferAttribute
+        attach={"attributes-color"}
+        array={dotColor}
+        count={dotColor.length/3}
+        itemSize={3}
       />
+    </bufferGeometry>
+    <shaderMaterial
+          fragmentShader={fragmentShader}
+          vertexShader={vertexShader}
+          uniforms={uniforms}
+          transparent={true}
+          depthWrite={false}
+          depthTest={true}
+        />
     
   </points>
  
@@ -238,9 +251,7 @@ export function Test() {
             <Canvas id="sphere">
             <ambientLight intensity={0.5} />
               {/* <Sphere size={[3,50,50]} position={[0,0,0]}/> */}
-              <Light position={[10,15,10]} color={"F6F5E1"} angle={0.28} intensity={.75} decay={.1}/>
-              <Light position={[-10,15,10]} color={"BDA9FF"} angle={0.22} intensity={1.5} decay={.2}/>
-              <Light position={[-2,15,-5]} color={"FF8000"} angle={0.45} intensity={.75} decay={.3}/>
+             
               <Environment files="/texture/bg.hdr" resolution={128}>
                 <group rotation={[0, 0, 0]}>
                   <Lightformer form="circle" intensity={10} position={[2, 6, -10]} scale={30} onUpdate={(self) => self.lookAt(0, 0, 0)} />
@@ -249,13 +260,13 @@ export function Test() {
                   <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-20, 1, 0]} scale={[20, 100, 1]} />
                 </group>
               </Environment>
-              {/* <Init /> */}
+              <Init />
           
               <Logo/>
         
               <EffectComposer >
               
-                <Bloom mipmapBlur luminanceThreshold={.3} intensity={3.0} />
+                <Bloom mipmapBlur luminanceThreshold={.4} intensity={0.3} />
                 {/* <Scanline opacity={.5}/> */}
                 
                 {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}

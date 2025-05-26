@@ -21,6 +21,7 @@
     "@xyflow/react": "^12.3.6",
     "framer-motion": "^11.3.23",
     "lenis": "^1.1.18",
+    "motion": "^12.14.0",
     "next": "^14.2.20",
     "next-sanity": "^9.11.1",
     "raw-loader": "^4.0.2",
