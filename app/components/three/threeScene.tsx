@@ -266,7 +266,7 @@ export function Test() {
         
               <EffectComposer >
               
-                <Bloom mipmapBlur luminanceThreshold={.4} intensity={0.3} />
+                <Bloom mipmapBlur luminanceThreshold={.9} intensity={3.5} />
                 {/* <Scanline opacity={.5}/> */}
                 
                 {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}
