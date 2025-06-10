@@ -18,17 +18,11 @@ export default function Logo(props:any) {
   const { nodes, materials } = useGLTF('/models/logo.gltf')
   const standard = new THREE.MeshStandardMaterial
 
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime()
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, Math.cos(t / 2) / 20 + 0.25, 0.1)
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, Math.sin(t / 4) / 20, 0.1)
-    groupRef.current.rotation.z = THREE.MathUtils.lerp(groupRef.current.rotation.z, Math.sin(t / 8) / 20, 0.1)
-    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, (Math.sin(t /2)) / 8, 0.1)
-  })
+
   console.log(nodes)
   return (
-    <group ref={groupRef} {...props} dispose={null} position={[-1,0,2]}>
-      <mesh geometry={nodes.Remesh.geometry || []} scale={.018} material-emissive="red" material-roughness={1}>
+    <group ref={groupRef} {...props} dispose={null} position={[-1.5,.2,2.0]}>
+      <mesh geometry={nodes.Remesh.geometry || []} scale={.018} material-emissive="red" material-roughness={0}>
       <MeshTransmissionMaterial
           backside
           backsideThickness={1}
@@ -91,12 +85,12 @@ const Init =()=>{
 const Dots =({imageData}: any)=>{
   const meshRef = useRef<any>(null)
   const DOT_DENSITY = 30;
-  const RADIUS = 1.5
+  const RADIUS = 2.0
   const LATITUDE_COUNT = 150
   const dotCount=[]
   const colorCount=[]
-  const dotGeometries = new Float32Array(10000*6)
-  const dotColor = new Float32Array(10000*6)
+  const dotGeometries = new Float32Array(20000*6)
+  const dotColor = new Float32Array(20000*6)
   const vector = new THREE.Vector3();
     const [currX,setX]=useState()
   const [currY,setY]=useState()
@@ -249,13 +243,13 @@ export function Test() {
     <div className='w-full h-full fixed z-0 pointer-events-none bg-[var(--dark)]'>
     
             <Canvas id="sphere">
-            <ambientLight intensity={0.5} />
+            <ambientLight intensity={0.8} />
               {/* <Sphere size={[3,50,50]} position={[0,0,0]}/> */}
              
               <Environment files="/texture/bg.hdr" resolution={32}>
-                <group rotation={[0, 0, 0]}>
-                  <Lightformer form="circle" intensity={10} position={[2, 6, -10]} scale={30} onUpdate={(self) => self.lookAt(0, 0, 0)} />
-                  <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-0, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
+                <group rotation={[0, 0, 4]} position={[0,0,5]}>
+                  <Lightformer form="circle" intensity={.8} position={[2, 6, -10]} scale={30} onUpdate={(self) => self.lookAt(0, 0, 0)} />
+                  <Lightformer intensity={0.3} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-0, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
                   <Lightformer intensity={0.5} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 1, 0]} rotation-y={-Math.PI / 2} scale={[50, 10, 1]} />
                   <Lightformer color="white" intensity={0.2} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-20, 1, 0]} scale={[20, 100, 1]} />
                 </group>
@@ -266,7 +260,7 @@ export function Test() {
         
               <EffectComposer >
               
-                <Bloom mipmapBlur luminanceThreshold={.7} intensity={0.2} />
+                <Bloom mipmapBlur luminanceThreshold={.7} intensity={0.4} />
                 {/* <Scanline opacity={.5}/> */}
                 
                 {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}

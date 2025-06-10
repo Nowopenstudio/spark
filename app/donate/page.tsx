@@ -12,7 +12,7 @@ import Donate from "./donateModule";
 
 export default async function Home({params}:{params:{slug:string}}) {
     const { data } = await getData(`*[_type=='donate'][0]{title,subhead,cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio},"slug":slug.current,copy,donations[]{title,id,summary,"color":color.hex,content[]{content,text,"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio,gallery[]{'image':asset->url}}}}`)
-    console.log(data.donations[0].content[2].gallery)
+
   return (
     <div className="w-full pb-[--med] min-h-[100dvh] articleStage relative" style={{backgroundColor: `rgba(0,0,0,.7)`}}>
       
@@ -20,7 +20,7 @@ export default async function Home({params}:{params:{slug:string}}) {
                                   <div className="w-full  min-h-[100vh] relative">
                                   {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
                                   <div className={`absolute xy-center z-[20] w-full p-[--sm] text-center`}>
-                                    <h1 className="title">s i t e  9 2 I</h1>
+                                    <h1 className="title">D O N A T E</h1>
                                   </div>
                                 
                                  </div>

@@ -13,6 +13,12 @@ export default async function Donations({data}:any) {
   return (
     
           <div className="col-span-full grid grid-cols-12 richText">
+            <Reveal styleSet="col-span-6 col-start-4 ">
+                  <div className="w-full mb-[--lrg]">
+                   <h1 className="w-full mb-[--sm]">{data.subhead}</h1>
+                     <PortableText value={data.copy}/>
+                    </div>
+                </Reveal>
               {data.donations.map((item:any,i:number)=>{
               return(
                 <Reveal styleSet="col-span-12 mb-[--lrg] grid grid-cols-12" count={i} key={`donate-${i}`}>

@@ -92,5 +92,5 @@ export const myStructure = (S:any) =>
         .title('Donations')
         .child(S.document().title('Donations').schemaType('donate').documentId('donate')),
 
-      ...S.documentTypeListItems().filter(listItem => !['donate','categories','authors','about','roadmap','membership','contact','articles'].includes(listItem.getId())),
+      ...S.documentTypeListItems().filter(listItem => !['donate','mux.videoAsset','categories','authors','about','roadmap','membership','contact','articles'].includes(listItem.getId())),
 ])
