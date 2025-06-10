@@ -7,7 +7,7 @@ import {useRef, useEffect,useState, useMemo, useCallback } from "react";
 import * as THREE from "three";
 import { TextureLoader, SRGBColorSpace, Vector2 } from "three";
 import { spherePointToUV, sampleImage } from "../../lib/utils-canvas";
-import { EffectComposer, Bloom, BrightnessContrast, HueSaturation, Noise, ToneMapping, Scanline} from '@react-three/postprocessing'
+import { EffectComposer, Bloom} from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
 import vertexShader from "!!raw-loader!./vertexShader.glsl";
 import fragmentShader from "!!raw-loader!./fragmentShader.glsl";
@@ -252,7 +252,7 @@ export function Test() {
             <ambientLight intensity={0.5} />
               {/* <Sphere size={[3,50,50]} position={[0,0,0]}/> */}
              
-              <Environment files="/texture/bg.hdr" resolution={128}>
+              <Environment files="/texture/bg.hdr" resolution={32}>
                 <group rotation={[0, 0, 0]}>
                   <Lightformer form="circle" intensity={10} position={[2, 6, -10]} scale={30} onUpdate={(self) => self.lookAt(0, 0, 0)} />
                   <Lightformer intensity={0.1} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[-0, 1, -1]} rotation-y={Math.PI / 2} scale={[50, 10, 1]} />
@@ -266,7 +266,7 @@ export function Test() {
         
               <EffectComposer >
               
-                <Bloom mipmapBlur luminanceThreshold={.9} intensity={3.5} />
+                <Bloom mipmapBlur luminanceThreshold={.7} intensity={0.2} />
                 {/* <Scanline opacity={.5}/> */}
                 
                 {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}

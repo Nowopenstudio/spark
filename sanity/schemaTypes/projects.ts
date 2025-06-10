@@ -3,70 +3,91 @@ export default {
     type:"document",
     title:'Project',
     fields:[
+     
         {
-            type:"object",
-            name:"cover",
-            title:'Cover',
-            fields:[
-                
-                    {
-                        name:"image",
-                        type:'image',
-                        title:"file"
-                    },
-                    {
-                        name:"video",
-                        type:'mux.video',
-                        title:"Video"
-                    }
-                
-            ]
-
-        },
-        {
-            type:'string',
+            type:"string",
             name:'title',
             title:'Title'
         },
         {
-            type:'slug',
-            name:'slug',
-            title:'Slug',
-            options:{
-                source:'title'
-            }
+        type:'slug',
+        name:'slug',
+        title:'Slug',
+        options:{
+            source:'title'
+        }
 
-        },
-        {   name:'content',
+    },
+        {type:'object', name:'cover',title:'Cover',fields:[
+                {type:'image', name:'image',title:'Image'},
+                {type:'mux.video', name:'video', title:'Video'}
+        ]},
+
+        {name:'subhead', type:'string', title:"Intro Header"},
+        {name:'copy', type:'array', title:"Copy",of:[{type:'block'}]},
+        {
             type:'array',
-            title:'Content',
-            options:{sortable:true,layout:"list"},
-            of:[{
-                name:"section",
-                type: "object",
-                title:'Content',
+            name:'donations',
+            title:"Donations",
+            of:[{type:'object',
+                name:'donate',
+                title:'Donate',
                 fields:[
                     {
-                        name:"image",
-                        type:'image',
-                        title:"file"
+                        type:'string',
+                        name:'title',
+                        title:'Title'
                     },
+                    {type:'array',name:"summary",title:'summary',of:[{type:'block'}]},
                     {
-                        name:"video",
-                        type:'mux.video',
-                        title:"Video"
-                    },
-                    {
-                        name:"desc",
                         type:'array',
-                        title:"Content",
-                        of:[{type:"block"}]
-                    }
-                ]
-            }]
-    
-         },
-       
+                        name:'content',
+                        title:'Content',
+                        of:[
+                                {name:'single', title:"Single", type:"object",fields:[
+                                {name:'content',title:'Type', type:'string',initialValue:'text',options: {
+                                    list: [
+                                    {title: 'Text', value: 'text'},
+                                    {title: 'Image', value: 'image'},
+                                    {title:'Image Gallery', value:"gallery"},
+                                     {title: 'Video', value: 'video'}
+                                    ],
 
+                                    
+                                }},
+                                {name:'text',title:'Text',type:'array',of:[{type:'block'}], hidden: ({ parent }) => parent?.content !== "text"},
+                                {name:'image',title:'Image',type:'image', hidden: ({ parent }) => parent?.content !== "image"},
+                                {name:'gallery',title:'Image Gallery',type:'array', hidden: ({ parent }) => parent?.content !== "gallery",of:[{type:'image', name:'image',title:'Image'}]},
+                                {name:'vid',title:'Video',type:'mux.video', hidden: ({ parent }) => parent?.content !== "video"},
+                            ]}
+                        ]
+                    },
+                    {
+                        type:'string',
+                        title:'campaign ID',
+                        name:'id'
+                    },
+                     {
+                        type:'color',
+                        name:'color',
+                        title:'Color',
+                        options: {
+                            colorList: [
+                            '#CBDFDB',
+                            '#C9BEF3',
+                            '#9CC0F7',
+                            '#FDA490',
+                            '#539543',
+                            
+                            ]
+          }
+    },
+                  
+            
+                ]
+
+            }]
+        }
+        
     ]
 }

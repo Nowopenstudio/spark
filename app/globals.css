@@ -134,6 +134,7 @@ button{
 
 .react-flow__edge path{
   stroke: var(--white);
+  pointer-events: none;
 }
 
   .react-flow__handle{

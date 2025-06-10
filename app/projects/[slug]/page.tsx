@@ -4,38 +4,35 @@ import Link from "next/link";
 import Image from 'next/image';
 import { Reveal } from "@/app/components/util/reveal";
 import { SwitchContent } from "@/app/components/util/contentSwitch";
+import Donate from "./donateModule";
+import Donations from "./donations";
 
 
 
 
 export default async function Home({params}:{params:{slug:string}}) {
-    const { data } = await getData(`*[_type=='projects' && slug.current == '${params.slug}'][0]{title,content[]{desc,'image':image.asset->url,'vid':video.asset->{playbackId}},cover{'image':image.asset->url,'vid':video.asset->{playbackId}}}`)
-    console.log(data)
+    const { data } = await getData(`*[_type=='projects' && slug.current == '${params.slug}'][0]{title,subhead,cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio},"slug":slug.current,copy,donations[]{title,id,summary,"color":color.hex,content[]{content,text,"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio,gallery[]{'image':asset->url}}}}`)
+   
   return (
-      <Reveal styleSet="w-[100vw] min-h-[100dvh] pb-[60px] grid grid-cols-12 articleStage bg-[--dark] text-white relative">
-                     <div className="w-full col-span-full min-h-[50vh] pb-[60px]">
-                      {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
-                    
-                     </div>
-                      {data.content?(
-                        data.content.map((item:any,i:number)=>{
-                          return(
-                            <div className="contentBlock col-span-full grid grid-cols-12" key={`content-${i}`}>
-                              {item.desc?(
-                                <div className="intro col-span-full xl:col-span-6 col-start-1 xl:col-start-4 py-[--med] text-[--white] px-[--sm]">
-                                <div className="secHead"><p>{item.title}</p></div>
-                              <PortableText value={item.desc}/>
-                            </div>
-                              ):(
-                                <div className="contentBlock col-span-full">
-                              <SwitchContent work={item} title={`header`}/>
-                              </div>
-                              )}
-                            </div>
-                            
-                          )
-                        })
-                      ):('')}
+      <Reveal styleSet="w-[100vw] min-h-[100dvh]">
+                      <div className="w-full pb-[--med] min-h-[100dvh] articleStage relative" style={{backgroundColor: `rgba(0,0,0,.7)`}}>
+                           
+                                {data.cover?(
+                                                       <div className="w-full  min-h-[100vh] relative">
+                                                       {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
+                                                       <div className={`absolute xy-center z-[20] w-full p-[--sm] text-center`}>
+                                                         <h1 className="title">s i t e  9 2 I</h1>
+                                                       </div>
+                                                     
+                                                      </div>
+                                                  ):("")}
+
+                     
+                                 <Donate data={data}/>
+                             
+                                 <Donations data={data}/>
+                     
+                         </div>
        
       </Reveal>
   );
