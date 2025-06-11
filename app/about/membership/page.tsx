@@ -13,7 +13,7 @@ export default async function Home({params}:{params:{slug:string}}) {
   console.log(data[0])
   return (
        <Reveal styleSet="w-[100vw] min-h-[100lvh] pb-[60px] grid grid-cols-12 articleStage text-white relative" style={{backgroundColor:`rgba(0,0,0,.7)`}}>
-                      <div className="w-full col-span-full min-h-[50vh] pb-[60px]">
+                      <div className="w-full col-span-full lg:min-h-[50vh] pb-[60px]">
                        {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
                      
                       </div>
