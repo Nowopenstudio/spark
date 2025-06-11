@@ -96,8 +96,8 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
       timer = window.setInterval(()=>moveView(260,60), 500)
       if(params.slug){
         const pro = filterIndex(projects,"slug",params.slug)
-        changeTitleSingle(projects,1,sec,pro!,1,'projects',460,200)
-        timer = window.setInterval(()=>moveView(460,(winY/2)/zoom), 500)
+        changeTitleSingle(projects,1,sec,pro!,1,'projects',600,200)
+        timer = window.setInterval(()=>moveView(600,(winY/2)/zoom), 500)
       }
     }else if(page.includes('about')){
       changeSec(3)
@@ -105,8 +105,8 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
       const curr =  page.split('/')[2]
       if(curr){
         const pro = filterIndex(info,"slug",curr)
-        changeTitleSingle(info,1,sec,pro!,-1,'about',-320,200)
-        timer = window.setInterval(()=>moveView(-320,(winY/2)/zoom), 500)
+        changeTitleSingle(info,1,sec,pro!,-1,'about',-480,200)
+        timer = window.setInterval(()=>moveView(-480,(winY/2)/zoom), 500)
       }
     }
   
@@ -205,7 +205,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-320,60)}><div className="navBut w-full h-full" style={{backgroundColor:item.color}} ><div style={{animationDelay:`${100*i}ms`,color:item.color}}><p className="text-[--white]">{item.title}</p></div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-320,60)}><div className="navBut w-full h-full" style={{backgroundColor:item.color}} ><div style={{animationDelay:`${100*i}ms`,color:`var(--white)`}}>{item.title}</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -262,7 +262,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: `navBut${opt>0?'Alt':''}`,
-          data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-${i}`} onClick={()=>changeTitleSingle(items,1,sec,i,opt,slug,opt>0?610:-340,(winY/2)/zoom)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-${i}`} onClick={()=>changeTitleSingle(items,1,sec,i,opt,slug,opt>0?600:-480,(winY/2)/zoom)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -295,7 +295,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
       const singleNode = {
         id: `${i+root+categories.length+mobile}`,
         type: 'navBut',
-        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-560,(winY/2)/zoom,parent)}><div className="navBut w-full h-full" style={{backgroundColor:parent.color}} ><div style={{animationDelay:`${100*i}ms`,color:item.color}} ><p className="text-[--white]">{item.title}</p></div> </div></Link> },
+        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-560,(winY/2)/zoom,parent)}><div className="navBut w-full h-full" style={{backgroundColor:parent.color}} ><div style={{animationDelay:`${100*i}ms`,color:`var(--white)`}} >{item.title}</div> </div></Link> },
         position: { x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
       }
       const singleEdge = {
@@ -383,7 +383,7 @@ const changeTitleSingle=(items:any,sec:number,cat:number, art:number,opt:number,
     id: `${root+art}`,
     type: `navBack${opt>0?'Alt':''}`,
     data: {label:<Link href={`/${slug}`}  onClick={()=>changeSec(cat)}><div className="navBut w-full h-full" ><div >{opt>0?`← ${slug}`:`${slug} →`}</div> </div></Link>},
-    position: { x:((nodeX + nodeGap*3)*opt)*2, y:  0},
+    position: { x:((nodeX + nodeGap*2)*opt)*2.7, y:  0},
   }
 
   const titleEdge = {
@@ -445,7 +445,7 @@ useEffect(()=>{
 
     return(
 
-      <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"":'pointer-events-none'}`}>
+      <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"pointer-evens-fill":'pointer-events-none'}`}>
         {mobile!==null?(
             <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
             <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(0, 0, 0, .2)'} nodeStrokeColor={"rgb(0, 0, 0, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable />
@@ -467,12 +467,12 @@ export default function NavBar({categories, projects,info,donate}:{donate:any,ca
 
 
   return(
-  <div className="fixed z-[50] w-[100vw] h-[100dvh]">
+ <React.Fragment>
     {mobile!==null && winY && winX?(
         <ReactFlowProvider>
         <Flow categories={categories} donate={donate} page={page} params={params} projects={projects} info={info} winX={winX} winY={winY} mobile={mobile}/>
-    </ReactFlowProvider>
+        </ReactFlowProvider>
     ):('')}
-</div>
+</React.Fragment>
   )
 }

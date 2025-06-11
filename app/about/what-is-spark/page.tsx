@@ -9,7 +9,7 @@ import { SwitchContent } from "@/app/components/util/contentSwitch";
 
 
 export default async function Home({params}:{params:{slug:string}}) {
-  const { data } = await getData(`*[_type=='about'][0]{title,slug,'imageUrl': cover.asset->url, intro, content[]{desc,'image':image.asset->url,'vid':video.asset->{playbackId}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
+  const { data } = await getData(`*[_type=='about'][0]{title,slug,'imageUrl': cover.asset->url, intro, content[]{desc,'image':image.asset->url,"ratio":video.asset->data.aspect_ratio,'vid':video.asset->playbackId},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
   console.log(data[0])
   return (
        <Reveal styleSet="w-[100vw] min-h-[100lvh] pb-[60px] grid grid-cols-12 articleStage text-white relative" style={{backgroundColor:`rgba(0,0,0,.7)`}}>

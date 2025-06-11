@@ -1,12 +1,12 @@
 import { MuxVideoBG } from "./muxPlayer";
 import Image from "next/image";
 
-export function SwitchContent({work, title}: {work?: any, title?:string;}) {
+export function SwitchContent({work, title}: any) {
   if (!work) return null
 
   
   if (work.vid){
-    return <div className="w-full noControl object-fill"> <MuxVideoBG playbackId={work.vid.playbackId} title={title} /></div>
+    return <div className="w-full noControl object-fill"> <MuxVideoBG playbackId={work.vid} title={title} ratio={work.ratio}  /></div>
   
 
     }

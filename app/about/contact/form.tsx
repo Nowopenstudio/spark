@@ -34,7 +34,7 @@ export default function Form({form, settings}:any) {
     
 
     
-  <div className="grid grid-cols-12 w-full items-center h-full col-span-full pt-[--sm] px-[--sm]">
+  <div className="grid grid-cols-12 w-full items-center h-full col-span-full px-[--sm]">
     {success?(
       <Reveal styleSet="text-center col-start-1 col-span-12 px-[20px] sm:col-start-2 sm:col-span-10 md:col-start-3 md:col-span-8 xl:col-start-4 xl:col-span-6 ">
         <PortableText value={form.contactSuccess}/>
@@ -45,8 +45,8 @@ export default function Form({form, settings}:any) {
         <input className="col-span-1 border border-[--black] px-[20px]" type="text" placeholder="Name" name="name" required></input>
         <input className="col-span-1 border border-[--black] px-[20px]" type="text" placeholder="Email" name="email" required></input>
         <input className="col-span-2 border border-[--black] px-[20px]" type="text" placeholder="Subject" name="subject" required></input>
-        <textarea className="border border-[--black] col-span-full rounded-[10px] p-[20px] min-h-[200px]" placeholder="Message" name="message" required></textarea>
-        <button type="submit" className={`py-[10px] bg-[--dark] text-[--white] uppercase relative col-span-full border border-black text-nav text-center mb-[20px]`}>Submit Inquiry</button>
+        <textarea className="border border-[--black] col-span-full p-[20px] min-h-[200px] mb-[--sm]" placeholder="Message" name="message" required></textarea>
+        <button type="submit" className={`py-[10px] bg-[--dark] text-[--white] uppercase relative col-span-full border border-black  text-center mb-[20px] subBut`}><div>Submit Inquiry</div></button>
 
        </form>
        </div>

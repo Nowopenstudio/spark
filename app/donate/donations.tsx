@@ -12,8 +12,8 @@ import Gallery from "./gallery";
 export default async function Donations({data}:any) {
   return (
     
-          <div className="col-span-full grid grid-cols-12 richText">
-            <Reveal styleSet="col-span-6 col-start-4 ">
+          <div className="col-span-full grid grid-cols-12 richText px-[--sm]">
+            <Reveal styleSet="col-span-12 lg:col-span-6 lg:col-start-4 ">
                   <div className="w-full mb-[--lrg]">
                    <h1 className="w-full mb-[--sm]">{data.subhead}</h1>
                      <PortableText value={data.copy}/>
@@ -22,12 +22,12 @@ export default async function Donations({data}:any) {
               {data.donations.map((item:any,i:number)=>{
               return(
                 <Reveal styleSet="col-span-12 mb-[--lrg] grid grid-cols-12" count={i} key={`donate-${i}`}>
-                  <h1 className="mb-[--sm] w-full col-span-6 col-start-4">{item.title}</h1>
+                  <h1 className="mb-[--sm] w-full col-span-12 lg:col-span-6 lg:col-start-4">{item.title}</h1>
                   {item.content.map((single:any,i:number)=>{
                     return(
                       <div key={`content-i-${single.content}`} className="col-span-full grid grid-cols-12">
                           {single.content == "text"?(
-                            <div className="col-span-6 col-start-4 mb-[--sm]"><PortableText value={single.text}/></div>
+                            <div className="col-span-12 lg:col-span-6 lg:col-start-4 mb-[--sm]"><PortableText value={single.text}/></div>
                           ):""}
 
                            {single.content == "image"?(

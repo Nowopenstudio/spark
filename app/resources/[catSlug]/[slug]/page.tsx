@@ -10,8 +10,8 @@ import { getDate } from "@/app/components/util/sanity";
 
 
 export default async function Home({params}:{params:{slug:string}}) {
-    const { data } = await getData(`*[_type=='articles' && slug.current == '${params.slug}'][0]{title,_createdAt,"author":author->{firstName},"color":category->color.rgb,slug,'imageUrl': cover.asset->url, intro, content[]{desc,'image':image.asset->url,'vid':video.asset->{playbackId}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
-    console.log(data)
+    const { data } = await getData(`*[_type=='articles' && slug.current == '${params.slug}'][0]{title,_createdAt,"author":author->{firstName},"color":category->color.rgb,slug,'imageUrl': cover.asset->url, intro, content[]{desc,'image':image.asset->url,"ratio":video.asset->data.aspect_ratio,'vid':video.asset->playbackId},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
+    console.log(data.cover)
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
                    <div className="w-full grid grid-cols-12 articleStage relative text-[white] pb-[60px]" style={{backgroundColor:`rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})`}}>

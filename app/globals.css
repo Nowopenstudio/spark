@@ -99,6 +99,29 @@ button{
   font-family: "fake",Arial, Helvetica, sans-serif;
 }
 
+input{
+  background-color: transparent;
+  border:0;
+  padding:var(--xs);
+  border-bottom: 1px solid var(--white);
+}
+
+textarea{
+  background-color: transparent;
+  border:1px solid var(--white)
+}
+
+textarea::placeholder{
+  font-family: "fake",Arial, Helvetica, sans-serif;
+  font-size:12pt;
+  color: var(--white)
+}
+input::placeholder{
+  font-family: "fake",Arial, Helvetica, sans-serif;
+  font-size:12pt;
+  color: var(--white)
+}
+
 .navTitle{
   font-size:.5em;
   font-family: "fake",Arial, Helvetica, sans-serif;
@@ -172,7 +195,7 @@ button{
     animation: fadeOn 1s cubic-bezier(0.57, 0.06, 0.05, 0.95) forwards;
   }
 
-  .navBut::before, .gridBox::before{
+  .navBut::before, .gridBox::before, .subBut::before{
     content: "+";
     position: absolute;
     top:0;
@@ -180,7 +203,7 @@ button{
     transform: translate(-50%,-50%);
   }
 
-  .navBut div:first-child:before,.gridBox div:first-child:before {
+  .navBut div:first-child:before,.gridBox div:first-child:before, .subBut div:first-child:before {
     content: "+";
     position: absolute;
     bottom:0;
@@ -190,7 +213,7 @@ button{
 
  
 
-  .navBut::after,  .gridBox::after {
+  .navBut::after,  .gridBox::after,.subBut::after {
     content: "+";
     position: absolute;
     top:0;
@@ -198,7 +221,7 @@ button{
     transform: translate(50%,-50%);
   }
 
-  .navBut div:first-child::after, .gridBox div:first-child::after{
+  .navBut div:first-child::after, .gridBox div:first-child::after, .subBut div:first-child::after{
     content: "+";
     position: absolute;
     bottom:0;
@@ -210,7 +233,7 @@ button{
     font-size:10pt;
   }
 
-  .navBut:hover{
+  .navBut:hover, .subBut:hover{
     animation: blink 250ms cubic-bezier(0.57, 0.06, 0.05, 0.95) infinite;
   }
 
@@ -254,10 +277,29 @@ button{
     }
 }
 
+@media (max-width:1400px){
+  h1.title{
+    font-size: 8rem;
+  }
+
+}
+
+@media (max-width:1000px){
+  h1.title{
+    font-size: 5rem;
+  }
+
+}
+
 @media (max-width:850px){
   h1{
     font-size: 1.5rem;
   }
+
+  h1.title{
+    font-size: 2rem;
+  }
+
   p,li{
     font-size:12pt;
   }
