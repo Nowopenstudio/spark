@@ -1,6 +1,6 @@
 
 import {createClient} from 'next-sanity'
-import {apiVersion, dataset, projectId, token} from "../../../env"
+import {apiVersion, dataset, projectId, token, open} from "../../../env"
 import imageUrlBuilder from '@sanity/image-url'
 
 
@@ -103,7 +103,39 @@ export const delData = (async (query:any) =>{
         })
     })
 
+export const openConnect = (async (slug:any)=>{
 
+ 
+ 
+    const response = await fetch(`https://api.opencollective.com/graphql/v2`,{
+      method: "POST",
+      headers:{
+        'Personal-Token':open,
+        'Content-type':'application/json'
+      },
+      body:JSON.stringify(
+        {query:`query accountStats($slug: String){ project(slug: $slug) {
+    id
+    name
+    slug
+    description
+    stats{balance{value}
+          yearlyBudget{value}
+     }
+    settings
+  
+  }
+}`,variables:{slug:slug}}
+      )
+
+    })
+    const characters = await response.json();
+    return(characters.data)
+    ;
+    
+  
+ 
+}) 
 
 export const sendEmail= (async (profile:any,form:any,contact:any)=>{
     console.log("step1",profile)

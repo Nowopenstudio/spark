@@ -19,7 +19,7 @@ export default function Logo(props:any) {
   const standard = new THREE.MeshStandardMaterial
 
 
-  console.log(nodes)
+
   return (
     <group ref={groupRef} {...props} dispose={null} position={[-1.5,.2,2.0]}>
       <mesh geometry={nodes.Remesh.geometry || []} scale={.018} material-emissive="red" material-roughness={0}>
@@ -84,13 +84,13 @@ const Init =()=>{
 
 const Dots =({imageData}: any)=>{
   const meshRef = useRef<any>(null)
-  const DOT_DENSITY = 30;
+  const DOT_DENSITY = 8;
   const RADIUS = 2.0
-  const LATITUDE_COUNT = 150
+  const LATITUDE_COUNT = 85
   const dotCount=[]
   const colorCount=[]
-  const dotGeometries = new Float32Array(20000*6)
-  const dotColor = new Float32Array(20000*6)
+  const dotGeometries = new Float32Array(4000*3)
+  const dotColor = new Float32Array(4000*3)
   const vector = new THREE.Vector3();
     const [currX,setX]=useState()
   const [currY,setY]=useState()
@@ -147,7 +147,7 @@ const Dots =({imageData}: any)=>{
       
 
   }
-  console.log(dotColor)
+ 
    
 }
 //   useEffect(() => {

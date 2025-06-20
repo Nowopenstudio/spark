@@ -64,8 +64,8 @@ export default {
                     },
                     {
                         type:'string',
-                        title:'campaign ID',
-                        name:'id'
+                        title:'Open Slug',
+                        name:'openSlug'
                     },
                      {
                         type:'color',

@@ -34,11 +34,49 @@
 	font-style: normal;
 }
 
+/* Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.noControl mux-player {
+	/* Hide all controls at once */
+	--controls: none;
+  }
+
+  
+.bgMux mux-player{
+  --controls: none;
+  --media-object-fit: cover;
+  position: absolute;
+  width: 100vw;
+  height: 100dvh;
+  clip-path: inset(0 0);
+}
+
 body {
   font-size:18pt;
   font-family: "mono",Arial, Helvetica, sans-serif;
   color: var(--white);
 }
+
+
 
 h1{
   font-size: 5rem;
@@ -94,7 +132,7 @@ margin-bottom: var(--sm);
   position: relative;
 }
 
-button{
+button,.caption{
   font-size:10pt;
   font-family: "fake",Arial, Helvetica, sans-serif;
 }
@@ -164,7 +202,7 @@ input::placeholder{
    opacity:0;
   }
 
-  .articleStage{
+  .articleStage, .bgBlur{
     /* background-color: rgb(24 25 38 / 5%); */
     backdrop-filter: blur(30px);
     /* clip-path: rect(50% 50% 50% 50%);
@@ -203,7 +241,7 @@ input::placeholder{
     transform: translate(-50%,-50%);
   }
 
-  .navBut div:first-child:before,.gridBox div:first-child:before, .subBut div:first-child:before {
+  .navBut div:first-child:before,.gridBox > div:first-child:before, .subBut > div:first-child:before {
     content: "+";
     position: absolute;
     bottom:0;
@@ -221,7 +259,7 @@ input::placeholder{
     transform: translate(50%,-50%);
   }
 
-  .navBut div:first-child::after, .gridBox div:first-child::after, .subBut div:first-child::after{
+  .navBut div:first-child::after, .gridBox > div:first-child::after, .subBut > div:first-child::after{
     content: "+";
     position: absolute;
     bottom:0;
@@ -252,12 +290,26 @@ input::placeholder{
 
 
 
+    .growOn{
+      transform: scaleX(0);
+      animation: growOn ease-in-out 2s forwards;
+      transform-origin: left;
+    }
+
 
   @keyframes fadeOn{
   0%{    opacity:0;max-height:0;transform: translateX(20px);
   }
   100% {
    opacity:1;max-height:1000px;transform: translateX(0);
+    }
+}
+
+  @keyframes growOn{
+  0%{    transform:scaleX(0);
+  }
+  100% {
+   transform:scaleX(1);
     }
 }
 

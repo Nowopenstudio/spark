@@ -4,6 +4,7 @@ import Navbar from "./components/navbar";
 import {getData} from "./lib/utils-sanity";
 import { Test } from "./components/three/threeScene";
 import SmoothScrolling from "./components/util/SmoothScrolling";
+import { openConnect } from "./components/util/sanity";
 
 
 
@@ -18,6 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   const query = await getData(`{
     'categories':*[_type=='categories']|order(name){title,"slug":slug.current, 'color':color.hex, "articles": *[ _type == "articles" && references(^._id)]{title, _createdAt,"slug":slug.current, intro, content, "cover":cover.asset->url,"author":author->{firstName,lastName}}},
     'projects': *[_type=='projects']{title,'slug':slug.current},
