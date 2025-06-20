@@ -7,10 +7,7 @@ import { openConnect } from "./util/sanity";
 
 
 export default async function Donate({data}:any) {
-   const open = await openConnect(data.open)
-    
-      const {project} = open
-      console.log(project)
+
   return (
     
           <div className="w-[100vw] richText text-[--white] py-[--sm] gap-[--sm] z-[100] sticky top-[0] lg:top-[280px] ">
