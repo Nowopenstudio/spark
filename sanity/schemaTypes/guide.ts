@@ -1,45 +1,47 @@
 export default {
-    name:"membership",
-    type:"document",
-    title:'Membership',
-    fields:[
+    name: "guide",
+    type: "document",
+    title: 'guide',
+    groups: [{
+        name: 'infoSet',
+        title: 'Info',
+        options: { columns: 2 },
+    },
+    {
+        name: 'meta',
+        title: 'Meta',
+    }],
+    fields: [
         {
-            type:"object",
-            name:"cover",
-            title:'Cover',
-            fields:[
-                
-                    {
-                        name:"image",
-                        type:'image',
-                        title:"file"
-                    },
-                    {
-                        name:"video",
-                        type:'mux.video',
-                        title:"Video"
-                    }
-                
+            type: 'string',
+            name: 'title',
+            title: 'Title',
+        },
+   
+        {
+            type: "object",
+            name: "cover",
+            title: 'Cover',
+            fields: [
+
+                {
+                    name: "image",
+                    type: 'image',
+                    title: "file"
+                },
+                {
+                    name: "video",
+                    type: 'mux.video',
+                    title: "Video"
+                }
+
             ]
 
         },
-        {
-            type:"string",
-            name:'title',
-            title:'Title'
-        },
-        {
-            type:'slug',
-            name:'slug',
-            title:'Slug',
+        
+        { name: 'summary', title: 'Summary', type: 'array', of: [{ type: 'block' }] },
 
-            options:{
-                source:'title'
-            }
-
-        },
-    
-          {
+        {
             type: 'array',
             name: 'content',
             title: 'Content',
@@ -69,7 +71,7 @@ export default {
                                 ]
                             }
                         },
-                        { name: 'desc', title: 'Text', type: 'array', of: [{ type: 'block' }], hidden: ({ parent }: any) => parent?.content !== "text" },
+                        { name: 'text', title: 'Text', type: 'array', of: [{ type: 'block' }], hidden: ({ parent }: any) => parent?.content !== "text" },
                         { name: 'embed', title: 'Embed', type: 'text', hidden: ({ parent }: any) => parent?.content !== "embed" },
                         { name: 'image', title: 'Image', type: 'image', hidden: ({ parent }: any) => parent?.content !== "image" },
                         {
@@ -120,5 +122,43 @@ export default {
                 }
             ]
         },
-    ]
+
+        {
+            name: "meta",
+            title: 'Metadata',
+            type: "object",
+            group: "meta",
+            fields: [
+                {
+                    type: 'string',
+                    title: 'Title',
+                    name: 'title',
+                },
+                {
+                    type: 'text',
+                    title: 'Description',
+                    name: 'description',
+                },
+                {
+                    type: 'string',
+                    title: 'Keywords',
+                    name: 'keywords',
+                },
+                {
+                    type: 'image',
+                    name: 'image',
+                    title: 'image'
+
+                }
+            ]
+        }
+
+
+
+    ],
+    preview: {
+        select: {
+            title: 'title',
+        }
+    }
 }

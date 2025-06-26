@@ -70,6 +70,11 @@ html.lenis, html.lenis body {
   clip-path: inset(0 0);
 }
 
+.contentBlock iframe{
+  width:100% !important;
+  height:100% !important;
+}
+
 body {
   font-size:18pt;
   font-family: "mono",Arial, Helvetica, sans-serif;
@@ -80,6 +85,12 @@ body {
 
 h1{
   font-size: 5rem;
+  font-family: 'fake', arial;
+  line-height: 1.125em;
+}
+
+h2{
+  font-size: 1rem;
   font-family: 'fake', arial;
   line-height: 1.125em;
 }
@@ -98,6 +109,10 @@ margin-bottom: var(--sm);
 
 .contentBlock h1, .contentBlock h2{
   margin-top: var(--sm);
+  }
+
+  .contentBlock h1{
+  font-size:3.5rem;
   }
 
 

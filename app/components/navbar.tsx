@@ -206,7 +206,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-320,60)}><div className="navBut w-full h-full" style={{backgroundColor:item.color}} ><div style={{animationDelay:`${100*i}ms`,color:`var(--white)`}}>{item.title}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-540,-145)}><div className="navBut w-full h-full" style={{backgroundColor:item.color}} ><div style={{animationDelay:`${100*i}ms`,color:`var(--white)`}}>{item.title}</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -253,6 +253,7 @@ setActive(active)
     }
 
     const newSingle =(items:any, nodeX:any, nodeGap:any,sec:number, slug:any, opt:number)=>{
+     
       setTriEdges([])
       setTriNodes([])
       setTitleEdges([])
@@ -287,52 +288,34 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
   setTriEdges([])
   setTitleEdges([])
   moveView(x,y)
-  setActive(true)
+  setActive(false)
   
   const getTri:any = []
   const getTriEdge:any=[]
-  if(parent.articles){
-    items[sec].articles.map((item:any,i:any)=>{
-      const singleNode = {
-        id: `${i+root+categories.length+mobile}`,
-        type: 'navBut',
-        data: { label: <Link href={`/${slug}/${item.slug}`} key={`art-${i}`} style={{color:parent.color}} onClick={()=>changeTitle(1,sec,i,opt,slug,-560,(winY/2)/zoom,parent)}><div className="navBut w-full h-full" style={{backgroundColor:parent.color}} ><div style={{animationDelay:`${100*i}ms`,color:`var(--white)`}} >{item.title}</div> </div></Link> },
-        position: { x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(i+.5)) },
-      }
-      const singleEdge = {
-        id: `${sec+root}-${i+root+categories.length+mobile}`,
-        type: 'smoothstep',
-        animated:true,
-        style:{stroke:parent.color},
-        source: `${sec+root}`,
-        target: `${i+root+categories.length+mobile}`,
-      }
-      getTri.push(singleNode)
-      getTriEdge.push(singleEdge)
-    })
-    if(mobile || (items[sec].articles.length == 0)){
+  
+  
      
     
         const backNode = {
-          id: `${items.length+root+categories.length}`,
+          id: `${root+categories.length}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}`} key={`art-tri-back`} style={{color:parent.color}} onClick={()=>moveView(-140,60)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>{`${items[sec].articles.length?"":"0 ENTRIES "}`}→</div> </div></Link> },
-          position: {  x: ((nodeX + nodeGap*2)*opt)*2, y: (categories[sec].articles.length*nodeGap)/2-(nodeGap*(-1+.5))},
+          data: { label: <Link href={`/${slug}`} key={`art-tri-back`} style={{color:parent.color}} onClick={()=>moveView(-140,60)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>{`${items[sec].articles.length?`${categories[sec].title} `:"0 ENTRIES "}`}→</div> </div></Link> },
+          position: {  x: ((nodeX + nodeGap*2)*opt)*3, y: -winY/4*1.5},
         }
         getTri.push(backNode)
 
         const backEdge = {
-          id: `${sec+root}-${items.length+root+categories.length}`,
+          id: `${sec+root}-${root+categories.length}`,
           type: 'smoothstep',
           animated:true,
           source: `${sec+root}`,
           style:{stroke:parent.color},
-          target: `${items.length+root+categories.length}`,
+          target: `${root+categories.length}`,
         }
         getTriEdge.push(backEdge)
 
       
-    }
+    
 
   setTitleEdges([])
   setTitleNodes([])
@@ -343,7 +326,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
   
 
   
-}
+
 
 const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:number, y:number,parent:any)=>{
   setActive(false)

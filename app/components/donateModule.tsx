@@ -38,8 +38,8 @@ export async function Single({item,count}:any){
       {open?(
          <div className="w-full p-[--sm]" >
                     <div className="relative bgBlur" style={{backgroundColor:`rgba(255, 255, 255, 0.1)`}}>
-                      <div className="y-center absolute z-[10] left-[--xs] caption">${open.project.stats.balance.value/100}</div>
-                      <div className="w-full h-[40px] mb-[--xs] growOn" style={{animationDelay:`${count*.75}s`,backgroundColor:`${item.color}`,width:`${(open.project.stats.balance.value/open.project.settings.goals[0].amount)*100}%`}}></div></div>
+                      <div className="y-center absolute z-[10] left-[--xs] caption">${2000000/100}</div>
+                      <div className="w-full h-[40px] mb-[--xs] growOn" style={{animationDelay:`${count*.75}s`,backgroundColor:`${item.color}`,width:`${(2000000/open.project.settings.goals[0].amount)*100}%`}}></div></div>
                     <p className="uppercase ">{open.project.name}</p>
                     <div className={` richText hidden lg:block`}><PortableText value={item.description} /></div>
                     <a href={`https://opencollective.com/sighte-92i/projects/${item.openSlug}`} target={'__blank'} className="w-full h-[40px] bg-[--white] articleStage text-[--dark] flex items-center mt-[--xs]"><div className="w-full text-center">DONTATE</div></a>

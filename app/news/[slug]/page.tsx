@@ -1,4 +1,4 @@
-import { getData } from "../../../lib/utils-sanity";
+import { getData } from "../../lib/utils-sanity";
 import { PortableText } from "next-sanity";
 import Link from "next/link";
 import Image from 'next/image';
@@ -11,11 +11,11 @@ import Gallery from "@/app/donate/gallery";
 
 
 export default async function Home({ params }: { params: { slug: string } }) {
-  const { data } = await getData(`*[_type=='articles' && slug.current == '${params.slug}'][0]{title,_createdAt,"author":author->{firstName},"color":category->color.rgb,slug,'imageUrl': cover.asset->url, intro, content[]{content,desc,right,columns,caption,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
+  const { data } = await getData(`*[_type=='news' && slug.current == '${params.slug}'][0]{title,_createdAt,"author":author->{firstName},"color":category->color.rgb,slug,'imageUrl': cover.asset->url, intro, content[]{content,text,right,columns,caption,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
   console.log(data.cover)
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] pb-[--sm]" style={{ backgroundColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})` }}>
+      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] pb-[--sm]" style={{ backgroundColor: `rgba(30,30,30,.5)` }}>
 
         {data.cover ? (
           <div className="w-full col-span-full lg:min-h-[50vh]">
@@ -40,7 +40,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                   {item.content == 'text' ? (
                     <div className="w-full col-span-6 col-start-4">
                       <div className="richText col-span-full lg:col-span-5 xl:col-span-4">
-                        <PortableText value={item.desc} />
+                        <PortableText value={item.text} />
                       </div>
                     </div>
                   ) : ('')}

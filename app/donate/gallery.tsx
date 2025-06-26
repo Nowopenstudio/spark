@@ -14,19 +14,20 @@ export default function Gallery({data}:any){
     const {winY} = useResize()
     const {scrollYProgress} = useScroll(
         {target:ref}
+        
     );
 
 
 
-    const x = useTransform(scrollYProgress, [0, 1],['-50%','0%'])
+    const x = useTransform(scrollYProgress, [0, 1],['0%',`-${data.length*75-100}%`])
   
 
     return(
-        <div  ref={ref} className={`w-[100vw] overflow-hidden h-auto `}>
-            <motion.div  className="flex" style={{x}} >
+        <div  ref={ref} className={`w-[100vw] h-full`}>
+            <motion.div  className="flex  sticky top-[--lrg]" style={{x}} >
                 
                      {data.map((image:any,m:number)=>{
-                              return( <div key={`gallery-${m}`} className="w-1/2  mb-[--sm] p-[--sm] relative gridBox flex-shrink-0">
+                              return( <div key={`gallery-${m}`} className="w-3/4  mb-[--sm] p-[--sm] relative gridBox flex-shrink-0">
                               <div className="w-full h-auto">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className="w-full h-auto"/>):''}</div>
                             </div>
 

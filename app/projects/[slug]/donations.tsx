@@ -36,14 +36,8 @@ export default async function Donations({data}:any) {
                           ):""}
 
                            {single.content == "gallery" && single.gallery?(
-                            (single.gallery.length > 2)?(<Gallery data={single.gallery} />):(
-                            single.gallery.map((image:any,m:number)=>{
-                              return( <div key={`gallery-i-${single.content}-${m}`} className="col-span-12 lg:col-span-6  mb-[--sm] p-[--sm] relative gridBox">
-                              <div className="w-full h-auto">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className="w-full h-auto"/>):''}</div>
-                            </div>
-
-                              )
-                            }))
+                            <div className="col-span-full" style={{height:`${single.gallery.length*100}vh`}}> <Gallery data={single.gallery} /></div>
+                         
                           ):""}
                       </div>
                     )
