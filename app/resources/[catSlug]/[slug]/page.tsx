@@ -15,17 +15,20 @@ export default async function Home({ params }: { params: { slug: string } }) {
 
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] pb-[--sm]" style={{ backgroundColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, .8)` }}>
+      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] pb-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.2)` }}>
 
         {data.cover ? (
-          <div className="w-full col-span-full lg:min-h-[50vh]">
+          <div className="w-full col-span-10 col-start-2 lg:min-h-[50vh]">
             {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio}  cover/>) : ''}
 
           </div>
         ) : ("")}
-        <div className={`${data.cover ? '' : 'pt-[--xl]'} col-span-8 col-start-3 py-[--sm] text-center uppercase`}>
-          <h1 className="mb-[--sm]">{data.title}</h1>
-          <h2>BY {data.author.firstName} - {getDate(data._createdAt)}</h2>
+        <div className={`${data.cover ? '' : 'pt-[--xl]'} col-span-6 col-start-4 py-[--sm] uppercase flex`}>
+        <div className="aspect-square h-full rounded-sm" style={{backgroundColor:`rgb(${data.color.r},${data.color.g},${data.color.b})`}}></div>
+        <div className="pl-[--xs]">
+            <h1 className="mb-[--2xs]">{data.title}</h1>
+            <h2>BY {data.author.firstName} - {getDate(data._createdAt)}</h2>
+        </div>
         </div>
 
         <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4 p-4 contentBlock">
