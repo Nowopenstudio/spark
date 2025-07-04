@@ -47,6 +47,12 @@ export const myStructure = (S: any) =>
             ])
         ),
       S.divider(),
+       S.listItem()
+        .title('Projects')
+        .child(
+          S.documentTypeList('projects')
+            .title('Projects')
+        ),
       S.listItem()
         .title('Donations')
         .child(S.document().title('Donations').schemaType('donate').documentId('donate')),

@@ -80,17 +80,17 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
     
     if(page.includes('resources')){
       changeSec(1)
-      timer = window.setInterval(()=>moveView(-140,60), 500)
-      if(params.catSlug){
-        const index = filterIndex(categories,"slug",params.catSlug)
-        changeTri(categories,categories[index!],index!,-1,`resources/${categories[index!].slug}`,-320,60)
-        timer = window.setInterval(()=>moveView(-320,60), 1000)
-        if(params.slug){
-          const art = filterIndex(categories[index!].articles,"slug",params.slug)
-          changeTitle(1,sec,art!,-1,`resources/`,-500,(winY/2)/zoom,categories[index!])
-         timer = window.setInterval(()=>moveView(-500,260), 1000)
-        }
-      }
+      // timer = window.setInterval(()=>moveView(-140,60), 500)
+      // if(params.catSlug){
+      //   const index = filterIndex(categories,"slug",params.catSlug)
+      //   changeTri(categories,categories[index!],index!,-1,`resources/${params.catSlug}`,-320,60)
+      //   timer = window.setInterval(()=>moveView(-320,60), 1000)
+      //   if(params.slug){
+      //     const art = filterIndex(categories[index!].articles,"slug",params.slug)
+      //     changeTitle(1,sec,art!,-1,`resources/`,-500,(winY/2)/zoom,categories[index!])
+      //    timer = window.setInterval(()=>moveView(-500,260), 1000)
+      //   }
+      // }
 
     }else if(page.includes('projects')){
       changeSec(2)

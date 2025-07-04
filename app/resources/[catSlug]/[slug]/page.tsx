@@ -12,10 +12,10 @@ import Gallery from "@/app/donate/gallery";
 
 export default async function Home({ params }: { params: { slug: string } }) {
   const { data } = await getData(`*[_type=='articles' && slug.current == '${params.slug}'][0]{title,_createdAt,"author":author->{firstName},"color":category->color.rgb,slug,'imageUrl': cover.asset->url, intro, content[]{content,desc,right,columns,caption,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
-  console.log(data.cover)
+
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] pb-[--sm]" style={{ backgroundColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, ${data.color.a})` }}>
+      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] pb-[--sm]" style={{ backgroundColor: `rgba(${data.color.r}, ${data.color.g}, ${data.color.b}, .8)` }}>
 
         {data.cover ? (
           <div className="w-full col-span-full lg:min-h-[50vh]">
