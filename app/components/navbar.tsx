@@ -12,9 +12,6 @@ import NavBackAlt from "./nodes/NavBackAlt";
 import NavTitle from "./nodes/NavTitle";
 import { useParams, usePathname } from "next/navigation";
 import { filterIndex } from "./util/sanity";
-import { style } from "framer-motion/client";
-import { getRootState } from "@react-three/fiber";
-
 
 
 const nodeTypes = { navBut: NavBut, navTitle: NavTitle, navBack:NavBack, navButAlt:NavButAlt, navBackAlt:NavBackAlt};
@@ -206,7 +203,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-540,-145)}><div className="navBut w-full h-full" style={{backgroundColor:item.color}} ><div style={{animationDelay:`${100*i}ms`,color:`var(--white)`}}>{item.title}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-540,-145)}><div className="navBut w-full h-full" style={{backgroundColor:`rgb(20,20,20,.8)`}} ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -243,6 +240,7 @@ setActive(active)
           type: 'smoothstep',
           animated:true,
           source: `${source}`,
+          style:{stroke:item.color},
           target: `${i+root}`,
         }
         getEdges.push(singleEdge)

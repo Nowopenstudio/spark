@@ -15,23 +15,23 @@ export default async function Home({ params }: { params: { slug: string } }) {
 
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] pb-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.2)` }}>
+      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] p-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
 
         {data.cover ? (
-          <div className="w-full col-span-10 col-start-2 lg:min-h-[50vh]">
-            {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio}  cover/>) : ''}
+          <div className="w-full px-[--sm] lg:px-0 col-span-full  lg:min-h-[50vh]">
+            {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} cover />) : ''}
 
           </div>
         ) : ("")}
         <div className={`${data.cover ? '' : 'pt-[--xl]'} col-span-6 col-start-4 py-[--sm] uppercase flex`}>
-        <div className="aspect-square h-full rounded-sm" style={{backgroundColor:`rgb(${data.color.r},${data.color.g},${data.color.b})`}}></div>
-        <div className="pl-[--xs]">
+          <div className="aspect-square h-full rounded-sm" style={{ backgroundColor: `rgb(${data.color.r},${data.color.g},${data.color.b})` }}></div>
+          <div className="pl-[--xs]">
             <h1 className="mb-[--2xs]">{data.title}</h1>
             <h2>BY {data.author.firstName} - {getDate(data._createdAt)}</h2>
-        </div>
+          </div>
         </div>
 
-        <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4 p-4 contentBlock">
+        <div className="col-span-full grid grid-cols-12  gap-4 p-4 contentBlock">
           {data.content ? (
             data.content.map((item: any, i: number) => {
               return (
@@ -41,7 +41,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                   ) : ('')}
 
                   {item.content == 'text' ? (
-                    <div className="w-full col-span-6 col-start-4">
+                    <div className="w-full col-span-full lg:col-span-6 lg:col-start-4">
                       <div className="richText col-span-full lg:col-span-5 xl:col-span-4">
                         <PortableText value={item.desc} />
                       </div>
@@ -50,17 +50,17 @@ export default async function Home({ params }: { params: { slug: string } }) {
 
                   {item.content == 'video' ? (
                     <div className="col-span-full gridBox  relative"><div className="w-full relative p-[--xs]">
-                    <SwitchContent work={item} title={data.title} ratio={item.ratio} /></div></div>
+                      <SwitchContent work={item} title={data.title} ratio={item.ratio} /></div></div>
                   ) : ('')}
 
-                  {item.content == "gallery" && item.gallery?(
-                                          <div className="col-span-full" style={{height:`${item.gallery.length*100}vh`}}> <Gallery data={item.gallery} /></div>
-                                           
-                                            ):""}
+                  {item.content == "gallery" && item.gallery ? (
+                    <div className="col-span-full" style={{ height: `${item.gallery.length * 100}vh` }}> <Gallery data={item.gallery} /></div>
+
+                  ) : ""}
                   {
                     item.embed ? (
-                       <div className="col-span-full gridBox  relative"><div className="w-full relative p-[--xs]">
-                      <div className="w-full aspect-video" dangerouslySetInnerHTML={{ __html: item.embed }}></div></div></div>
+                      <div className="col-span-full gridBox  relative"><div className="w-full relative p-[--xs]">
+                        <div className="w-full aspect-video" dangerouslySetInnerHTML={{ __html: item.embed }}></div></div></div>
                     ) : ('')
                   }
                 </Reveal>

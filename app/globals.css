@@ -81,10 +81,24 @@ body {
   color: var(--white);
 }
 
+li{font-size: 14pt;}
+
+ul{
+  list-style-type: circle;
+  padding-left: var(--xs);
+}
+
+
+ol{
+  list-style-type: decimal;
+    padding-left: var(--sm);
+}
+
+
 
 
 h1{
-  font-size: 2rem;
+  font-size: 3.5rem;
   font-family: 'fake', arial;
   line-height: 1.125em;
 }
@@ -103,7 +117,7 @@ h1.title{
   
 }
 
-.contentBlock p, .contentBlock h1, .contentBlock h2{
+.contentBlock p, .contentBlock h1, .contentBlock h2, .contentBlock li{
 margin-bottom: var(--sm);
 }
 
@@ -112,7 +126,7 @@ margin-bottom: var(--sm);
   }
 
   .contentBlock h1{
-  font-size:3.5rem;
+  font-size:2rem;
   }
 
 
@@ -286,7 +300,7 @@ input::placeholder{
     font-size:10pt;
   }
 
-  .navBut:hover, .subBut:hover{
+  .navBut:hover, .subBut:hover, .singleArticle:hover{
     animation: blink 250ms cubic-bezier(0.57, 0.06, 0.05, 0.95) infinite;
   }
 

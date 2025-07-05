@@ -14,7 +14,7 @@ console.log(params)
     <main className="w-[100vw] grid grid-cols-12 pt-[100px] relative gap-[--xs] px-[--sm] py-[200px] articleStage min-h-[100dvh]" style={{backgroundColor:`rgba(20,20,20,.1)` }}>
       {data.map((item:any,i:number)=>{
           return( 
-            <Link href={`/resources/${params.catSlug}/${item.slug}`} key={`article-${i}`} className="col-span-full md:col-span-6 xl:col-span-4 gridBox relative" >
+            <Link href={`/resources/${params.catSlug}/${item.slug}`} key={`article-${i}`} className="col-span-full md:col-span-6 xl:col-span-4 gridBox relative singleArticle" >
               <Reveal styleSet="w-full  p-[--2xs] relative" count={i}>
                 
                 <div className="articleStage relative">
