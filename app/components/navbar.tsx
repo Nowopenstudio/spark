@@ -295,7 +295,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
      
     
         const backNode = {
-          id: `${root+categories.length}`,
+          id: `${root+categories.length+1}`,
           type: 'navBut',
           data: { label: <Link href={`/${slug}`} key={`art-tri-back`} style={{color:parent.color}} onClick={()=>moveView(-140,60)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>{`${items[sec].articles.length?`${categories[sec].title} `:"0 ENTRIES "}`}→</div> </div></Link> },
           position: {  x: ((nodeX + nodeGap*2)*opt)*3, y: -winY/4*1.5},
@@ -303,12 +303,12 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
         getTri.push(backNode)
 
         const backEdge = {
-          id: `${sec+root}-${root+categories.length}`,
+          id: `${sec+root}-${root+categories.length+1}`,
           type: 'smoothstep',
           animated:true,
           source: `${sec+root}`,
           style:{stroke:parent.color},
-          target: `${root+categories.length}`,
+          target: `${root+categories.length+1}`,
         }
         getTriEdge.push(backEdge)
 
@@ -425,9 +425,16 @@ useEffect(()=>{
 },[resources, secEdges, triEdges, triNodes, titleNodes, titleEdges])
      
 
+const nonMenu =()=>{
+  setActive(false)
+  moveView((-winX/4)+60,60)
+}
+
     return(
 
       <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"pointer-evens-fill":'pointer-events-none'}`}>
+        <div className="fixed bottom-0 left-0 z-[1000] flex"><Link href={`/news`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="caption"><p>News</p></div></Link>
+<Link href={`/guide`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="caption"><p>Guide</p></div></Link></div>
         {mobile!==null?(
             <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
             <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(0, 0, 0, .2)'} nodeStrokeColor={"rgb(0, 0, 0, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable />
@@ -450,11 +457,13 @@ export default function NavBar({categories, projects,info,donate}:{donate:any,ca
 
   return(
  <React.Fragment>
+
     {mobile!==null && winY && winX?(
         <ReactFlowProvider>
         <Flow categories={categories} donate={donate} page={page} params={params} projects={projects} info={info} winX={winX} winY={winY} mobile={mobile}/>
         </ReactFlowProvider>
     ):('')}
+
 </React.Fragment>
   )
 }

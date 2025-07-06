@@ -15,15 +15,15 @@ export default async function Home({ params }: { params: { slug: string } }) {
 
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] p-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
+      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] p-[--xs] md:p-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
 
         {data.cover ? (
-          <div className="w-full px-[--sm] lg:px-0 col-span-full  lg:min-h-[50vh]">
+          <div className="w-full  col-span-full  lg:min-h-[50vh]">
             {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} cover />) : ''}
 
           </div>
         ) : ("")}
-        <div className={`${data.cover ? '' : 'pt-[--xl]'} col-span-6 col-start-4 py-[--sm] uppercase flex`}>
+        <div className={`${data.cover ? '' : 'pt-[--xl]'} col-span-full lg:col-span-6 lg:col-start-4 py-[--sm] uppercase flex`}>
           <div className="aspect-square h-full rounded-sm" style={{ backgroundColor: `rgb(${data.color.r},${data.color.g},${data.color.b})` }}></div>
           <div className="pl-[--xs]">
             <h1 className="mb-[--2xs]">{data.title}</h1>
@@ -31,7 +31,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        <div className="col-span-full grid grid-cols-12  gap-4 p-4 contentBlock">
+        <div className="col-span-full grid grid-cols-12  gap-4 p-[--xs] lg:p-[--sm] contentBlock">
           {data.content ? (
             data.content.map((item: any, i: number) => {
               return (

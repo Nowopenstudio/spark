@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 export default function Gallery({data}:any){
     const ref = useRef(null)
-    const {winY} = useResize()
+    const {winY, mobile} = useResize()
     const {scrollYProgress} = useScroll(
         {target:ref}
         
@@ -19,7 +19,7 @@ export default function Gallery({data}:any){
 
 
 
-    const x = useTransform(scrollYProgress, [0, 1],['0%',`-${data.length*75-100}%`])
+    const x = useTransform(scrollYProgress, [0, 1],['0%',`-${data.length*(mobile?102:77)-100}%`])
   
 
     return(
@@ -27,7 +27,7 @@ export default function Gallery({data}:any){
             <motion.div  className="flex  sticky top-[--lrg]" style={{x}} >
                 
                      {data.map((image:any,m:number)=>{
-                              return( <div key={`gallery-${m}`} className="w-3/4  mb-[--sm] p-[--sm] relative gridBox flex-shrink-0">
+                              return( <div key={`gallery-${m}`} className="w-full md:w-3/4  mb-[--sm] p-[--sm] relative gridBox flex-shrink-0">
                               <div className="w-full h-auto">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className="w-full h-auto"/>):''}</div>
                             </div>
 

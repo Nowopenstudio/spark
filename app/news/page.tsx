@@ -14,7 +14,7 @@ export default async function Home({params}:{params:{catSlug:string}}) {
     <main className="w-[100vw] grid grid-cols-12 pt-[100px] relative gap-[--xs] px-[--sm] py-[200px] articleStage min-h-[100dvh]" style={{backgroundColor:`rgba(20,20,20,.1)` }}>
       {data.map((item:any,i:number)=>{
           return( 
-            <Link href={`/resources/`} key={`article-${i}`} className="col-span-full md:col-span-6 xl:col-span-4 gridBox relative" >
+            <Link href={`/news/${item.slug}`} key={`article-${i}`} className="singleArticle col-span-full md:col-span-6 xl:col-span-4 gridBox relative" >
               <Reveal styleSet="w-full  p-[--2xs]" count={i}>
                 <div className="articleStage relative">
                    <div className="linkBut w-[50px] h-[50px] z-10 top-[--2xs] right-[--2xs] absolute rounded-sm" style={{backgroundColor:`rgba(255,255,255,1)`}}><h2 className="xy-center absolute text-black">→</h2></div>
