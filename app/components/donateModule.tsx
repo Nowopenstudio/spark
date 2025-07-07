@@ -33,7 +33,7 @@ export async function Single({item,count}:any){
       
    console.log(open.project.stats.balance.value)
   return (
-    <div className={` col-span-full lg:col-span-4 gridBox relative navTitle`}>
+    <div className={` col-span-full lg:col-span-4 gridBox donate relative navTitle`}>
 
       {open?(
          <div className="w-full p-[--sm]" >

@@ -74,7 +74,7 @@ export default {
                         { name: 'image', title: 'Image', type: 'image', hidden: ({ parent }: any) => parent?.content !== "image" },
                         {
                             name: 'list', title: "List", type: 'object', hidden: ({ parent }: any) => parent?.content !== "list", fields: [
-                                { name: 'title', title: 'Title', type: "string" },
+                                { name: 'text', title: 'Text', type: "array",of:[{type:'block'}] },
                                 {
                                     name: 'items', title: "Items", type: "array", of: [
                                         {

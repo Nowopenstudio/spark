@@ -21,7 +21,7 @@ export default async function Home({params}:{params:{slug:string}}) {
                                   <div className="w-full  lg:min-h-[100vh] relative">
                                   {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
                                   <div className={`absolute xy-center z-[20] w-full p-[--sm] text-center`}>
-                                    <h1 className="text-center">{data.title}</h1>
+                                    <h1 className="text-center title uppercase">{data.title}</h1>
                                   </div>
                                 
                                  </div>

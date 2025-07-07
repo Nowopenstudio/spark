@@ -7,7 +7,7 @@ import {useRef, useEffect,useState, useMemo, useCallback } from "react";
 import * as THREE from "three";
 import { TextureLoader, SRGBColorSpace, Vector2 } from "three";
 import { spherePointToUV, sampleImage } from "../../lib/utils-canvas";
-import { EffectComposer, Bloom} from '@react-three/postprocessing'
+import { EffectComposer, Bloom, Noise} from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
 import vertexShader from "!!raw-loader!./vertexShader.glsl";
 import fragmentShader from "!!raw-loader!./fragmentShader.glsl";
@@ -243,7 +243,7 @@ export function Test() {
     <div className='w-full h-full fixed z-0 pointer-events-none bg-[var(--dark)]'>
     
             <Canvas id="sphere">
-            <ambientLight intensity={0.8} />
+            <ambientLight intensity={0.7} />
               {/* <Sphere size={[3,50,50]} position={[0,0,0]}/> */}
              
               <Environment files="/texture/bg.hdr" resolution={32}>
@@ -260,11 +260,11 @@ export function Test() {
         
               <EffectComposer >
               
-                <Bloom mipmapBlur luminanceThreshold={.7} intensity={0.4} />
-                {/* <Scanline opacity={.5}/> */}
-                
+                <Bloom mipmapBlur luminanceThreshold={.7} intensity={0.3} />
+                {/* <Scanline opacity={.5}/>
+                 */}
                 {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}
-                {/* <Noise opacity={.1} /> */}
+                {/* <Noise opacity={.2} /> */}
                 
 
               </EffectComposer>
