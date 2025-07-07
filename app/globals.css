@@ -26,12 +26,63 @@
 	font-weight: 500;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'fk';
+	src: url('/fonts/FK-Blended.woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'fk';
+	src: url('/fonts/FK-Smooth.woff2');
+	font-weight: 900;
+	font-style: normal;
+}
+
 
 @font-face {
 	font-family: 'mono';
 	src: url('/fonts/mono.woff2');
 	font-weight: 500;
 	font-style: normal;
+}
+
+@font-face {
+	font-family: 'inter';
+	src: url('/fonts/Inter-Regular.woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'inter';
+	src: url('/fonts/Inter-Light.woff2');
+	font-weight: 200;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'inter';
+	src: url('/fonts/Inter-Bold.woff2');
+	font-weight: 900;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'inter';
+	src: url('/fonts/Inter-Italic.woff2');
+	font-weight: 500;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'inter';
+	src: url('/fonts/Inter-LightItalic.woff2');
+	font-weight: 200;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'inter';
+	src: url('/fonts/Inter-BoldItalic.woff2');
+	font-weight: 900;
+	font-style: italic;
 }
 
 /* Lenis */
@@ -76,12 +127,14 @@ html.lenis, html.lenis body {
 }
 
 body {
-  font-size:18pt;
-  font-family: "mono",Arial, Helvetica, sans-serif;
+  font-size:16pt;
+  font-family: "inter",Arial, Helvetica, sans-serif;
   color: var(--white);
 }
 
-li{font-size: 14pt;}
+li{
+  font-family: 'mono', 'Courier New', Courier, monospace;
+  font-size: 15pt;}
 
 ul{
   list-style-type: circle;
@@ -99,14 +152,9 @@ ol{
 
 h1{
   font-size: 3.5rem;
-  font-family: 'fake', arial;
+  font-family: 'fk', Arial, Helvetica, sans-serif;
   line-height: 1.125em;
-}
-
-h2{
-  font-size: 1rem;
-  font-family: 'fake', arial;
-  line-height: 1.125em;
+  font-weight: 900;
 }
 
 h1.title{
@@ -117,7 +165,16 @@ h1.title{
   
 }
 
-.contentBlock p, .contentBlock h1, .contentBlock h2, .contentBlock li{
+h2{
+  font-size: 1.75rem;
+  font-family: 'fk', Arial, Helvetica, sans-serif;
+  line-height: 1.225em;
+  font-weight: 500;
+}
+
+
+
+.richText p, .contentBlock p, .contentBlock h1, .contentBlock h2, .contentBlock li{
 margin-bottom: var(--sm);
 }
 
@@ -131,17 +188,13 @@ margin-bottom: var(--sm);
 
 
 .contentBlock strong{
-  font-family: "fake",Arial, Helvetica, sans-serif;
-  font-weight: 500;
+  font-weight: 900;
 }
 
 .contentBlock em{
-  font-family: "fake",Arial, Helvetica, sans-serif;
-  font-style: normal;
-  text-decoration: underline;
-  font-weight: 500;
+  font-style: italic;
 }
-
+  
 .fake {
   font-size:12pt;
   font-family: "fake",Arial, Helvetica, sans-serif;
@@ -151,6 +204,12 @@ margin-bottom: var(--sm);
 .fakeSub{
   font-size:10pt;
 }
+
+.fk {
+  font-family: 'fk';
+}
+
+.mono{font-family:"mono",'Courier New', Courier, monospace}
 
 .navBut{
   font-size:5pt;
@@ -374,19 +433,10 @@ input::placeholder{
   }
 
 }
-
+/* 
 @media (max-width:850px){
-  h1{
-    font-size: 1.5rem;
-  }
 
-  h1.title{
-    font-size: 2rem;
-  }
 
-  p,li{
-    font-size:12pt;
-  }
-}
+} */
 
 

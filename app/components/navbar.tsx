@@ -433,8 +433,8 @@ const nonMenu =()=>{
     return(
 
       <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"pointer-evens-fill":'pointer-events-none'}`}>
-        <div className="fixed bottom-0 left-0 z-[1000] flex"><Link href={`/news`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="caption"><p>News</p></div></Link>
-<Link href={`/guide`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="caption"><p>Guide</p></div></Link></div>
+        <div className="fixed bottom-0 left-0 z-[1000] flex"><Link href={`/news`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="fk uppercase"><p>News</p></div></Link>
+<Link href={`/guide`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="fk uppercase"><p>Guide</p></div></Link></div>
         {mobile!==null?(
             <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
             <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(0, 0, 0, .2)'} nodeStrokeColor={"rgb(0, 0, 0, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable />

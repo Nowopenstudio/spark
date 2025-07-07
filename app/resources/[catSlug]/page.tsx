@@ -18,7 +18,7 @@ console.log(params)
               <Reveal styleSet="w-full  p-[--2xs] relative" count={i}>
                 
                 <div className="articleStage relative">
-                  <div className="linkBut w-[50px] h-[50px] z-10 top-[--2xs] right-[--2xs] absolute rounded-sm" style={{backgroundColor:`rgba(${item.color.r},${item.color.g},${item.color.b},1)`}}><h2 className="xy-center absolute">→</h2></div>
+                  <div className="linkBut w-[50px] h-[50px] z-10 top-[--2xs] right-[--2xs] absolute rounded-sm" style={{backgroundColor:`rgba(${item.color.r},${item.color.g},${item.color.b},1)`}}><h1 className="xy-center absolute">→</h1></div>
                   <div className="contentHold p-[--2xs]">
                     <div className='coverHold w-full aspect-video noControl mb-[--2xs]'>
                         {item.cover?(
@@ -27,7 +27,7 @@ console.log(params)
                     </div>
                     <div className={`infoHold p-[--xs] text-[--white] rounded-sm`} style={{backgroundColor:`rgba(255,255,255,.1)` }}>
                       <h2>{item.title}</h2>
-                      <h2>{item.author.firstName}</h2>
+                      <p className="caption">{item.author.firstName}</p>
                     </div>
                   </div>
                 </div>

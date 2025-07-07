@@ -18,6 +18,11 @@ export default {
             title: 'Title',
         },
         {
+            type: 'string',
+            name: 'subTitle',
+            title: 'Sub Title',
+        },
+        {
             type: 'reference',
             name: 'author',
             title: 'Author',
