@@ -7,33 +7,35 @@ import {useRef, useEffect,useState, useMemo, useCallback } from "react";
 import * as THREE from "three";
 import { TextureLoader, SRGBColorSpace, Vector2 } from "three";
 import { spherePointToUV, sampleImage } from "../../lib/utils-canvas";
-import { EffectComposer, Bloom, Noise} from '@react-three/postprocessing'
+import { EffectComposer, Bloom, Noise, ToneMapping} from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
 import vertexShader from "!!raw-loader!./vertexShader.glsl";
 import fragmentShader from "!!raw-loader!./fragmentShader.glsl";
+import useResize from "../util/useResize";
 
 
 export default function Logo(props:any) {
   const groupRef = useRef<any>(null!)
+  const {mobile} = useResize();
   const { nodes, materials } = useGLTF('/models/logo.gltf')
   const standard = new THREE.MeshStandardMaterial
 
 
 
   return (
-    <group ref={groupRef} {...props} dispose={null} position={[-1.5,.2,2.0]}>
-      <mesh geometry={nodes.Remesh.geometry || []} scale={.018} material-emissive="red" material-roughness={0}>
+    <group ref={groupRef} {...props} dispose={null} position={[mobile?-0.8:-1.5,.2,2.0]}>
+      <mesh geometry={nodes.Remesh.geometry || []} scale={mobile?.01:.018} material-emissive="red" material-roughness={0}>
       <MeshTransmissionMaterial
           backside
           backsideThickness={1}
-          samples={8}
+          samples={16}
           thickness={0.5}
           anisotropicBlur={0.5}
-          iridescence={.9}
+          iridescence={.2}
           iridescenceIOR={1}
           iridescenceThicknessRange={[0, 1400]}
           clearcoat={1}
-          envMapIntensity={0.1}
+          envMapIntensity={0.01}
         />
       </mesh>
   
@@ -56,7 +58,7 @@ const Light = (props:any)=>{
 
 const Init =()=>{
   
-  const source = '/texture/green2.png'
+  const source = '/texture/color.png'
   const wMap = useLoader(TextureLoader, source)
   
   const tempCanvas = document.createElement("canvas");
@@ -84,13 +86,13 @@ const Init =()=>{
 
 const Dots =({imageData}: any)=>{
   const meshRef = useRef<any>(null)
-  const DOT_DENSITY = 8;
+  const DOT_DENSITY = 32;
   const RADIUS = 2.0
-  const LATITUDE_COUNT = 85
+  const LATITUDE_COUNT = 320
   const dotCount=[]
   const colorCount=[]
-  const dotGeometries = new Float32Array(4000*3)
-  const dotColor = new Float32Array(4000*3)
+  const dotGeometries = new Float32Array(56000*3)
+  const dotColor = new Float32Array(56000*3)
   const vector = new THREE.Vector3();
     const [currX,setX]=useState()
   const [currY,setY]=useState()
@@ -105,8 +107,8 @@ const Dots =({imageData}: any)=>{
 
 
   let currCount = 0
-  const texture = useTexture('/texture/map.png');
-    const color = useTexture('/texture/green.png');
+  const texture = useTexture('/texture/color.png');
+  const color = useTexture('/texture/color.png');
 
   for (let lat = 0; lat < LATITUDE_COUNT;lat ++ ) {
   const radius =Math.cos((-90 + (180 / LATITUDE_COUNT) * lat) * (Math.PI / 180)) * RADIUS;
@@ -203,7 +205,7 @@ const Dots =({imageData}: any)=>{
 
   return (
       
-  <points ref={meshRef} position={[0,0,3]}>
+  <points ref={meshRef} position={[0,0,0]} scale={1.2}>
     <bufferGeometry>
       <bufferAttribute
         attach={"attributes-position"}
@@ -259,11 +261,11 @@ export function Test() {
               <Logo/>
         
               <EffectComposer >
-              
-                <Bloom mipmapBlur luminanceThreshold={.7} intensity={0.3} />
+{/*               
+                // <Bloom luminanceThreshold={.6} intensity={.01} /> */}
                 {/* <Scanline opacity={.5}/>
                  */}
-                {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}
+                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
                 {/* <Noise opacity={.2} /> */}
                 
 

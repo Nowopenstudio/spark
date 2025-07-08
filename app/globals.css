@@ -151,7 +151,7 @@ ol{
 
 
 h1{
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-family: 'fk', Arial, Helvetica, sans-serif;
   line-height: 1.125em;
   font-weight: 900;
@@ -187,7 +187,7 @@ h1.ol-number, .navBut p{
 
 
   .contentBlock h1{
-  font-size:2rem;
+  font-size:3rem;
   }
 
 
@@ -197,6 +197,10 @@ h1.ol-number, .navBut p{
 
 .contentBlock em{
   font-style: italic;
+}
+
+.faqQuest p{
+  font-size:15pt;
 }
   
 .fake {
@@ -457,10 +461,20 @@ input::placeholder{
   }
 
 }
-/* 
-@media (max-width:850px){
 
+@media (max-width:500px){
 
-} */
+ .richText p, .contentBlock p {
+font-size: 14pt;
+}
+
+h2{
+  font-size: 1.5rem; 
+}
+
+.contentBlock li, .faqQuest p, .contentBlock .mono p{
+  font-size:12pt;
+}
+}
 
 

@@ -78,10 +78,10 @@ export default async function Home({ params }: { params: { slug: string } }) {
                         {item.list.items?(
                           item.list.items.map((single:any,s:number)=>{
                             return (
-                              <div className="w-full p-[--xs] lg:p-[--sm] gridBox relative" key={`list-${i}-${s}`} >
+                              <div className="w-full p-[--2xs] lg:p-[--sm] gridBox relative" key={`list-${i}-${s}`} >
                                <div>
                                   <div className="relative bgBlur flex flex-wrap items-start p-[--xs] lg:p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
-                                    <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap-[--xs]`}>
+                                    <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap- [--xs]`}>
                                       <div ><div className="aspect-square w-[50px] rounded-sm flex-shrink-0 relative" style={{ backgroundColor: `rgb(${data.color.r},${data.color.g},${data.color.b})` }}>
                                         {item.ordered?(
                                           <h1 className="absolute xy-center ol-number">{s+1}</h1>
@@ -91,7 +91,10 @@ export default async function Home({ params }: { params: { slug: string } }) {
                                         <h2 className="mb-[--xs] flex-shrink-0 pt-[--2xs]">{single.title}</h2>
                                       </div>
                                     </div>
-                                  <div className="w-full flex-shrink-0 mono"><PortableText value={single.item}/></div>
+                                    {single.item?(
+                                        <div className="w-full flex-shrink-0 mono  pt-[--xs]"><PortableText value={single.item}/></div>
+                                 
+                                    ):('')}
                                   </div>
                                </div>
                                 

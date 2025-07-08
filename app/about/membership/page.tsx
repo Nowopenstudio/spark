@@ -47,46 +47,49 @@ export default async function Home({ params }: { params: { slug: string } }) {
 
                   ) : ""}
 
-                     {item.content == 'list' ? (
-                                     <div className="w-full col-span-full lg:col-span-8 lg:col-start-3 px-0 lg:px-[--sm]">
-                                       {item.list.text ? (
-                                         <PortableText value={item.list.text} />
-                                       ) : ('')}
-                                       {item.list.items ? (
-                                         item.list.faqs?(
-                                           item.list.items.map((single: any, s: number) => {
-                                             return(
-                                               <ListFaqs key={`faqs-${i}-${s}`} data={single} ordered={item.ordered} count={s}/>
-                                         
-                                             )
-                                           })
-                                         ):(
-                                           item.list.items.map((single: any, s: number) => {
-                                           return (
-                                             <div className="w-full p-[--xs] lg:p-[--sm] gridBox relative" key={`list-${i}-${s}`}  >
-                                               <div>
-                                                 <div className="relative bgBlur flex flex-wrap items-start p-[--xs] lg:p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
-                                                   <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap-[--xs]`}>
-                                                     <div ><div className="aspect-square w-[50px] rounded-sm flex-shrink-0 relative" style={{ backgroundColor: `#ffffff` }}>
-                                                       {item.ordered ? (
-                                                         <h1 className="absolute xy-center ol-number">{s + 1}</h1>
-                                                       ) : ('')}
-                                                     </div></div>
-                                                     <div >
-                                                       <h2 className="mb-[--xs] flex-shrink-0 pt-[--2xs]">{single.title}</h2>
-                                                     </div>
-                                                   </div>
-                                                   <div className="w-full flex-shrink-0 mono pt-[--sm]"><PortableText value={single.item} /></div>
-                                                 </div>
-                                               </div>
-                 
-                                             </div>
-                                           )
-                                         })
-                                         )
-                                       ) : ('')}
-                                     </div>
-                                   ) : ('')}
+                  {item.content == 'list' ? (
+                    <div className="w-full col-span-full lg:col-span-8 lg:col-start-3 px-0 lg:px-[--sm]">
+                      {item.list.text ? (
+                        <PortableText value={item.list.text} />
+                      ) : ('')}
+                      {item.list.items ? (
+                        item.list.faqs ? (
+                          item.list.items.map((single: any, s: number) => {
+                            return (
+                              <ListFaqs key={`faqs-${i}-${s}`} data={single} ordered={item.ordered} count={s} />
+
+                            )
+                          })
+                        ) : (
+                          item.list.items.map((single: any, s: number) => {
+                            return (
+                              <div className="w-full p-[--xs] lg:p-[--sm] gridBox relative" key={`list-${i}-${s}`}  >
+                                <div>
+                                  <div className="relative bgBlur flex flex-wrap items-start p-[--xs] lg:p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
+                                    <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap-[--xs]`}>
+                                      <div ><div className="aspect-square w-[50px] rounded-sm flex-shrink-0 relative" style={{ backgroundColor: `#ffffff` }}>
+                                        {item.ordered ? (
+                                          <h1 className="absolute xy-center ol-number">{s + 1}</h1>
+                                        ) : ('')}
+                                      </div></div>
+                                      <div >
+                                        <h2 className="mb-[--xs] flex-shrink-0 pt-[--2xs]">{single.title}</h2>
+                                      </div>
+                                    </div>
+                                    {single.item ? (
+                                      <div className="w-full flex-shrink-0 mono  pt-[--xs]"><PortableText value={single.item} /></div>
+
+                                    ) : ('')}
+                                  </div>
+                                </div>
+
+                              </div>
+                            )
+                          })
+                        )
+                      ) : ('')}
+                    </div>
+                  ) : ('')}
                   {
                     item.embed ? (
                       <div className="col-span-full gridBox  relative"><div className="w-full relative p-[--xs]">

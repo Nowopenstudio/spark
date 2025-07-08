@@ -80,7 +80,10 @@ export default async function Home({ params }: { params: { slug: string } }) {
                                       <h2 className="mb-[--xs] flex-shrink-0 pt-[--2xs]">{single.title}</h2>
                                     </div>
                                   </div>
-                                  <div className="w-full flex-shrink-0 mono pt-[--sm]"><PortableText value={single.item} /></div>
+                                   {single.item?(
+                                        <div className="w-full flex-shrink-0 mono  pt-[--xs]"><PortableText value={single.item}/></div>
+                                 
+                                    ):('')}
                                 </div>
                               </div>
 
