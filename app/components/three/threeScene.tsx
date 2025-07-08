@@ -261,8 +261,8 @@ export function Test() {
               <Logo/>
         
               <EffectComposer >
-{/*               
-                // <Bloom luminanceThreshold={.6} intensity={.01} /> */}
+              
+                <Bloom luminanceThreshold={.6} intensity={.5} />
                 {/* <Scanline opacity={.5}/>
                  */}
                 <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
