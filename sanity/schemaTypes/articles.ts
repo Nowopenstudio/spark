@@ -102,6 +102,7 @@ export default {
                         {
                             name: 'list', title: "List", type: 'object', hidden: ({ parent }: any) => parent?.content !== "list", fields: [
                                 { name: 'text', title: 'Text', type: "array",of:[{type:'block'}] },
+                                  { name: 'faqs', title:'FAQs', type:'boolean'},
                                 {
                                     name: 'items', title: "Items", type: "array", of: [
                                         {

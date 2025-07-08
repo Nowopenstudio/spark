@@ -50,16 +50,37 @@ export default {
                                     {title: 'Text', value: 'text'},
                                     {title: 'Image', value: 'image'},
                                     {title:'Image Gallery', value:"gallery"},
-                                     {title: 'Video', value: 'video'}
+                                     {title: 'Video', value: 'video'},
+                                      { title: 'List', value: 'list' },
                                     ],
 
                                     
                                 }},
-                                {name:'text',title:'Text',type:'array',of:[{type:'block'}], hidden: ({ parent }) => parent?.content !== "text"},
-                                {name:'image',title:'Image',type:'image', hidden: ({ parent }) => parent?.content !== "image"},
-                                {name:'gallery',title:'Image Gallery',type:'array', hidden: ({ parent }) => parent?.content !== "gallery",of:[{type:'image', name:'image',title:'Image'}]},
-                                {name:'vid',title:'Video',type:'mux.video', hidden: ({ parent }) => parent?.content !== "video"},
-                            ]}
+                                  {
+                                        name:'ordered',type:'boolean',title:"Ordered List", fieldset:'content',hidden: ({ parent }: any) => parent?.content !== "list"
+                                    },
+                                {
+                                    name: 'list', title: "List", type: 'object', hidden: ({ parent }: any) => parent?.content !== "list", fields: [
+                                        { name: 'text', title: 'Text', type: "array", of: [{ type: 'block' }] },
+                                        { name: 'faqs', title: 'FAQs', type: 'boolean' },
+                                        {
+                                            name: 'items', title: "Items", type: "array", of: [
+                                                {
+                                                    name: 'item', type: "object", title: "Item", fields: [
+                                                        { name: "title", type: 'string', title: "Subhead" },
+                                                        { name: 'item', type: "array", title: "Item", of: [{ type: 'block' }] }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                { name: 'text', title: 'Text', type: 'array', of: [{ type: 'block' }], hidden: ({ parent }) => parent?.content !== "text" },
+                                { name: 'image', title: 'Image', type: 'image', hidden: ({ parent }) => parent?.content !== "image" },
+                                { name: 'gallery', title: 'Image Gallery', type: 'array', hidden: ({ parent }) => parent?.content !== "gallery", of: [{ type: 'image', name: 'image', title: 'Image' }] },
+                                { name: 'vid', title: 'Video', type: 'mux.video', hidden: ({ parent }) => parent?.content !== "video" },
+                            ]
+                            }
                         ]
                     },
                     {

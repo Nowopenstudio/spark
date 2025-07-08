@@ -11,7 +11,7 @@ import Gallery from "@/app/donate/gallery";
 
 
 export default async function Home({ params }: { params: { slug: string } }) {
-  const { data } = await getData(`*[_type=='articles' && slug.current == '${params.slug}'][0]{title,subTitle,_createdAt,"author":author->{firstName},"color":category->color.rgb,slug,'imageUrl': cover.asset->url, intro, content[]{content,desc,right,columns,caption,list,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
+  const { data } = await getData(`*[_type=='articles' && slug.current == '${params.slug}'][0]{title,subTitle,_createdAt,"author":author->{firstName},"color":category->color.rgb,slug,'imageUrl': cover.asset->url, intro, content[]{content,desc,right,columns,caption,ordered,list,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
 
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
@@ -71,20 +71,24 @@ export default async function Home({ params }: { params: { slug: string } }) {
                   }
 
                    {item.content == 'list' ? (
-                    <div className="w-full col-span-full lg:col-span-8 lg:col-start-3 px-[--sm]">
+                    <div className="w-full col-span-full lg:col-span-8 lg:col-start-3 px-0 lg:px-[--sm]">
                         {item.list.text?(
                           <PortableText value={item.list.text}/>
                         ):('')}
                         {item.list.items?(
                           item.list.items.map((single:any,s:number)=>{
                             return (
-                              <div className="w-full p-[--sm] gridBox relative" key={`list-${i}-s`} >
+                              <div className="w-full p-[--xs] lg:p-[--sm] gridBox relative" key={`list-${i}-s`} >
                                <div>
-                                  <div className="relative bgBlur flex flex-wrap items-start p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
-                                    <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 uppercase flex-wrap lg:flex-nowrap flex  px-[--xs] lg:px-0 gap-[--xs]`}>
-                                      <div ><div className="aspect-square w-[50px] rounded-sm flex-shrink-0 " style={{ backgroundColor: `rgb(${data.color.r},${data.color.g},${data.color.b})` }}></div></div>
+                                  <div className="relative bgBlur flex flex-wrap items-start p-[--xs] lg:p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
+                                    <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap-[--xs]`}>
+                                      <div ><div className="aspect-square w-[50px] rounded-sm flex-shrink-0 relative" style={{ backgroundColor: `rgb(${data.color.r},${data.color.g},${data.color.b})` }}>
+                                        {item.ordered?(
+                                          <h1 className="absolute xy-center ol-number">{s+1}</h1>
+                                        ):('')}
+                                        </div></div>
                                       <div >
-                                        <h2 className="mb-[--xs] flex-shrink-0">{single.title}</h2>
+                                        <h2 className="mb-[--xs] flex-shrink-0 pt-[--2xs]">{single.title}</h2>
                                       </div>
                                     </div>
                                   <div className="w-full flex-shrink-0 mono"><PortableText value={single.item}/></div>

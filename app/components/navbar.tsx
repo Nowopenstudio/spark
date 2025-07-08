@@ -20,7 +20,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
    const initialNodes = [
       {
         id: '1',
-        data: { label: <Link href={'/resources'} onClick={()=>changeSec(1)}><div className="navBut w-full h-full" style={{animationDelay:"0"}}><div>Resources</div></div></Link> },
+        data: { label: <Link href={'/resources'} onClick={()=>changeSec(1)}><div className="navBut w-full h-full" style={{animationDelay:"0"}}><div><p>Resources</p></div></div></Link> },
         type: 'navBut',
         position: { x: 0, y: 80 },
       },
@@ -29,20 +29,20 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
         id: '2',
         type: 'navButAlt',
         // you can also pass a React component as a label
-        data: { label: <Link href={'/projects'} onClick={()=>changeSec(2)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div>Projects</div></div></Link> },
+        data: { label: <Link href={'/projects'} onClick={()=>changeSec(2)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div><p>Projects</p></div></div></Link> },
         position: { x: 0, y: 40 },
       },
       {
         id: '3',
         type: 'navBut',
-        data:  { label: <Link href={'/about'} onClick={()=>changeSec(3)}><div className="navBut w-full h-full" style={{animationDelay:"300ms"}}><div>About</div></div></Link> },
+        data:  { label: <Link href={'/about'} onClick={()=>changeSec(3)}><div className="navBut w-full h-full" style={{animationDelay:"300ms"}}><div><p>About</p></div></div></Link> },
         position: { x: 0, y: 0 },
       },
       {
         id: '4',
         type: 'navButAlt',
         // you can also pass a React component as a label
-        data: { label: <Link href={'/donate'} onClick={()=>changeSec(4)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div>Donate</div></div></Link> },
+        data: { label: <Link href={'/donate'} onClick={()=>changeSec(4)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div><p>Donate</p></div></div></Link> },
         position: { x: 0, y: 120 },
       },
       
@@ -203,7 +203,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-540,-145)}><div className="navBut w-full h-full" style={{backgroundColor:`rgb(20,20,20,.8)`}} ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-540,-145)}><div className="navBut w-full h-full" style={{backgroundColor:`rgb(20,20,20,.8)`}} ><div style={{animationDelay:`${100*i}ms`}}><p>{item.title}</p></div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -212,7 +212,7 @@ setActive(active)
         const backNode = {
           id: `${root+(items.length)}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}`} key={`cat-new-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>→</div> </div></Link> },
+          data: { label: <Link href={`/${slug}`} key={`cat-new-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>→</p></div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap+1)/2-(nodeGap*((-1)+.5))},
         }
         getNodes.push(backNode)
@@ -262,7 +262,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: `navBut${opt>0?'Alt':''}`,
-          data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-newSingle-${i}`} onClick={()=>changeTitleSingle(items,1,sec,i,opt,slug,opt>0?600:-480,(winY/2)/zoom)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}>{item.title}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} key={`cat-newSingle-${i}`} onClick={()=>changeTitleSingle(items,1,sec,i,opt,slug,opt>0?600:-480,(winY/2)/zoom)}><div className="navBut w-full h-full" ><div style={{animationDelay:`${100*i}ms`}}><p>{item.title}</p></div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -271,7 +271,7 @@ setActive(active)
         const backNode = {
           id: `${items.length+root}`,
           type: `navBut${opt>0?'Alt':''}`,
-          data: { label: <Link href={`/${slug}`} key={`single-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>{opt>0?'←':'→'}</div> </div></Link> },
+          data: { label: <Link href={`/${slug}`} key={`single-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{opt>0?'←':'→'}</p></div> </div></Link> },
           position: {  x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(-1+.5))},
         }
         getNodes.push(backNode)
@@ -297,7 +297,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
         const backNode = {
           id: `${root+categories.length+1}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}`} key={`art-tri-back`} style={{color:parent.color}} onClick={()=>moveView(-140,60)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}>{`${items[sec].articles.length?`${categories[sec].title} `:"0 ENTRIES "}`}→</div> </div></Link> },
+          data: { label: <Link href={`/${slug}`} key={`art-tri-back`} style={{color:parent.color}} onClick={()=>moveView(-140,60)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{`${items[sec].articles.length?`${categories[sec].title} `:"0 ENTRIES "}`}→</p></div> </div></Link> },
           position: {  x: ((nodeX + nodeGap*2)*opt)*3, y: -winY/4*1.5},
         }
         getTri.push(backNode)
@@ -334,7 +334,7 @@ const changeTitle=(sec:number,cat:number, art:number,opt:number,slug:string, x:n
   const titleNode={
     id: `${art+root+categories.length+mobile}`,
     type: 'navBack',
-    data: {label:<Link href={`/${slug}`}  style={{color:parent.color}} onClick={()=>changeActive(cat,-320,60,true)}><div className="navBut w-full h-full" ><div >{`${categories[cat].title} →`}</div> </div></Link>},
+    data: {label:<Link href={`/${slug}`}  style={{color:parent.color}} onClick={()=>changeActive(cat,-320,60,true)}><div className="navBut w-full h-full" ><div ><p>{`${categories[cat].title} →`}</p></div> </div></Link>},
     position: { x: ((nodeX + nodeGap*root)*opt)*2, y: 0},
   }
 
@@ -364,7 +364,7 @@ const changeTitleSingle=(items:any,sec:number,cat:number, art:number,opt:number,
   const titleNode={
     id: `${root+art}`,
     type: `navBack${opt>0?'Alt':''}`,
-    data: {label:<Link href={`/${slug}`}  onClick={()=>changeSec(cat)}><div className="navBut w-full h-full" ><div >{opt>0?`← ${slug}`:`${slug} →`}</div> </div></Link>},
+    data: {label:<Link href={`/${slug}`}  onClick={()=>changeSec(cat)}><div className="navBut w-full h-full" ><div ><p>{opt>0?`← ${slug}`:`${slug} →`}</p></div> </div></Link>},
     position: { x:((nodeX + nodeGap*2)*opt)*2.7, y:  0},
   }
 
@@ -393,7 +393,7 @@ const changeTitleDonate=(x:number, y:number)=>{
   const titleNode={
     id: `${root}`,
     type: `navBackAlt`,
-    data: {label:<Link href={`/`}  onClick={()=>changeSec(0)}><div className="navBut w-full h-full" ><div >← Back</div> </div></Link>},
+    data: {label:<Link href={`/`}  onClick={()=>changeSec(0)}><div className="navBut w-full h-full" ><div ><p>← Back</p></div> </div></Link>},
     position: { x:((nodeX + nodeGap*2))*2.7, y:  0},
   }
 

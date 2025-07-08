@@ -67,12 +67,16 @@ export default {
                                 ]
                             }
                         },
+                          {
+                                        name:'ordered',type:'boolean',title:"Ordered List", fieldset:'content',hidden: ({ parent }: any) => parent?.content !== "list"
+                                    },
                         { name: 'desc', title: 'Text', type: 'array', of: [{ type: 'block' }], hidden: ({ parent }: any) => parent?.content !== "text" },
                         { name: 'embed', title: 'Embed', type: 'text', hidden: ({ parent }: any) => parent?.content !== "embed" },
                         { name: 'image', title: 'Image', type: 'image', hidden: ({ parent }: any) => parent?.content !== "image" },
                         {
                             name: 'list', title: "List", type: 'object', hidden: ({ parent }: any) => parent?.content !== "list", fields: [
                                { name: 'text', title: 'Text', type: "array",of:[{type:'block'}] },
+                               { name: 'faqs', title:'FAQs', type:'boolean'},
                                 {
                                     name: 'items', title: "Items", type: "array", of: [
                                         {
@@ -85,6 +89,7 @@ export default {
                                 }
                             ]
                         },
+                        
                         {
                             name: 'gallery', title: 'Image Gallery', type: 'array', hidden: ({ parent }: any) => parent?.content !== "gallery", of: [{
                                 type: "object",

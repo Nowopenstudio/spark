@@ -65,10 +65,14 @@ export default {
                                     { title: 'Image Gallery', value: "gallery" },
                                     { title: 'Video Upload', value: 'video' },
                                     { title: 'Video Embed', value: 'embed' },
-                                    { title: 'List', value: 'list' }
+                                    { title: 'List', value: 'list' },
+                                      { name: 'faqs', title:'FAQs', type:'boolean'},
                                 ]
                             }
                         },
+                          {
+                                        name:'ordered',type:'boolean',title:"Ordered List", fieldset:'content',hidden: ({ parent }: any) => parent?.content !== "list"
+                                    },
                         { name: 'desc', title: 'Text', type: 'array', of: [{ type: 'block' }], hidden: ({ parent }: any) => parent?.content !== "text" },
                         { name: 'embed', title: 'Embed', type: 'text', hidden: ({ parent }: any) => parent?.content !== "embed" },
                         { name: 'image', title: 'Image', type: 'image', hidden: ({ parent }: any) => parent?.content !== "image" },
