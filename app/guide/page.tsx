@@ -77,7 +77,7 @@ export default async function Home() {
                                                  item.list.faqs?(
                                                    item.list.items.map((single: any, s: number) => {
                                                      return(
-                                                       <ListFaqs key={`faqs-${i}-s`} data={single} ordered={item.ordered} count={s}/>
+                                                       <ListFaqs key={`faqs-${i}-${s}`} data={single} ordered={item.ordered} count={s}/>
                                                  
                                                      )
                                                    })
