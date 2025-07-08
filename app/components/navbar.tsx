@@ -107,6 +107,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
         timer = window.setInterval(()=>moveView(-480,(winY/2)/zoom), 500)
       }
     }
+ 
   
   },[])
 
@@ -131,7 +132,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
       setTitleNodes([])
       
        setNodes(initialNodes)
-       moveView(60,60)
+       moveView(60,mobile?-20:-40)
     }
     else if(sec==1){
       setEdges([])
@@ -212,7 +213,7 @@ setActive(active)
         const backNode = {
           id: `${root+(items.length)}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}`} key={`cat-new-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>→</p></div> </div></Link> },
+          data: { label: <Link href={`/`} key={`cat-new-back`} onClick={()=>changeSec(0)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>→</p></div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap+1)/2-(nodeGap*((-1)+.5))},
         }
         getNodes.push(backNode)
@@ -271,7 +272,7 @@ setActive(active)
         const backNode = {
           id: `${items.length+root}`,
           type: `navBut${opt>0?'Alt':''}`,
-          data: { label: <Link href={`/${slug}`} key={`single-back`} onClick={()=>moveView(60,60)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{opt>0?'←':'→'}</p></div> </div></Link> },
+          data: { label: <Link href={`/`} key={`single-back`} onClick={()=>changeSec(0)}><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{opt>0?'←':'→'}</p></div> </div></Link> },
           position: {  x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(-1+.5))},
         }
         getNodes.push(backNode)
@@ -364,7 +365,7 @@ const changeTitleSingle=(items:any,sec:number,cat:number, art:number,opt:number,
   const titleNode={
     id: `${root+art}`,
     type: `navBack${opt>0?'Alt':''}`,
-    data: {label:<Link href={`/${slug}`}  onClick={()=>changeSec(cat)}><div className="navBut w-full h-full" ><div ><p>{opt>0?`← ${slug}`:`${slug} →`}</p></div> </div></Link>},
+    data: {label:<Link href={`/`}  onClick={()=>changeSec(cat)}><div className="navBut w-full h-full" ><div ><p>{opt>0?`← ${slug}`:`${slug} →`}</p></div> </div></Link>},
     position: { x:((nodeX + nodeGap*2)*opt)*2.7, y:  0},
   }
 
@@ -427,6 +428,7 @@ useEffect(()=>{
 
 const nonMenu =()=>{
   setActive(false)
+  changeSec(0)
   moveView((-winX/4)+60,60)
 }
 
@@ -437,7 +439,7 @@ const nonMenu =()=>{
 <Link href={`/guide`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="fk uppercase"><p>Guide</p></div></Link></div>
         {mobile!==null?(
             <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
-            <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(0, 0, 0, .2)'} nodeStrokeColor={"rgb(0, 0, 0, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} zoomable pannable />
+            <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(250, 250, 250, .5)'} nodeStrokeColor={"rgb(0, 0, 0, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} pannable />
           </ReactFlow>
         ):('')}
       

@@ -22,7 +22,7 @@ void main() {
 
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
   vec2 st = modelPosition.xy;
-    modelPosition.x += cos(modelPosition.x)*.15*uTime;
+    modelPosition.x += cos(uTime)*.15+modelPosition.x;
 
     modelPosition.z += sin(modelPosition.z)*.5*uTime;
   vec4 viewPosition = viewMatrix * modelPosition;
