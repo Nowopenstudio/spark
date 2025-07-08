@@ -8,6 +8,6 @@ varying vec3 vColor;
 
             //gl_FragColor = texture2D(uTexture, vUv);
             //gl_FragColor = vec4(0.93, 0.01, 0.67, alpha);
-              gl_FragColor = vec4(vColor, alpha*.1);
+              gl_FragColor = vec4(vColor, alpha*.25);
 
     }

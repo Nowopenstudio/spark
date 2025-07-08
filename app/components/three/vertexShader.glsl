@@ -22,13 +22,13 @@ void main() {
 
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
   vec2 st = modelPosition.xy;
-    modelPosition.x += random( st )*.05;
-  modelPosition.y +=  random( st )*.9 + (uProgress * 0.02);
-    modelPosition.z += fract(sin(modelPosition.z)*1.0)/10.0;
+    modelPosition.x += cos(modelPosition.x)*.15*uTime;
+
+    modelPosition.z += sin(modelPosition.z)*.5*uTime;
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
 
   gl_Position = projectedPosition; 
- gl_PointSize = 3.5 * (uProgress+1.0);
+ gl_PointSize = 5.5 * (uProgress+1.0);
 }
 
