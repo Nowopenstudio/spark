@@ -84,7 +84,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                                     <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap- [--xs]`}>
                                       <div ><div className="aspect-square w-[50px] rounded-sm flex-shrink-0 relative" style={{ backgroundColor: `rgb(${data.color.r},${data.color.g},${data.color.b})` }}>
                                         {item.ordered?(
-                                          <h1 className="absolute xy-center ol-number">{s+1}</h1>
+                                          <h2 className="absolute xy-center ol-number">{s+1}</h2>
                                         ):('')}
                                         </div></div>
                                       <div >

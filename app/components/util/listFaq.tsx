@@ -14,7 +14,7 @@ export default function ListFaqs({ data,count,ordered }: any) {
 
   return (
 
-    <ViewActive >
+    
       <Reveal styleSet="faqsItem w-full cursor-pointer" >
         <div onClick={()=>setActive(!active)} className={` w-full p-[--2xs]  lg:p-[--sm] gridBox relative ${active?'itemActive':''}`}>
           <div>
@@ -43,7 +43,7 @@ export default function ListFaqs({ data,count,ordered }: any) {
 
 
       </Reveal>
-    </ViewActive>
+
 
 
   );

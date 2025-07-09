@@ -12,6 +12,7 @@ import NavBackAlt from "./nodes/NavBackAlt";
 import NavTitle from "./nodes/NavTitle";
 import { useParams, usePathname } from "next/navigation";
 import { filterIndex } from "./util/sanity";
+import { interpolate } from "framer-motion";
 
 
 const nodeTypes = { navBut: NavBut, navTitle: NavTitle, navBack:NavBack, navButAlt:NavButAlt, navBackAlt:NavBackAlt};
@@ -73,43 +74,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
    const zoom = 2;
 
 
-   useEffect(()=>{
-    
-    if(page.includes('resources')){
-      changeSec(1)
-      // timer = window.setInterval(()=>moveView(-140,60), 500)
-      // if(params.catSlug){
-      //   const index = filterIndex(categories,"slug",params.catSlug)
-      //   changeTri(categories,categories[index!],index!,-1,`resources/${params.catSlug}`,-320,60)
-      //   timer = window.setInterval(()=>moveView(-320,60), 1000)
-      //   if(params.slug){
-      //     const art = filterIndex(categories[index!].articles,"slug",params.slug)
-      //     changeTitle(1,sec,art!,-1,`resources/`,-500,(winY/2)/zoom,categories[index!])
-      //    timer = window.setInterval(()=>moveView(-500,260), 1000)
-      //   }
-      // }
 
-    }else if(page.includes('projects')){
-      changeSec(2)
-      timer = window.setInterval(()=>moveView(260,60), 500)
-      if(params.slug){
-        const pro = filterIndex(projects,"slug",params.slug)
-        changeTitleSingle(projects,1,sec,pro!,1,'projects',600,200)
-        timer = window.setInterval(()=>moveView(600,(winY/2)/zoom), 500)
-      }
-    }else if(page.includes('about')){
-      changeSec(3)
-      timer = window.setInterval(()=>moveView(-140,60), 500)
-      const curr =  page.split('/')[2]
-      if(curr){
-        const pro = filterIndex(info,"slug",curr)
-        changeTitleSingle(info,1,sec,pro!,-1,'about',-480,200)
-        timer = window.setInterval(()=>moveView(-480,(winY/2)/zoom), 500)
-      }
-    }
- 
-  
-  },[])
 
 
     const moveView=(x:number,y:number)=>{
@@ -204,7 +169,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-540,-145)}><div className="navBut w-full h-full" style={{backgroundColor:`rgb(20,20,20,.8)`}} ><div style={{animationDelay:`${100*i}ms`}}><p>{item.title}</p></div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-480,(winY/2)/zoom)}><div className="navBut w-full h-full" style={{backgroundColor:`rgb(20,20,20,.8)`}} ><div style={{animationDelay:`${100*i}ms`}}><p>{item.title}</p></div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
@@ -298,8 +263,8 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
         const backNode = {
           id: `${root+categories.length+1}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}`} key={`art-tri-back`} style={{color:parent.color}} onClick={()=>moveView(-140,60)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{`${items[sec].articles.length?`${categories[sec].title} `:"0 ENTRIES "}`}→</p></div> </div></Link> },
-          position: {  x: ((nodeX + nodeGap*2)*opt)*3, y: -winY/4*1.5},
+          data: { label: <Link href={`/resources`} key={`art-tri-back`} style={{color:parent.color}} onClick={()=>changeSec(1)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{`${items[sec].articles.length?`${categories[sec].title} `:"0 ENTRIES "}`}→</p></div> </div></Link> },
+          position: {  x:((nodeX + nodeGap*2)*opt)*2.7, y:  0},
         }
         getTri.push(backNode)
 
@@ -427,10 +392,61 @@ useEffect(()=>{
      
 
 const nonMenu =()=>{
-  setActive(false)
+
   changeSec(0)
-  moveView((-winX/4)+60,60)
+  moveView((-winX/4)+30,60)
+   setActive(false)
 }
+
+   useEffect(()=>{
+    
+    if(page.includes('resources')){
+      changeSec(1)
+      timer = window.setInterval(()=>moveView(-140,60), 500)
+      if(params.catSlug){
+        const index = filterIndex(categories,"slug",params.catSlug)
+        changeTri(categories,categories[index!],index!,-1,`resources/${params.catSlug}`,-320,60)
+        timer = window.setInterval(()=>moveView(-480,(winY/2)/zoom), 1000)
+     
+      }
+
+    }else if(page.includes('projects')){
+      changeSec(2)
+      timer = window.setInterval(()=>moveView(260,60), 500)
+      if(params.slug){
+        const pro = filterIndex(projects,"slug",params.slug)
+        changeTitleSingle(projects,1,sec,pro!,1,'projects',600,200)
+        timer = window.setInterval(()=>moveView(600,(winY/2)/zoom), 500)
+      }
+    }else if(page.includes('about')){
+      changeSec(3)
+      timer = window.setInterval(()=>moveView(-140,60), 500)
+      const curr =  page.split('/')[2]
+      if(curr){
+        const pro = filterIndex(info,"slug",curr)
+        changeTitleSingle(info,1,sec,pro!,-1,'about',-480,200)
+        timer = window.setInterval(()=>moveView(-480,(winY/2)/zoom), 500)
+      }
+    }
+    else if(page.includes('news') || page.includes('guide')){
+      
+      changeSec(0)
+       moveView((-winX/4)+30,60)
+      setActive(false)
+       timer = window.setInterval(()=>moveView((-winX/4)+30,60), 500)
+    }
+    else if(page.includes('donate')){
+      
+      changeSec(4)
+      timer = window.setInterval(()=>moveView(600,(winY/2)/zoom), 500)
+
+    }
+    else if(page=="/"){
+      timer = window.setInterval(()=>moveView(60,mobile?-20:-40), 500)
+    }
+ 
+  
+  },[])
 
     return(
 
@@ -439,7 +455,7 @@ const nonMenu =()=>{
 <Link href={`/guide`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="fk uppercase"><p>Guide</p></div></Link></div>
         {mobile!==null?(
             <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
-            <MiniMap maskColor={"rgb(135, 191, 239, 0.0)"} nodeColor={'rgb(250, 250, 250, .5)'} nodeStrokeColor={"rgb(0, 0, 0, 0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} pannable />
+            <MiniMap maskColor={"rgba(20, 20, 20, 0.1)"} nodeColor={'rgba(250, 250, 250,1.0)'} nodeStrokeColor={"rgba(0, 0, 0, 1.0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} pannable />
           </ReactFlow>
         ):('')}
       
