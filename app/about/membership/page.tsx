@@ -20,7 +20,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
           {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} cover />) : ''}
 
         </div>
-        <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4 p-4 contentBlock">
+        <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4 px-0 lg:px-4 py-4 contentBlock">
           {data.content ? (
             data.content.map((item: any, i: number) => {
               return (
@@ -30,7 +30,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                   ) : ('')}
 
                   {item.content == 'text' ? (
-                    <div className="w-full col-span-6 col-start-4">
+                    <div className="w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] md:px-0">
                       <div className="richText col-span-full lg:col-span-5 xl:col-span-4">
                         <PortableText value={item.desc} />
                       </div>
@@ -63,7 +63,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                         ) : (
                           item.list.items.map((single: any, s: number) => {
                             return (
-                              <div className="w-full p-[--xs] lg:p-[--sm] gridBox relative" key={`list-${i}-${s}`}  >
+                              <div className="w-full p-[--xs]  lg:p-[--sm] gridBox relative" key={`list-${i}-${s}`}  >
                                 <div>
                                   <div className="relative bgBlur flex flex-wrap items-start p-[--xs] lg:p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
                                     <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap-[--xs]`}>

@@ -19,7 +19,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
           {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} cover />) : ''}
 
         </div>
-        <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4 p-4 contentBlock">
+        <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4 px-0 lg:px-4 py-4 contentBlock">
           {data.content ? (
             data.content.map((item: any, i: number) => {
               return (
@@ -29,7 +29,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                   ) : ('')}
 
                   {item.content == 'text' ? (
-                    <div className="w-full col-span-full lg:col-span-6 lg:col-start-4">
+                    <div className="w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] md:px-0">
                       <div className="richText col-span-full lg:col-span-5 xl:col-span-4">
                         <PortableText value={item.desc} />
                       </div>

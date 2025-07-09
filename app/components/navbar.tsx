@@ -396,14 +396,15 @@ useEffect(()=>{
 const nonMenu =()=>{
 
   changeSec(0)
-  moveView((-winX/4)+30,60)
+  moveView((-winX/4)+0,60)
    setActive(false)
    setOut(true)
 }
 
    useEffect(()=>{
     
-    
+    setCenter(60,mobile?20:-40);
+
     if(page.includes('resources')){
       changeSec(1)
       timer = window.setInterval(()=>moveView(-140,60), 500)
@@ -446,9 +447,7 @@ const nonMenu =()=>{
       timer = window.setInterval(()=>moveView(600,(winY/2)/zoom), 500)
 
     }
-    else if(page=="/"){
-      setCenter(60,mobile?-20:-40)
-    }
+
  
   
   },[])
@@ -465,7 +464,7 @@ const nonMenu =()=>{
           <Link href={`/guide`} className="p-[--xs] pointer-events-auto w-[100px] bgBlur rounded-sm  closeBut" onClick={nonMenu} style={{ backgroundColor: `rgba(250,250,250,.1)` }}><div className="fk uppercase font-bold"><p>Guide</p></div></Link>
         </div>
         {mobile !== null ? (
-          <ReactFlow nodeTypes={nodeTypes} nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
+          <ReactFlow nodeTypes={nodeTypes} nodes={nodes} edges={edges} zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
             <MiniMap maskColor={"rgba(20, 20, 20, 0.1)"} nodeColor={'rgba(250, 250, 250,1.0)'} nodeStrokeColor={"rgba(0, 0, 0, 1.0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} pannable />
           </ReactFlow>
         ) : ('')}

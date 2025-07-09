@@ -23,7 +23,7 @@ export default function Logo(props:any) {
 
 
   return (
-    <group ref={groupRef} {...props} dispose={null} position={[mobile?-0.7:-1.5,mobile?.6:.3,2.0]}>
+    <group ref={groupRef} {...props} dispose={null} position={[mobile?-0.7:-1.5,mobile?.8:.3,2.0]}>
       <mesh geometry={nodes.Remesh.geometry || []} scale={mobile?.009:.018} material-emissive="red" material-roughness={0}>
       <MeshTransmissionMaterial
           backside

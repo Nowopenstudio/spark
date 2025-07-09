@@ -10,9 +10,9 @@ import Gallery from "./gallery";
 export default async function Donations({data}:any) {
   return (
     
-          <div className="col-span-full grid grid-cols-12 richText px-[--sm]">
+          <div className="col-span-full grid grid-cols-12 richText px-0 md:px-[--sm]">
 
-              <Reveal styleSet="col-span-12 lg:col-span-6 lg:col-start-4 ">
+              <Reveal styleSet="col-span-12 lg:col-span-6 lg:col-start-4 px-[--xs] md:px-0">
                   <div className="w-full mb-[--lrg]">
                    <h1 className="w-full mb-[--sm]">{data.subhead}</h1>
                      <PortableText value={data.copy}/>
@@ -26,7 +26,7 @@ export default async function Donations({data}:any) {
                     return(
                       <div key={`content-i-${single.content}`} className="col-span-full grid grid-cols-12">
                           {single.content == "text"?(
-                            <div className="col-span-12 lg:col-span-6 lg:col-start-4 mb-[--sm]"><PortableText value={single.text}/></div>
+                            <div className="col-span-12 lg:col-span-6 lg:col-start-4 mb-[--sm] px-[--xs] md:px-0"><PortableText value={single.text}/></div>
                           ):""}
 
                            {single.content == "image"?(

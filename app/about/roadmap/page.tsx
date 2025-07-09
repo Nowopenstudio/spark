@@ -12,7 +12,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
   console.log(data.roadmapItem)
   return (
     <div className="w-full py-[--sm] grid items-center grid-cols-1 min-h-[100lvh] relative articleStage" style={{ backgroundColor: `rgba(20,20,20,.78)` }}>
-      <div className="grid grid-cols-3 col-span-full px-[--xs]">
+      <div className="grid grid-cols-3 col-span-full px-0 md:px-[--sm]">
         {data.roadmapItem.map((item: any, i: number) => {
           return (
             <Reveal styleSet="col-span-3 lg:col-span-1 gridBox relative flex-shrink-0" count={i} key={`roadmap-${i}`}>

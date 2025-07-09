@@ -16,7 +16,7 @@ export default function ListFaqs({ data,count,ordered }: any) {
 
     
       <Reveal styleSet="faqsItem w-full cursor-pointer" >
-        <div onClick={()=>setActive(!active)} className={` w-full p-[--2xs]  lg:p-[--sm] gridBox relative ${active?'itemActive':''}`}>
+        <div onClick={()=>setActive(!active)} className={` w-full p-[--xs]  lg:p-[--sm] gridBox relative ${active?'itemActive':''}`}>
           <div>
             <div className="relative bgBlur flex flex-wrap justify-between items-start p-[--xs] lg:p-[--sm] overflow-hidden" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
               <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap-[--xs]`}>

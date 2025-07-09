@@ -11,7 +11,7 @@ export default async function Home({params}:{params:{catSlug:string}}) {
     const { data } = await getData(`*[_type=='news']{title,'slug':slug.current,author->{firstName},category->{slug,title},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
     console.log(data)
   return (
-    <main className="w-[100vw] grid grid-cols-12 pt-[100px] relative gap-[--xs] px-[--sm] py-[200px] articleStage min-h-[100dvh]" style={{backgroundColor:`rgba(20,20,20,.1)` }}>
+    <main className="w-[100vw] grid grid-cols-12 pt-[100px] relative gap-[--xs] px-0 md:px-[--sm] py-[200px] articleStage min-h-[100dvh]" style={{backgroundColor:`rgba(20,20,20,.1)` }}>
       {data.map((item:any,i:number)=>{
           return( 
             <Link href={`/news/${item.slug}`} key={`article-${i}`} className="singleArticle col-span-full md:col-span-6 xl:col-span-4 gridBox relative" >

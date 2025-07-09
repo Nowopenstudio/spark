@@ -13,7 +13,7 @@ export default async function Home({params}:{params:{slug:string}}) {
   return (
     <main className="w-full  grid grid-cols-12 py-[--lrg] relative articleStage min-h-[100lvh]" style={{backgroundColor:`rgba(20,20,20,.7)`}}>
           
-                        <div className="intro col-start-1 col-span-12 lg:col-span-6 lg:col-start-4 text-2xl px-[--sm]" >
+                        <div className="intro col-start-1 col-span-12 lg:col-span-6 lg:col-start-4 text-2xl px-[--xs] md:px-[--sm]" >
                             <div className="secHead"><h1 className="mb-[--sm]">{data.header}</h1></div>
                           <div><PortableText value={data.text}/></div>
                           
