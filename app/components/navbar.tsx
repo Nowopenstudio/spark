@@ -403,6 +403,7 @@ const nonMenu =()=>{
 
    useEffect(()=>{
     
+    
     if(page.includes('resources')){
       changeSec(1)
       timer = window.setInterval(()=>moveView(-140,60), 500)
@@ -446,7 +447,7 @@ const nonMenu =()=>{
 
     }
     else if(page=="/"){
-      timer = window.setInterval(()=>moveView(60,mobile?-20:-40), 500)
+      setCenter(60,mobile?-20:-40)
     }
  
   
@@ -454,19 +455,22 @@ const nonMenu =()=>{
 
     return(
 
-      <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"pointer-evens-fill":'pointer-events-none'}`}>
-        <div className="fixed bottom-0 left-0 z-[1000] flex"><Link href={`/news`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="fk uppercase"><p>News</p></div></Link>
-      {out?(
-           <div className="fixed top-[--xs] right-[--xs] z-[1000] w-[50px] h-[50px] bg-white rounded-sm closeBut"><Link href={`/`} className="p-[--sm] pointer-events-auto" onClick={()=>changeSec(0)}><div className="fk uppercase"><h1 className="absolute xy-center text-black">×</h1></div></Link></div>
-      ):('')}
-<Link href={`/guide`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="fk uppercase"><p>Guide</p></div></Link></div>
-        {mobile!==null?(
-            <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
+      <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active ? "pointer-evens-fill" : 'pointer-events-none'}`}>
+        {out ? (
+          <div className="fixed top-[--xs] right-[--xs] z-[1000] w-[50px] h-[50px] bgBlur rounded-sm closeBut " style={{ backgroundColor: `rgba(250,250,250,.1)` }}><Link href={`/`} className="p-[--sm] pointer-events-auto" onClick={() => changeSec(0)}><div className="fk uppercase"><h1 className="absolute xy-center text-white">×</h1></div></Link></div>
+        ) : ('')}
+        <div className="fixed bottom-0 left-0 z-[1000] grid grid-cols-2 p-[--xs] gap-[--xs]">
+          <Link href={`/news`} className="p-[--xs] pointer-events-auto bgBlur rounded-sm w-[100px] closeBut" onClick={nonMenu} style={{ backgroundColor: `rgba(250,250,250,.1)` }}><div className="fk uppercase font-bold"><p>News</p></div></Link>
+
+          <Link href={`/guide`} className="p-[--xs] pointer-events-auto w-[100px] bgBlur rounded-sm  closeBut" onClick={nonMenu} style={{ backgroundColor: `rgba(250,250,250,.1)` }}><div className="fk uppercase font-bold"><p>Guide</p></div></Link>
+        </div>
+        {mobile !== null ? (
+          <ReactFlow nodeTypes={nodeTypes} nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
             <MiniMap maskColor={"rgba(20, 20, 20, 0.1)"} nodeColor={'rgba(250, 250, 250,1.0)'} nodeStrokeColor={"rgba(0, 0, 0, 1.0)"} nodeStrokeWidth={3} nodeClassName={"miniMap"} pannable />
           </ReactFlow>
-        ):('')}
-      
-        </div>
+        ) : ('')}
+
+      </div>
 
 
       
