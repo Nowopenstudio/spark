@@ -16,9 +16,9 @@ export default async function Home({ params }: { params: { slug: string } }) {
   console.log(data.cover)
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh]">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] p-[--xs] md:p-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
+      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] p-0 md:p-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
 
-        <div className={`${data.cover ? 'pt-[--sm] lg:pt-[--med]' : 'pt-[--xl]'} items-start col-span-full lg:col-span-6 lg:col-start-4 py-[--xs] uppercase flex-wrap lg:flex-nowrap flex  px-[--xs] lg:px-0 gap-[--xs]`}>
+        <div className={`${data.cover ? 'pt-[--sm] lg:pt-[--med]' : 'pt-[--xl]'} items-start col-span-full lg:col-span-6 lg:col-start-4 py-[--xs] uppercase flex-wrap lg:flex-nowrap flex  px-[--xs] md:px-0 gap-[--xs]`}>
           <div className="lg:pt-[5px]"><div className="aspect-square w-[50px] rounded-sm " style={{ backgroundColor: `#ffffff` }}></div></div>
           <div >
             <h1 className="mb-[--xs]">{data.title}</h1>
@@ -30,7 +30,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
 
         <div className="col-span-full grid grid-cols-12 py-[--xs] lg:py-[--sm] contentBlock">
           {data.subTitle ? (
-            <h2 className="w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] lg:px-0 pb-[--sm]" >{data.subTitle}</h2>
+            <h2 className="w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] lg:px-0 pb-[--sm] " >{data.subTitle}</h2>
           ) : ('')}
           <p className="caption w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] lg:px-0 pb-[--sm]">BY {data.author.firstName} - {getDate(data._createdAt)}</p>
           {data.summary ? (
@@ -48,7 +48,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                   ) : ('')}
 
                   {item.content == 'text' ? (
-                    <div className="w-full col-span-full lg:col-span-6 lg:col-start-4">
+                    <div className="w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] md:px-0">
                       <div className="richText col-span-full lg:col-span-5 xl:col-span-4">
                         <PortableText value={item.text} />
                       </div>
@@ -71,7 +71,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                     ) : ('')
                   }
                   {item.content == 'list' ? (
-                    <div className="w-full col-span-full lg:col-span-8 lg:col-start-3 px-0 lg:px-[--sm]">
+                    <div className="w-full col-span-full lg:col-span-8 lg:col-start-3 px-0 md:px-[--sm]">
                       {item.list.text ? (
                         <PortableText value={item.list.text} />
                       ) : ('')}
@@ -86,7 +86,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                         ) : (
                           item.list.items.map((single: any, s: number) => {
                             return (
-                              <div className="w-full p-[--xs] lg:p-[--sm] gridBox relative" key={`list-${i}-${s}`}  >
+                              <div className="w-full p-[--xs] md:p-[--sm] gridBox relative" key={`list-${i}-${s}`}  >
                                 <div>
                                   <div className="relative bgBlur flex flex-wrap items-start p-[--xs] lg:p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
                                     <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap-[--xs]`}>
