@@ -182,20 +182,18 @@ const Dots =({imageData}: any)=>{
   useFrame((state, delta) => {
     const { clock,mouse} = state;
     
-    // for (let i = 0; i < currCount; i++) {
-    //   const i3 = i * 3;
+  
        meshRef.current.material.uniforms.uTime.value = clock.elapsedTime;
     if(clock.elapsedTime < 3 )
       {meshRef.current.material.uniforms.uProgress.value = clock.elapsedTime - 3}
     meshRef.current.material.uniforms.uMouse.value = new Vector2(
-      mousePosition.current.x,
-      mousePosition.current.y
     );
-
-    //   meshRef.current!.geometry.attributes.position.array[i3] += Math.sin(clock.elapsedTime + Math.random() * 10) * 0.001;
-    //   meshRef.current!.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.001;
-    //   meshRef.current!.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.001;
-    // }
+  // for (let i = 0; i < currCount; i++) {
+  //     const i3 = i * 3;
+  //     meshRef.current!.geometry.attributes.position.array[i3] += Math.sin(clock.elapsedTime + Math.random() * 10) * 0.0001;
+  //     // meshRef.current!.geometry.attributes.position.array[i3 + 1] += Math.cos(clock.elapsedTime + Math.random() * 10) * 0.0001;
+  //     // meshRef.current!.geometry.attributes.position.array[i3 + 2] += Math.sin(clock.elapsedTime + Math.random() * 20) * 0.0001;
+  //   }
     
     meshRef.current!.geometry.attributes.position.needsUpdate = true;
     meshRef.current!.geometry.attributes.color.needsUpdate = true;
