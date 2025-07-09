@@ -56,22 +56,23 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
 
     
   
-   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-   const [sec, setSec] = useState(0)
-   const [active, setActive] = useState(true)
-   const [triNodes, setTriNodes] = useState([])
-   const [triEdges, setTriEdges] = useState([])
-   const [titleNodes, setTitleNodes] = useState([])
-   const [titleEdges, setTitleEdges] = useState([])
-   const [resources, setResources] = useState([])
-   const [secEdges, setSecEdges] = useState([])
-   const [nodeX, setW] = useState(120) ;
-   const [nodeGap,setGap] = useState(40);
-   const {setCenter} = useReactFlow();
-   let timer:any = null
-   const root = 5;
-   const zoom = 2;
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [sec, setSec] = useState(0)
+  const [out, setOut] = useState(false)
+  const [active, setActive] = useState(true)
+  const [triNodes, setTriNodes] = useState([])
+  const [triEdges, setTriEdges] = useState([])
+  const [titleNodes, setTitleNodes] = useState([])
+  const [titleEdges, setTitleEdges] = useState([])
+  const [resources, setResources] = useState([])
+  const [secEdges, setSecEdges] = useState([])
+  const [nodeX, setW] = useState(120) ;
+  const [nodeGap,setGap] = useState(40);
+  const {setCenter} = useReactFlow();
+  let timer:any = null
+  const root = 5;
+  const zoom = 2;
 
 
 
@@ -86,6 +87,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
     // Main Menu Section
   const changeSec=(sec:number)=>{
     setActive(true)
+    setOut(false)
     setSec(sec)
     if(sec==0){
       setEdges([])
@@ -396,6 +398,7 @@ const nonMenu =()=>{
   changeSec(0)
   moveView((-winX/4)+30,60)
    setActive(false)
+   setOut(true)
 }
 
    useEffect(()=>{
@@ -433,6 +436,7 @@ const nonMenu =()=>{
       changeSec(0)
        moveView((-winX/4)+30,60)
       setActive(false)
+      setOut(true)
        timer = window.setInterval(()=>moveView((-winX/4)+30,60), 500)
     }
     else if(page.includes('donate')){
@@ -452,6 +456,9 @@ const nonMenu =()=>{
 
       <div className={`fixed z-[50] w-[100vw] h-[100dvh] ${active?"pointer-evens-fill":'pointer-events-none'}`}>
         <div className="fixed bottom-0 left-0 z-[1000] flex"><Link href={`/news`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="fk uppercase"><p>News</p></div></Link>
+      {out?(
+           <div className="fixed top-[--xs] right-[--xs] z-[1000] w-[50px] h-[50px] bg-white rounded-sm closeBut"><Link href={`/`} className="p-[--sm] pointer-events-auto" onClick={()=>changeSec(0)}><div className="fk uppercase"><h1 className="absolute xy-center text-black">×</h1></div></Link></div>
+      ):('')}
 <Link href={`/guide`} className="p-[--sm] pointer-events-auto" onClick={nonMenu}><div className="fk uppercase"><p>Guide</p></div></Link></div>
         {mobile!==null?(
             <ReactFlow nodeTypes={nodeTypes}  nodes={nodes} edges={edges} fitView zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
