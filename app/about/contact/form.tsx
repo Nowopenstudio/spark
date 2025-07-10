@@ -37,7 +37,7 @@ export default function Form({form, settings}:any) {
   <div className="grid grid-cols-12 w-full items-center h-full col-span-full px-[--xs] md:px-[--sm]">
     {success?(
       <Reveal styleSet="text-center col-start-1 col-span-12 px-[20px] sm:col-start-2 sm:col-span-10 md:col-start-3 md:col-span-8 xl:col-start-4 xl:col-span-6 ">
-        <PortableText value={form.contactSuccess}/>
+        <h2>Thank you.</h2>
       </Reveal>
     ):(
       <div className="col-start-1 col-span-12 sm:col-start-2 sm:col-span-10 md:col-start-3 md:col-span-8 xl:col-start-4 xl:col-span-6 grid-cols-2 grid">
