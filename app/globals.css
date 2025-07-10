@@ -486,19 +486,13 @@ input::placeholder{
     }
 }
 
-@media (max-width:1400px){
+@media (max-width:800px){
   h1.title{
-    font-size: 8rem;
+    font-size: 10rem;
   }
 
 }
 
-@media (max-width:1000px){
-  h1.title{
-    font-size: 5rem;
-  }
-
-}
 
 @media (max-width:500px){
 

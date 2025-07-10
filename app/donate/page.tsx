@@ -7,6 +7,7 @@ import { SwitchContent } from "../components/util/contentSwitch";
 import Donations from "./donations";
 import Donate from "../components/donateModule";
 import { openConnect } from "../components/util/sanity";
+import Scroller from "../components/scroller";
 
 
 
@@ -20,8 +21,8 @@ export default async function Home({params}:{params:{slug:string}}) {
            {data.cover?(
                                   <div className="w-full  lg:min-h-[100vh] relative">
                                   {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
-                                  <div className={`absolute xy-center z-[20] w-full p-[--sm] text-center`}>
-                                    <h1 className="text-center title uppercase">{data.title}</h1>
+                                  <div className={`absolute xy-center z-[20] w-full text-center`}>
+                                   <Scroller text={data.title} time={20} />
                                   </div>
                                 
                                  </div>
