@@ -470,9 +470,9 @@ const nonMenu =()=>{
           <div className="fixed top-[--xs] right-[--xs] z-[1000] w-[50px] h-[50px] bgBlur rounded-sm closeBut " style={{ backgroundColor: `rgba(250,250,250,.1)` }}><Link href={`/`} className="p-[--sm] pointer-events-auto" onClick={() => changeSec(0)}><div className="fk uppercase"><h1 className="absolute xy-center text-white">×</h1></div></Link></div>
         ) : ('')}
         <div className="fixed bottom-0 left-0 z-[1000] grid grid-cols-2 p-[--xs] gap-[--xs] w-[100vw] sm:w-auto">
-          <Link href={`/news`} className="p-[--xs] md:p-[--xs] pointer-events-auto bgBlur rounded-sm col-span-1 sm:w-[100px] closeBut text-center" onClick={nonMenu} style={{ backgroundColor: `rgba(250,250,250,.1)` }}><div className="fk uppercase font-bold"><p>News</p></div></Link>
+          <Link href={`/news`} className="p-[--xs] md:p-[--xs] pointer-events-auto bgBlur rounded-sm col-span-1 sm:w-[100px] closeBut text-center" onClick={nonMenu} style={{ backgroundColor: `rgba(250,250,250,.05)` }}><div className="fk uppercase font-bold"><p>News</p></div></Link>
 
-          <Link href={`/guide`} className="p-[--xs] md:p-[--xs] pointer-events-auto col-span-1 sm:w-[100px] bgBlur rounded-sm  closeBut text-center" onClick={nonMenu} style={{ backgroundColor: `rgba(250,250,250,.1)` }}><div className="fk uppercase font-bold "><p>Guide</p></div></Link>
+          <Link href={`/guide`} className="p-[--xs] md:p-[--xs] pointer-events-auto col-span-1 sm:w-[100px] bgBlur rounded-sm  closeBut text-center" onClick={nonMenu} style={{ backgroundColor: `rgba(250,250,250,.05)` }}><div className="fk uppercase font-bold "><p>Guide</p></div></Link>
         </div>
         {mobile !== null ? (
           <ReactFlow nodeTypes={nodeTypes} nodes={nodes} edges={edges} zoomOnScroll={false} minZoom={zoom} maxZoom={zoom}>
