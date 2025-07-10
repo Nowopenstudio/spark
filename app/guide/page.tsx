@@ -16,7 +16,7 @@ export default async function Home() {
   console.log(data)
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh]">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white]  py-4" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
+      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] py-4" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
 
         {data.cover ? (
           <div className="w-full  col-span-full  lg:min-h-[50vh] ">

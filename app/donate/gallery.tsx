@@ -24,7 +24,7 @@ export default function Gallery({data}:any){
 
     return(
         <div  ref={ref} className={`w-[100vw] h-full`}>
-            <div  className="sticky top-[--lrg] w-[100vw] overflow-x-hidden" >
+            <div  className="sticky top-[--lrg] w-full overflow-x-hidden" >
                 
                      <motion.div className="w-full flex  " style={{x}}>
                          {data.map((image:any,m:number)=>{

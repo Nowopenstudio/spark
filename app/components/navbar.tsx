@@ -171,7 +171,7 @@ setActive(active)
         const singleNode = {
           id: `${i+root}`,
           type: 'navBut',
-          data: { label: <Link href={`/${slug}/${item.slug}`} style={{color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-480,(winY/2)/zoom)}><div className="navBut w-full h-full" style={{backgroundColor:`rgb(20,20,20,.8)`}} ><div style={{animationDelay:`${100*i}ms`}}><p>{item.title}</p></div> </div></Link> },
+          data: { label: <Link href={`/${slug}/${item.slug}`} style={{backgroundColor:item.color, color:item.color}} key={`cat-newNodes-${i}`} onClick={()=>changeTri(items,item,i,opt,`${slug}/${item.slug}`,-480,(winY/2)/zoom)}><div className="navBut w-full h-full" style={{backgroundColor:item.color}} ><div style={{animationDelay:`${100*i}ms`}}><p className="text-white">{item.title}</p></div> </div></Link> },
           position: { x: ((nodeX + (nodeGap*2))*opt), y: (items.length*nodeGap)/2-(nodeGap*(i+.5)) },
         }
         getNodes.push(singleNode)
