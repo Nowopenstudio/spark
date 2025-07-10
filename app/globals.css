@@ -169,6 +169,7 @@ body {
 }
 
 .contentBlock, .articleStage{
+  width: 100vw;
   overflow-x: hidden;
 }
 
