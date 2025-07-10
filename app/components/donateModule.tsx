@@ -31,11 +31,11 @@ export default async function Donate({data}:any) {
 export async function Single({item,count}:any){
       const open = await openConnect(item.openSlug)
       
-   console.log(open.project.stats.balance.value)
+
   return (
     <div className={` col-span-full lg:col-span-4 gridBox donate relative navTitle`}>
 
-      {open?(
+      {open && open.project?(
          <div className="w-full p-[--sm]" >
                     <div className="relative bgBlur" style={{backgroundColor:`rgba(255, 255, 255, 0.1)`}}>
                       <div className="y-center absolute z-[10] left-[--xs] caption">${open.project.stats.balance.value/100}</div>
