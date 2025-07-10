@@ -10,7 +10,7 @@ export default async function Donate({data}:any) {
 
   return (
     
-          <div className="w-[100vw] richText text-[--white] py-[--sm] gap-[--sm] z-[100] sticky top-[0] lg:top-[280px] ">
+          <div className="hidden md:block w-[100vw] richText text-[--white] py-[--sm] gap-[--sm] z-[100] sticky top-[0] lg:top-[280px] ">
            <div className="grid grid-cols-12 w-full lg:absolute lg:bottom-[0] justify-end pb-[--lrg] left-0">
               {data.donations.map((item:any,i:number)=>{
                 return(
@@ -43,7 +43,7 @@ export async function Single({item,count}:any){
                       <div className="w-full h-[40px] mb-[--xs] growOn" style={{animationDelay:`${count*.75}s`,backgroundColor:`${item.color}`,width:`${(open.project.stats.balance.value/open.project.settings.goals[0].amount)*100}%`}}></div></div>
                     <p className="uppercase ">{open.project.name}</p>
                     <div className={` richText hidden lg:block`}><PortableText value={item.description} /></div>
-                    <a href={`https://opencollective.com/sighte-92i/projects/${item.openSlug}`} target={'__blank'} className="w-full h-[40px] bg-[--white] articleStage text-[--dark] flex items-center mt-[--xs]"><div className="w-full text-center">DONTATE</div></a>
+                    <a href={`https://opencollective.com/sighte-92i/projects/${item.openSlug}`} target={'__blank'} className="w-full h-[40px] bg-[--white] text-[--dark] flex items-center mt-[--xs] donateBut"><div className="w-full text-center">DONTATE</div></a>
   
                   </div>
       ):('')}

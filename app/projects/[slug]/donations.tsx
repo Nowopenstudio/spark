@@ -3,6 +3,7 @@ import { PortableText } from "next-sanity";
 import Image from 'next/image';
 import { Reveal } from "../../components/util/reveal";
 import Gallery from "./gallery";
+import { Single } from "@/app/components/donateModule";
 
 
 
@@ -20,8 +21,11 @@ export default async function Donations({data}:any) {
                 </Reveal>
               {data.donations.map((item:any,i:number)=>{
               return(
+                
                 <Reveal styleSet="col-span-12 mb-[--lrg] grid grid-cols-12 " count={i} key={`donate-${i}`}>
-                  <h1 className="mb-[--sm] col-span-12 lg:col-span-6 lg:col-start-4">{item.title}</h1>
+                  
+                  <h1 className="mb-[--sm] col-span-12 lg:col-span-6 lg:col-start-4 px-[--xs] md:px-0">{item.title}</h1>
+                  
                   {item.content.map((single:any,i:number)=>{
                     return(
                       <div key={`content-i-${single.content}`} className="col-span-full grid grid-cols-12">
@@ -42,6 +46,9 @@ export default async function Donations({data}:any) {
                       </div>
                     )
                   })}
+                   <div className="col-span-full"> <Single key={`donate-${i}`} item={item} count={i}/></div>
+
+                  
 
                 
                 </Reveal>
