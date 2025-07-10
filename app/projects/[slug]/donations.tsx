@@ -25,6 +25,7 @@ export default async function Donations({data}:any) {
                 <Reveal styleSet="col-span-12 mb-[--lrg] grid grid-cols-12 " count={i} key={`donate-${i}`}>
                   
                   <h1 className="mb-[--sm] col-span-12 lg:col-span-6 lg:col-start-4 px-[--xs] md:px-0">{item.title}</h1>
+                  <div className=" col-span-12 lg:col-span-8 lg:col-start-3 mb-[--sm]"> <Single key={`donate-${i}`} item={item} count={i}/></div>
                   
                   {item.content.map((single:any,i:number)=>{
                     return(
@@ -46,7 +47,7 @@ export default async function Donations({data}:any) {
                       </div>
                     )
                   })}
-                   <div className="col-span-full"> <Single key={`donate-${i}`} item={item} count={i}/></div>
+                   
 
                   
 
