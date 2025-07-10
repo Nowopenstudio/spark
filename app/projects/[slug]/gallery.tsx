@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 export default function Gallery({data}:any){
     const ref = useRef(null)
-    const {winY} = useResize()
+    const {winY,mobile} = useResize()
     const {scrollYProgress} = useScroll(
         {target:ref}
         
@@ -19,7 +19,7 @@ export default function Gallery({data}:any){
 
 
 
-    const x = useTransform(scrollYProgress, [0, 1],['0%',`-${data.length*75-100}%`])
+    const x = useTransform(scrollYProgress, [0, 1],['0%',`-${data.length*(mobile?102:77)-100}%`])
   
 
     return(
