@@ -171,8 +171,9 @@ body {
 
 li{
   font-family: 'mono', 'Courier New', Courier, monospace;
-  font-size: 15pt;}
-
+  font-size: 15pt;
+overflow-wrap:break-word;}
+  
 ul{
   list-style-type: circle;
   padding-left: var(--xs);
@@ -558,7 +559,7 @@ z-index: 100;
   font-size:10pt;
 }
 
- .richText p, .contentBlock p {
+ .richText p, .contentBlock p, .contentBlock li {
 font-size: 14pt;
 }
 h1{font-size:2.5rem;

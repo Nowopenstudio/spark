@@ -31,7 +31,7 @@ export default async function Donations({data}:any) {
                     return(
                       <div key={`content-i-${single.content}`} className="col-span-full grid grid-cols-12">
                           {single.content == "text"?(
-                            <div className="col-span-12 lg:col-span-6 lg:col-start-4 mb-[--sm] px-[--xs] md:px-0"><PortableText value={single.text}/></div>
+                            <div className="col-span-12 lg:col-span-6 lg:col-start-4 mb-[--sm] px-[--xs] md:px-0 wrap-break-word"><PortableText value={single.text}/></div>
                           ):""}
 
                            {single.content == "image"?(
