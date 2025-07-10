@@ -23,7 +23,7 @@ export default function Gallery({data}:any){
   
 
     return(
-      <div className="col-span-full" style={{height:`${mobile?'auto':data.length*100}vw`}}>
+      <div className="col-span-full" style={{height:mobile?"auto":`${data.length*100}vw`}}>
          <div  ref={ref} className={`w-[100vw] h-full`}>
                      <div  className="md:sticky top-[--lrg] w-[100vw] overflow-x-hidden" >
                          
