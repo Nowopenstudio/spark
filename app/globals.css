@@ -168,10 +168,6 @@ body {
   color: var(--white);
 }
 
-.contentBlock, .articleStage{
-  width: 100vw;
-  overflow-x: hidden;
-}
 
 li{
   font-family: 'mono', 'Courier New', Courier, monospace;

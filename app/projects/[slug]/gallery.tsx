@@ -23,19 +23,21 @@ export default function Gallery({data}:any){
   
 
     return(
-        <div  ref={ref} className={`w-[100vw] h-full`}>
-            <motion.div  className="flex  sticky top-[--lrg]" style={{x}} >
-                
-                     {data.map((image:any,m:number)=>{
-                              return( <div key={`gallery-${m}`} className="w-3/4  mb-[--sm] p-[--sm] relative gridBox flex-shrink-0">
-                              <div className="w-full h-auto">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className="w-full h-auto"/>):''}</div>
-                            </div>
-
-                              )
-                            })}
-               
-            </motion.div>
-        </div>
+       <div  ref={ref} className={`w-[100vw] h-full`}>
+                   <div  className="sticky top-[--lrg] w-[100vw] overflow-x-hidden" >
+                       
+                            <motion.div className="w-full flex  " style={{x}}>
+                                {data.map((image:any,m:number)=>{
+                                         return( <div key={`gallery-${m}`} className="w-full md:w-3/4  mb-[--sm] p-[--sm] relative gridBox flex-shrink-0">
+                                         <div className="w-full h-auto">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className="w-full h-auto"/>):''}</div>
+                                       </div>
+           
+                                         )
+                                       })}
+                            </motion.div>
+                      
+                   </div>
+               </div>
       
         
     
