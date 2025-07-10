@@ -506,7 +506,7 @@ input::placeholder{
 
 @media (max-width:500px){
 
-  .contentBlock, .articleStage{
+  .articleStage{
   padding-bottom:150px;
 }
 
