@@ -18,13 +18,9 @@ export default async function Home({params}:{params:{slug:string}}) {
                       <div className="w-full pb-[--med] lg:min-h-[100dvh] articleStage relative" style={{backgroundColor: `rgba(0,0,0,.7)`}}>
                            
                                 {data.cover?(
-                                                       <div className="w-full  lg:min-h-[100vh] relative">
-                                                       {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
-                                                       <div className={`absolute xy-center z-[20] w-full p-[--sm] text-center`}>
-                                                         <h1 className="title uppercase">s i t e 9 2 I</h1>
-                                                       </div>
-                                                     
-                                                      </div>
+                                                       <div className="w-full col-span-full md:col-span-10 md:col-start-2 p-[--xs] gridBox relative">
+         <div className="w-full"><div className="p-[--2xs] relative w-full aspect-video overflow-hidden rounded-sm"> {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} />) : ''}</div></div></div>
+
                                                   ):("")}
 
                      

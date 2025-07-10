@@ -57,7 +57,7 @@ export default {
                                     
                                 }},
                                   {
-                                        name:'ordered',type:'boolean',title:"Ordered List", fieldset:'content',hidden: ({ parent }: any) => parent?.content !== "list"
+                                        name:'ordered',type:'boolean',title:"Ordered List",hidden: ({ parent }: any) => parent?.content !== "list"
                                     },
                                 {
                                     name: 'list', title: "List", type: 'object', hidden: ({ parent }: any) => parent?.content !== "list", fields: [

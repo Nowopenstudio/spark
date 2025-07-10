@@ -14,9 +14,9 @@ export default async function Home({ params }: { params: { slug: string } }) {
   console.log(data[0])
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh]">
-      <div className="pb-[60px] grid grid-cols-12 articleStage text-white relative" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
-        <div className="w-full col-span-full h-[50vh] lg:h-[66vh] relative overflow-hidden  bgMux">
-          {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} cover />) : ''}
+      <div className="pb-[60px] grid grid-cols-12 articleStage text-white relative pt-[--lrg]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
+        <div className="w-full col-span-full md:col-span-10 md:col-start-2 p-[--xs] gridBox relative">
+         <div className="w-full"><div className="p-[--2xs] relative w-full aspect-video overflow-hidden rounded-sm"> {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} />) : ''}</div></div>
 
         </div>
         <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4 px-0 lg:px-4 py-4 contentBlock">
