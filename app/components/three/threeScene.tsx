@@ -7,7 +7,7 @@ import {useRef, useEffect,useState, useMemo, useCallback } from "react";
 import * as THREE from "three";
 import { TextureLoader, SRGBColorSpace, Vector2 } from "three";
 import { spherePointToUV, sampleImage } from "../../lib/utils-canvas";
-import { EffectComposer, Bloom, Noise, ToneMapping} from '@react-three/postprocessing'
+import { EffectComposer, Bloom, Noise, ToneMapping,Scanline, TiltShift2} from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
 import vertexShader from "!!raw-loader!./vertexShader.glsl";
 import fragmentShader from "!!raw-loader!./fragmentShader.glsl";
@@ -15,15 +15,22 @@ import useResize from "../util/useResize";
 
 
 export default function Logo(props:any) {
-  const groupRef = useRef<any>(null!)
+  const group = useRef<any>(null!)
   const {mobile} = useResize();
   const { nodes, materials } = useGLTF('/models/logo.gltf')
   const standard = new THREE.MeshStandardMaterial
 
+    useFrame((state) => {
+       const { clock, mouse} = state;
+    const t = clock.elapsedTime
+    // group.current.rotation.set(0.1 + Math.cos(t / 4.5) / 10, Math.sin(t / 4) / 8, Math.sin(t / 20)*.1)
+   group.current.position.y =(mobile?.8:.3)+ (1 + Math.sin(t / 2)) / 10
+
+  })
 
 
   return (
-    <group ref={groupRef} {...props} dispose={null} position={[mobile?-0.7:-1.5,mobile?.8:.3,2.0]}>
+    <group ref={group} {...props} dispose={null} position={[mobile?-0.7:-1.5,mobile?.8:.3,2.0]}>
       <mesh geometry={nodes.Remesh.geometry || []} scale={mobile?.009:.018} material-emissive="red" material-roughness={0}>
       <MeshTransmissionMaterial
           backside
@@ -180,7 +187,7 @@ const Dots =({imageData}: any)=>{
 
 
   useFrame((state, delta) => {
-    const { clock,mouse} = state;
+    const { clock, mouse} = state;
     
   
        meshRef.current.material.uniforms.uTime.value = clock.elapsedTime;
@@ -261,11 +268,11 @@ export function Test() {
               <EffectComposer >
               
                 <Bloom luminanceThreshold={.6} intensity={.5} />
-                {/* <Scanline opacity={.5}/>
-                 */}
-                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-                {/* <Noise opacity={.2} /> */}
+                {/* <Scanline opacity={.1}/> */}
                 
+                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+                {/* <Noise opacity={.1} /> */}
+              
 
               </EffectComposer>
       

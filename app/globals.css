@@ -112,14 +112,50 @@ html.lenis, html.lenis body {
   }
 
   
+mux-player{
+  clip-path: inset(2px 2px);
+}
+  
 .bgMux mux-player{
   --controls: none;
   --media-object-fit: cover;
   position: absolute;
-  width: 100vw;
-  height: 100dvh;
-  clip-path: inset(0 0);
+  width: calc(100% + 1px);
+  height:calc(100% + 1px);
 }
+
+.containH mux-player{
+  
+  width:auto;
+  height:100%;
+}
+.containW mux-player{
+  
+  width:100%;
+  height:auto;
+}
+
+mux-player {
+  
+
+  /* Target all sections by excluding the section prefix */
+  
+  --live-button: none;
+  --seek-backward-button: none;
+  --seek-forward-button: none;
+  --mute-button: none;
+  
+  --pip-button: none;
+  --playback-rate-button: none;
+  --rendition-menu-button: none;
+    clip-path: inset(0 0);
+
+}
+.workStage mux-player{
+   clip-path: inset(1px 1px);
+   -webkit-clip-path: inset(1px 1px);
+}
+
 
 .contentBlock iframe{
   width:100% !important;
@@ -468,7 +504,8 @@ input::placeholder{
  .richText p, .contentBlock p {
 font-size: 14pt;
 }
-
+h1{font-size:2.5rem;
+}
 h2{
   font-size: 1.5rem; 
 }

@@ -10,12 +10,12 @@ import ListFaqs from "@/app/components/util/listFaq";
 
 
 export default async function Home({ params }: { params: { slug: string } }) {
-  const { data } = await getData(`*[_type=='about'][0]{title,slug,'imageUrl': cover.asset->url, intro, content[]{content,desc,ordered,list,right,columns,caption,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
+  const { data } = await getData(`*[_type=='about'][0]{title,slug,cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}, intro, content[]{content,desc,ordered,list,right,columns,caption,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
   console.log(data[0])
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh]">
       <div className="pb-[60px] grid grid-cols-12 articleStage text-white relative" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
-        <div className="w-full col-span-full lg:min-h-[50vh] pb-[60px] ">
+        <div className="w-full col-span-full h-[50vh] lg:h-[66vh] relative overflow-hidden  bgMux">
           {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} cover />) : ''}
 
         </div>

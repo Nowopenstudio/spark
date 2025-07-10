@@ -439,7 +439,7 @@ const nonMenu =()=>{
        moveView((-winX/4)+30,60)
       setActive(false)
       setOut(true)
-       timer = window.setInterval(()=>moveView((-winX/4)+30,60), 500)
+       timer = window.setInterval(()=>moveView((-winX/4),60), 500)
     }
     else if(page.includes('donate')){
       
