@@ -506,6 +506,10 @@ input::placeholder{
 
 @media (max-width:500px){
 
+  .contentBlock, .articleStage{
+  padding-bottom:150px;
+}
+
  .richText p, .contentBlock p {
 font-size: 14pt;
 }
