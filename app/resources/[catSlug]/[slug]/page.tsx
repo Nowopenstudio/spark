@@ -79,7 +79,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                         item.list.items.map((single: any, s: number) => {
                           return (
                             <div className="w-full p-[--xs] lg:p-[--sm] gridBox relative" key={`list-${i}-${s}`} >
-                              <div>
+                              <div className="w-full">
                                 <div className="relative bgBlur flex flex-wrap items-start p-[--xs] lg:p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
                                   <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap- [--xs]`}>
                                     <div ><div className="aspect-square w-[50px] rounded-sm flex-shrink-0 relative" style={{ backgroundColor: `rgb(${data.color.r},${data.color.g},${data.color.b})` }}>

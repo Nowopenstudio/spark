@@ -372,6 +372,7 @@ input::placeholder{
   .navBut::before, .gridBox::before, .subBut::before{
     content: "+";
     position: absolute;
+    width:0;
     top:0;
     left:0;
     transform: translate(-50%,-50%);
@@ -380,6 +381,7 @@ input::placeholder{
   .navBut div:first-child:before,.gridBox > div:first-child:before, .subBut > div:first-child:before {
     content: "+";
     position: absolute;
+    width:0;
     bottom:0;
     left:0;
     transform: translate(-50%,50%);
@@ -389,18 +391,22 @@ input::placeholder{
 
   .navBut::after,  .gridBox::after,.subBut::after {
     content: "+";
+    width:0;
     position: absolute;
+    text-align: right;
     top:0;
-    right:0;
-    transform: translate(50%,-50%);
+    right:var(--xs);
+    transform: translate(-100%,-50%);
   }
 
   .navBut div:first-child::after, .gridBox > div:first-child::after, .subBut > div:first-child::after{
     content: "+";
     position: absolute;
+    text-align: right;
+    width:0;
     bottom:0;
-    right:0;
-    transform: translate(50%,50%);
+    right:var(--xs);
+    transform: translate(-100%,50%);
   }
 
   .gridBox.donate{
@@ -490,6 +496,7 @@ input::placeholder{
   h1.title{
     font-size: 10rem;
   }
+
 
 }
 
