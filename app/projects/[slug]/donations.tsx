@@ -2,7 +2,7 @@
 import { PortableText } from "next-sanity";
 import Image from 'next/image';
 import { Reveal } from "../../components/util/reveal";
-import Gallery from "./gallery";
+import Gallery from "../../components/gallery";
 import { Single } from "@/app/components/donateModule";
 
 
@@ -41,7 +41,7 @@ export default async function Donations({data}:any) {
                           ):""}
 
                            {single.content == "gallery" && single.gallery?(
-                            <div className="col-span-full" style={{height:`${single.gallery.length*100}vh`}}> <Gallery data={single.gallery} /></div>
+                          <Gallery data={single.gallery} />
                          
                           ):""}
                       </div>

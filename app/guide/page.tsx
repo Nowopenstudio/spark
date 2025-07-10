@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/app/components/util/reveal";
 import { getDate } from "../components/util/sanity";
-import Gallery from "../donate/gallery";
+import Gallery from "../components/gallery";
 import ListFaqs from "../components/util/listFaq";
 
 

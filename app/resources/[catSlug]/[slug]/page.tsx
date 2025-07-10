@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Reveal } from "@/app/components/util/reveal";
 import { SwitchContent } from "@/app/components/util/contentSwitch";
 import { getDate } from "@/app/components/util/sanity";
-import Gallery from "@/app/donate/gallery";
+import Gallery from "@/app/components/gallery";
 
 
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from 'next/image';
 import { Reveal } from "../components/util/reveal";
 import { SwitchContent } from "../components/util/contentSwitch";
-import Gallery from "./gallery";
+import Gallery from "../components/gallery";
 import { Single } from "../components/donateModule";
 
 

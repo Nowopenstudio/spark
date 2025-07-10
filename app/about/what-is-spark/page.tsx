@@ -3,7 +3,7 @@ import { PortableText } from "next-sanity";
 import Image from 'next/image';
 import { Reveal } from "@/app/components/util/reveal";
 import { SwitchContent } from "@/app/components/util/contentSwitch";
-import Gallery from "@/app/donate/gallery";
+import Gallery from "@/app/components/gallery";
 import ListFaqs from "@/app/components/util/listFaq";
 
 

@@ -17,7 +17,7 @@ export default async function Home({params}:{params:{slug:string}}) {
 
   return (
     <div className="w-full pb-[--med] min-h-[100dvh] articleStage relative" style={{backgroundColor: `rgba(0,0,0,.7)`}}>
-      
+            
            {data.cover?(
                                   <div className="w-full  lg:h-[75vh] relative overflow-hidden">
                                   {data.cover?( <SwitchContent work={data.cover} title={`header`}/>):''}
