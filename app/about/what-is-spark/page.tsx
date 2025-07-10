@@ -19,7 +19,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
          <div className="w-full"><div className="p-[--2xs] relative w-full aspect-video overflow-hidden rounded-sm"> {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} />) : ''}</div></div>
 
         </div>
-        <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4 px-0 lg:px-4 py-4 contentBlock">
+        <div className="col-span-full grid grid-cols-12 mt-[--lrg] gap-4  py-4 contentBlock">
           {data.content ? (
             data.content.map((item: any, i: number) => {
               return (

@@ -16,7 +16,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
   console.log(data.cover)
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh]">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] p-0 md:p-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
+      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] py-0 md:py-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
 
         <div className={`${data.cover ? 'pt-[--sm] lg:pt-[--med]' : 'pt-[--xl]'} items-start col-span-full lg:col-span-6 lg:col-start-4 py-[--xs] uppercase flex-wrap lg:flex-nowrap flex  px-[--xs] md:px-0 gap-[--xs]`}>
           <div className="lg:pt-[5px]"><div className="aspect-square w-[50px] rounded-sm " style={{ backgroundColor: `#ffffff` }}></div></div>
