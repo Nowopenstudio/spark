@@ -59,7 +59,7 @@ export default async function Home() {
                   ) : ('')}
 
                   {item.content == "gallery" && item.gallery ? (
-                    <div className="col-span-full" style={{ height: `${item.gallery.length * 100}vh` }}> <Gallery data={item.gallery} /></div>
+                     <Gallery data={item.gallery} />
 
                   ) : ""}
                   {
