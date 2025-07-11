@@ -11,7 +11,7 @@ import { Single } from "@/app/components/donateModule";
 export default async function Donations({data}:any) {
   return (
     
-          <div className="col-span-full grid grid-cols-12 richText px-0 md:px-[--sm]">
+          <div className="col-span-full grid grid-cols-12 richText px-0 md:px-[--sm] pt-[--med]">
 
               <Reveal styleSet="col-span-12 lg:col-span-6 lg:col-start-4 px-[--xs] md:px-0">
                   <div className="w-full mb-[--lrg]">

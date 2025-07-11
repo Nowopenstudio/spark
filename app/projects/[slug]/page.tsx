@@ -19,7 +19,7 @@ export default async function Home({params}:{params:{slug:string}}) {
                       <div className="w-full pt-[--med] md:pt-0 pb-[--med] lg:min-h-[100dvh] articleStage relative" style={{backgroundColor: `rgba(0,0,0,.7)`}}>
                            
                                 {data.cover?(
-                                                       <div className="w-full mb-[--med]  col-span-full md:col-span-10 md:col-start-2 p-[--xs] gridBox relative">
+                                                       <div className="w-full  col-span-full md:col-span-10 md:col-start-2 p-[--xs] gridBox relative">
          <div className="w-full"><div className="p-[--2xs] relative w-full aspect-video overflow-hidden rounded-sm"> {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} />) : ''}</div></div>
           <div className={`absolute xy-center z-[20] w-full text-center`}>
                                             <Scroller text={data.title} time={20} />
