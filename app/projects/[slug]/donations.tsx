@@ -39,7 +39,6 @@ export default async function Donations({data}:any) {
                               <div className="w-full h-full">{single.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={single.image}  className="w-full h-auto"/>):''}</div>
                             </div>
                           ):""}
-
                            {single.content == "gallery" && single.gallery?(
                           <Gallery data={single.gallery} />
                          

@@ -416,6 +416,9 @@ z-index: 100;
     transform: translate(-50%,50%);
   }
 
+  .gridBox{
+    font-size: 10pt;
+  }
  
 
   .navBut::after{
@@ -444,8 +447,8 @@ z-index: 100;
     position: absolute;
     text-align: right;
     top:0;
-    right:var(--xs);
-    transform: translate(-50%,-50%);
+    right:0;
+    transform: translate(50%,-50%);
   }
 
  .gridBox > div:first-child::after, .subBut > div:first-child::after{
@@ -454,8 +457,8 @@ z-index: 100;
     text-align: right;
     width:0;
     bottom:0;
-    right:var(--xs);
-    transform: translate(-50%,50%);
+    right:0;
+    transform: translate(50%,50%);
   }
 
   .gridBox.donate{
@@ -543,6 +546,25 @@ z-index: 100;
 @media (max-width:800px){
   h1.title{
     font-size: 10rem;
+  }
+
+  .gridBox::after,.subBut::after {
+    content: "+";
+    display:block;
+    position: absolute;
+    text-align: right;
+    top:0;
+    right:10px;
+    transform: translate(-100%,-50%);
+  }
+
+ .gridBox > div:first-child::after, .subBut > div:first-child::after{
+    content: "+";
+    position: absolute;
+    text-align: right;
+    bottom:0;
+    right:10px;
+    transform: translate(-100%,50%);
   }
 
 
