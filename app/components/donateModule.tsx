@@ -43,7 +43,7 @@ export async function Single({item,count}:any){
                       <div className="w-full h-[40px] mb-[--xs] growOn" style={{animationDelay:`${count*.75}s`,backgroundColor:`${item.color}`,width:`${(open.project.stats.balance.value/open.project.settings.goals[0].amount)*100}%`}}></div></div>
                     <p className="uppercase ">{open.project.name}</p>
                     <div className={` richText hidden lg:block`}><PortableText value={item.description} /></div>
-                    <a href={`https://opencollective.com/sighte-92i/projects/${item.openSlug}`} target={'__blank'} className="w-full h-[40px] bg-[--white] text-[--dark] flex items-center mt-[--xs] donateBut"><div className="w-full text-center">DONTATE</div></a>
+                    <a href={`https://opencollective.com/sighte-92i/projects/${item.openSlug}`} target={'__blank'} className="w-full h-[40px] bg-[--white] text-[--dark] flex items-center mt-[--xs] donateBut"><div className="w-full text-center">DONATE</div></a>
   
                   </div>
       ):('')}
