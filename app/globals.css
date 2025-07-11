@@ -416,7 +416,7 @@ z-index: 100;
     transform: translate(-50%,50%);
   }
 
-  .gridBox{
+  .gridBox::after,.subBut::after,.gridBox > div:first-child::after, .subBut > div:first-child::after{
     font-size: 10pt;
   }
  
