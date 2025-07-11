@@ -31,17 +31,17 @@ export default function Gallery({data}:any){
                               <div className="w-full">
                                   {data.map((image:any,m:number)=>{
                                            return( <div key={`gallery-${m}`} className="w-full  mb-[--sm] p-[--sm] relative gridBox ">
-                                           <div className="w-full h-auto">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className="w-full h-auto"/>):''}</div>
+                                           <div className="w-full h-full">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className="w-full h-auto"/>):''}</div>
                                          </div>
              
                                            )
                                          })}
                               </div>
                            ):(
-                              <motion.div className="w-full flex  " style={{x}}>
+                              <motion.div className="w-full flex " style={{x}}>
                                   {data.map((image:any,m:number)=>{
                                            return( <div key={`gallery-${m}`} className="w-full md:w-3/4  mb-[--sm] p-[--sm] relative gridBox flex-shrink-0">
-                                           <div className="w-full h-auto">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className="w-full h-auto"/>):''}</div>
+                                           <div className="w-full h-full">{image.image?( <Image alt="image" height={0}  width={0} sizes="100vw"  src={image.image}  className={`w-full ${m==0?"object-contain h-auto":"object-cover h-full"}`}/>):''}</div>
                                          </div>
              
                                            )
