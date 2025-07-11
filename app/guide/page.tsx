@@ -84,7 +84,7 @@ export default async function Home() {
                         ) : (
                           item.list.items.map((single: any, s: number) => {
                             return (
-                              <div className="w-full  lg:p-[--sm] gridBox relative" key={`list-${i}-s`} >
+                              <div className="w-full  p-[--sm] lg:p-[--sm] gridBox relative" key={`list-${i}-s`} >
                                 <div >
                                   <div className="relative bgBlur flex flex-wrap items-start p-[--xs] lg:p-[--sm]" style={{ backgroundColor: `rgba(255, 255, 255, 0.1)` }}>
                                     <div className={`items-start col-span-full lg:col-span-6 lg:col-start-4 flex-wrap lg:flex-nowrap flex px-0 gap-[--xs]`}>
