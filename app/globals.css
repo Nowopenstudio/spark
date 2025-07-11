@@ -416,7 +416,7 @@ z-index: 100;
     transform: translate(-50%,50%);
   }
 
-  .gridBox::after,.subBut::after,.gridBox > div:first-child::after, .subBut > div:first-child::after{
+  .gridBox::after,.subBut::after,.gridBox > div:first-child::after, .subBut > div:first-child::after, .gridBox::before, .subBut::before, .gridBox > div:first-child:before, .subBut > div:first-child:before{
     font-size: 10pt;
   }
  
