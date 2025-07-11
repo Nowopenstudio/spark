@@ -33,6 +33,7 @@ useEffect(()=>{
                  <div className=" w-auto text-center uppercase px-[--med] whitespace-nowrap"><h1 className="title">{text}</h1></div>
                    <div className=" w-auto text-center uppercase px-[--med] whitespace-nowrap"><h1 className="title">{text}</h1></div>
                      <div className=" w-auto text-center uppercase px-[--med] whitespace-nowrap"><h1 className="title">{text}</h1></div>
+                       <div className=" w-auto text-center uppercase px-[--med] whitespace-nowrap"><h1 className="title">{text}</h1></div>
                        
              
             
