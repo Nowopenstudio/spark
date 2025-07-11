@@ -21,7 +21,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
    const initialNodes = [
       {
         id: '1',
-        data: { label: <Link href={'/resources'} onClick={()=>changeSec(1)}><div className="navBut w-full h-full" style={{animationDelay:"0"}}><div><p>Resources</p></div></div></Link> },
+        data: { label: <Link href={'/resources'} key={`resourcesBut`} onClick={()=>changeSec(1)}><div className="navBut w-full h-full" style={{animationDelay:"0"}}><div><p>Resources</p></div></div></Link> },
         type: 'navBut',
         position: { x: 0, y: 80 },
       },
@@ -30,20 +30,20 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
         id: '2',
         type: 'navButAlt',
         // you can also pass a React component as a label
-        data: { label: <Link href={'/projects'} onClick={()=>changeSec(2)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div><p>Projects</p></div></div></Link> },
+        data: { label: <Link href={'/projects'} key={`projectBut`} onClick={()=>changeSec(2)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div><p>Projects</p></div></div></Link> },
         position: { x: 0, y: 40 },
       },
       {
         id: '3',
         type: 'navBut',
-        data:  { label: <Link href={'/about'} onClick={()=>changeSec(3)}><div className="navBut w-full h-full" style={{animationDelay:"300ms"}}><div><p>About</p></div></div></Link> },
+        data:  { label: <Link href={'/about'} key={`aboutBut`} onClick={()=>changeSec(3)}><div className="navBut w-full h-full" style={{animationDelay:"300ms"}}><div><p>About</p></div></div></Link> },
         position: { x: 0, y: 0 },
       },
       {
         id: '4',
         type: 'navButAlt',
         // you can also pass a React component as a label
-        data: { label: <Link href={'/donate'} onClick={()=>changeSec(4)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div><p>Donate</p></div></div></Link> },
+        data: { label: <Link href={'/donate'} key={`donateBut`} onClick={()=>changeSec(4)}><div className="navBut w-full h-full" style={{animationDelay:"200ms"}}><div><p>Donate</p></div></div></Link> },
         position: { x: 0, y: 120 },
       },
       
@@ -51,7 +51,7 @@ function Flow({donate,page, params, categories, projects,info,mobile,winX,winY}:
 
 
     const initialEdges:any = [
-   {},{}
+  
     ];
 
     
