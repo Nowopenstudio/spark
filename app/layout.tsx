@@ -10,7 +10,7 @@ import { openConnect } from "./components/util/sanity";
 
 export const metadata: Metadata = {
   title: "Spark",
-  description: "Spark is an eco-community research and development organization responding to this reality.",
+  description: "An eco-community research and development organization. Powered by 400M.",
 };
 
 

@@ -16,7 +16,7 @@ export default defineConfig({
 
   plugins: [structureTool({
     structure: myStructure
-  }), visionTool(),muxInput(),colorInput()],
+  }), visionTool(),muxInput({encoding_tier: 'baseline'}),colorInput()],
 
   schema: {
     types: schemaTypes,
