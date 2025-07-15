@@ -21,12 +21,13 @@ export async function generateMetadata() {
     'data':*[_type=='articles']{cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
  }`)
  const {data, info} = query.data  
+ const curr = getRandom(0,(data.length-1))
   return {
     title: "Resources - Spark",
     keywords: info.meta.keywords,
     description:info.meta.description,
     openGraph: {
-      images: data.length?`${data[getRandom(0,(data.length-1))].cover.image ?? info.meta.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`
+      images: data[curr].cover?`${data[getRandom(0,(data.length-1))].cover.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`
     }
   };
 }
