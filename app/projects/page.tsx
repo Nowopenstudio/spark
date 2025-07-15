@@ -1,6 +1,7 @@
 import { getData } from "../lib/utils-sanity";
 import { PortableText } from "next-sanity";
 import Link from "next/link";
+import { getRandom } from "../components/util/sanity";
 
 
 
@@ -23,3 +24,20 @@ export default async function Home() {
     </main>
   );
 }
+
+export async function generateMetadata() {
+  const query = await getData(`{
+    'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
+    'data':*[_type=='projects']{cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
+ }`)
+ const {data, info} = query.data  
+  return {
+    title: "Projects - Spark",
+    keywords: info.meta.keywords,
+    description:info.meta.description,
+    openGraph: {
+      images: data.length?`${data[getRandom(0,(data.length-1))].cover.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`
+    }
+  };
+}
+

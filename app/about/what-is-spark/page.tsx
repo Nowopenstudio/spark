@@ -105,3 +105,19 @@ export default async function Home({ params }: { params: { slug: string } }) {
     </Reveal>
   );
 }
+
+export async function generateMetadata() {
+  const query = await getData(`{
+    'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
+    'data':*[_type=='about'][0]{meta{title,description,keywords,"image":image.asset->url}}
+ }`)
+ const {data, info} = query.data  
+  return {
+    title: data.meta.title ?? info.meta.title,
+    keywords: data.meta.keywords ?? info.meta.keywords,
+    description:data.meta.description??info.meta.description,
+    openGraph: {
+      images: data.meta.image?`${data.meta.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`
+    }
+  };
+}

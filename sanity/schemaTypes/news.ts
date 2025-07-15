@@ -2,15 +2,7 @@ export default {
     name: "news",
     type: "document",
     title: 'News',
-    groups: [{
-        name: 'infoSet',
-        title: 'Info',
-        options: { columns: 2 },
-    },
-    {
-        name: 'meta',
-        title: 'Meta',
-    }],
+     groups: [{name: 'meta',title: 'Meta',}],
     fields: [
         {
             type: 'string',

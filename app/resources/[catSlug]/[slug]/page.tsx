@@ -115,3 +115,19 @@ export default async function Home({ params }: { params: { slug: string } }) {
     </Reveal>
   );
 }
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const query = await getData(`{
+    'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
+    'data':*[_type=='articles' && slug.current == '${params.slug}'][0]{title,"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
+ }`)
+ const {data, info} = query.data  
+  return {
+    title: data.meta.title ?? data.title,
+    keywords: data.meta.keywords ?? info.meta.keywords,
+    description:data.meta.description??info.summary,
+    openGraph: {
+      images: data.meta.image?`${data.meta.image}?auto=format&amp;w=500`: (data.cover.image?`${data.cover.image}?auto=format&amp;w=500`:`${info.meta.image}?auto=format&amp;w=500`)
+    }
+  };
+}

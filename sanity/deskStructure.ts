@@ -61,13 +61,13 @@ export const myStructure = (S: any) =>
         .title('Guide')
         .child(S.document().title('Guide').schemaType('guide').documentId('guide')),
       S.listItem()
-        .title('info')
+        .title('About')
         .child(
           S.list()
-            .title('Infomation')
+            .title('About')
             .items([
               S.listItem()
-                .title('About')
+                .title('What is Spark')
                 .child(S.document().title('about').schemaType('about').documentId('about')),
               S.listItem('roadmap')
                 .title('Roadmap')
@@ -100,10 +100,14 @@ export const myStructure = (S: any) =>
                 .child(
                   S.documentTypeList('authors')
                     .title('Authors')
-                )
+                ),
+                S.listItem()
+                .title('Info')
+                .child(S.document().title('Info').schemaType('info').documentId('info')),
+
 
             ])
         ),
 
-      ...S.documentTypeListItems().filter(listItem => !['donate', 'guide','news', 'projects', 'mux.videoAsset', 'categories', 'authors', 'about', 'roadmap', 'membership', 'contact', 'articles'].includes(listItem.getId())),
+      ...S.documentTypeListItems().filter(listItem => !['donate', 'info','guide','news', 'projects', 'mux.videoAsset', 'categories', 'authors', 'about', 'roadmap', 'membership', 'contact', 'articles'].includes(listItem.getId())),
     ])

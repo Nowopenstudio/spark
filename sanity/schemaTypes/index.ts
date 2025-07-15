@@ -9,7 +9,8 @@ import projects from "./projects";
 import donate from "./donate";
 import news from "./news";
 import guide from "./guide";
+import info from "./info";
 
 export const schemaTypes = [
-    categories, authors, about, roadmap,membership, contact, articles, projects,donate, news, guide
+    categories, authors, about, roadmap,membership, contact, articles, projects,donate, news, guide, info
 ]

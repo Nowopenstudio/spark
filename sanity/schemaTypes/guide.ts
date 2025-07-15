@@ -2,15 +2,8 @@ export default {
     name: "guide",
     type: "document",
     title: 'guide',
-    groups: [{
-        name: 'infoSet',
-        title: 'Info',
-        options: { columns: 2 },
-    },
-    {
-        name: 'meta',
-        title: 'Meta',
-    }],
+    
+     groups: [{name: 'meta',title: 'Meta',}],
     fields: [
         {
             type: 'string',

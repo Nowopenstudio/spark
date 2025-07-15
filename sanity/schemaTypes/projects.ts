@@ -2,6 +2,7 @@ export default {
     name: "projects",
     type: "document",
     title: 'Project',
+       groups: [{name: 'meta',title: 'Meta',}],
     fields: [
 
         {
@@ -174,7 +175,36 @@ export default {
                 ]
 
             }]
-        }
+        },
+         {
+            name:"meta",
+            title:'Metadata',
+            type:"object",
+            group:"meta",
+            fields:[
+                {
+                  type:'string',
+                  title:'Title',
+                  name:'title',
+                },
+                {
+                    type:'text',
+                    title:'Description',
+                    name:'description',
+                },
+                {
+                    type:'string',
+                    title:'Keywords',
+                    name:'keywords',
+                },
+                {
+                    type:'image',
+                    name:'image',
+                    title:'image'
+    
+                }
+            ]
+          }
 
     ]
 }

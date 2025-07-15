@@ -4,6 +4,7 @@ import { PortableText } from "next-sanity";
 import Link from "next/link";
 import { Reveal } from "@/app/components/util/reveal";
 import Scroller from "@/app/components/scroller";
+import { getRandom } from "@/app/components/util/sanity";
 
 
 
@@ -42,4 +43,21 @@ console.log(params)
                                         </div>
     </main>
   );
+}
+
+
+export async function generateMetadata({params}:{params:{catSlug:string}}) {
+  const query = await getData(`{
+    'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
+    'data':*[_type=='articles' && '${params.catSlug}' == category->slug.current]{title,category->{slug,title},"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
+ }`)
+ const {data, info} = query.data  
+  return {
+    title: `${data[0].category.title} - Spark`,
+    keywords: info.meta.keywords,
+    description:info.summary,
+    openGraph: {
+       images: data.length?`${data[getRandom(0,(data.length-1))].cover.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`
+    }
+  };
 }

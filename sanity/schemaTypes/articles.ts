@@ -2,11 +2,7 @@ export default {
     name: "articles",
     type: "document",
     title: 'Articles',
-    groups: [{
-        name: 'infoSet',
-        title: 'Info',
-        options: { columns: 2 },
-    }],
+    groups: [{ name: 'meta', title: 'Meta', }],
     fields: [
         {
             type: "object",
@@ -33,7 +29,7 @@ export default {
             name: 'title',
             title: 'Title',
         },
-          {
+        {
             type: 'string',
             name: 'subTitle',
             title: 'Sub Title',
@@ -42,7 +38,6 @@ export default {
             type: 'slug',
             name: 'slug',
             title: 'Slug',
-            group: 'infoSet',
             options: {
                 source: 'title'
             }
@@ -52,18 +47,16 @@ export default {
             type: 'reference',
             name: 'author',
             title: 'Author',
-            group: 'infoSet',
             to: [{ type: 'authors' }]
         },
         {
             type: 'reference',
             name: 'category',
             title: 'Category',
-            group: 'infoSet',
             to: [{ type: 'categories' }]
         },
 
-       {
+        {
             type: 'array',
             name: 'content',
             title: 'Content',
@@ -94,15 +87,15 @@ export default {
                             }
                         },
                         {
-                                        name:'ordered',type:'boolean',title:"Ordered List", fieldset:'content',hidden: ({ parent }: any) => parent?.content !== "list"
-                                    },
+                            name: 'ordered', type: 'boolean', title: "Ordered List", fieldset: 'content', hidden: ({ parent }: any) => parent?.content !== "list"
+                        },
                         { name: 'desc', title: 'Text', type: 'array', of: [{ type: 'block' }], hidden: ({ parent }: any) => parent?.content !== "text" },
                         { name: 'embed', title: 'Embed', type: 'text', hidden: ({ parent }: any) => parent?.content !== "embed" },
                         { name: 'image', title: 'Image', type: 'image', hidden: ({ parent }: any) => parent?.content !== "image" },
                         {
                             name: 'list', title: "List", type: 'object', hidden: ({ parent }: any) => parent?.content !== "list", fields: [
-                                { name: 'text', title: 'Text', type: "array",of:[{type:'block'}] },
-                                  { name: 'faqs', title:'FAQs', type:'boolean'},
+                                { name: 'text', title: 'Text', type: "array", of: [{ type: 'block' }] },
+                                { name: 'faqs', title: 'FAQs', type: 'boolean' },
                                 {
                                     name: 'items', title: "Items", type: "array", of: [
                                         {
@@ -148,6 +141,35 @@ export default {
                 }
             ]
         },
+         {
+            name:"meta",
+            title:'Metadata',
+            type:"object",
+            group:"meta",
+            fields:[
+                {
+                  type:'string',
+                  title:'Title',
+                  name:'title',
+                },
+                {
+                    type:'text',
+                    title:'Description',
+                    name:'description',
+                },
+                {
+                    type:'string',
+                    title:'Keywords',
+                    name:'keywords',
+                },
+                {
+                    type:'image',
+                    name:'image',
+                    title:'image'
+    
+                }
+            ]
+          }
 
     ]
 }

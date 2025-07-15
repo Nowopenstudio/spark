@@ -2,6 +2,7 @@ export default {
     name:"categories",
     title:'Categories',
     type:"document",
+    groups: [{name: 'meta',title: 'Meta',}],
     fields:[
 
         {
