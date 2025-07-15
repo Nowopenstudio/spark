@@ -134,7 +134,7 @@ export async function generateMetadata() {
     keywords: data.meta.keywords ?? info.meta.keywords,
     description:data.meta.description??info.summary,
     openGraph: {
-      images: data.meta.image?`${data.meta.image??info.meta.image}?auto=format&amp;w=500`: (data.cover.image?`${data.cover.image??info.meta.image}?auto=format&amp;w=500`:`${info.meta.image}?auto=format&amp;w=500`)
+      images: data.meta.image?`${data.meta.image}?auto=format&amp;w=500`:`${data.cover.image ?? info.meta.image}?auto=format&amp;w=500`
     }
   };
 }
