@@ -127,7 +127,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     keywords: data.meta.keywords ?? info.meta.keywords,
     description:data.meta.description??info.summary,
     openGraph: {
-      images: data.meta.image?`${data.meta.image}?auto=format&amp;w=500`: (data.cover.image?`${data.cover.image}?auto=format&amp;w=500`:`${info.meta.image}?auto=format&amp;w=500`)
+      images: data.meta && data.meta.image?`${data.meta.image}?auto=format&amp;w=500`: (data.cover.image?`${data.cover.image}?auto=format&amp;w=500`:`${info.meta.image}?auto=format&amp;w=500`)
     }
   };
 }
