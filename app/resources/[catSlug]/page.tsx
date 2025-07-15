@@ -49,16 +49,17 @@ console.log(params)
 export async function generateMetadata({params}:{params:{catSlug:string}}) {
   const query = await getData(`{
     'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
+    'cat':*[_type=="categories" && slug.current=='${params.catSlug}'][0]{slug,title},
     'data':*[_type=='articles' && '${params.catSlug}' == category->slug.current]{title,category->{slug,title},"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
  }`)
- const {data, info} = query.data  
+ const {data, info,cat} = query.data  
  const curr = getRandom(0,(data.length-1))
   return {
-    title: `${data[0].category.title} - Spark`,
+    title: `${cat.title} - ${info.meta.title}`,
     keywords: info.meta.keywords,
     description:info.summary,
     openGraph: {
-       images: data[curr].cover?`${data[curr].cover.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`
+       images: data.length && data[curr].cover?`${data[curr].cover.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`
     }
   };
 }

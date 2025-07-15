@@ -23,7 +23,7 @@ export async function generateMetadata() {
  const {data, info} = query.data  
  const curr = getRandom(0,(data.length-1))
   return {
-    title: "Resources - Spark",
+    title: `Resources - ${info.meta.title}`,
     keywords: info.meta.keywords,
     description:info.meta.description,
     openGraph: {

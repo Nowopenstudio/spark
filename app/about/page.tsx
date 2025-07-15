@@ -19,7 +19,7 @@ export async function generateMetadata() {
  }`)
  const {data} = query.data  
   return {
-    title: `About Spark`,
+    title: `About - ${data.meta.title}`,
     keywords: `${data.meta.keywords}`,
     description:`${data.meta.description}`,
     openGraph: {

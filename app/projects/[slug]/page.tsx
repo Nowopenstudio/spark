@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
  }`)
  const {data, info} = query.data  
   return {
-    title: data.meta.title ?? data.title,
+    title: `${data.meta.title ?? data.title} - ${info.meta.title}`,
     keywords: data.meta.keywords ?? info.meta.keywords,
     description:data.meta.description??info.summary,
     openGraph: {

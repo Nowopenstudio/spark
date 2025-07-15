@@ -47,7 +47,7 @@ export async function generateMetadata() {
  }`)
  const {data, info} = query.data  
   return {
-    title: "Latest News - Spark",
+    title: `Latest News - ${info.meta.title}`,
     keywords: info.meta.keywords,
     description:info.meta.description,
     openGraph: {
