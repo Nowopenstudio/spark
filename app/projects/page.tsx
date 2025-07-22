@@ -27,16 +27,16 @@ export default async function Home() {
 
 export async function generateMetadata() {
   const query = await getData(`{
-    'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
+    'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url},projects{title,description,keywords,"image":image.asset->url}},
     'data':*[_type=='projects']{cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
  }`)
  const {data, info} = query.data  
   return {
-    title: `Projects - ${info.meta.title}`,
-    keywords: info.meta.keywords,
-    description:info.meta.description,
+    title: `${info.projects.title} - ${info.meta.title}`,
+    keywords: info.projects.keywords ?? info.meta.keywords,
+    description: info.projects.description ?? info.meta.description,
     openGraph: {
-      images: data.length?`${data[getRandom(0,(data.length-1))].cover.image ?? info.meta.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`
+      images: info.projects.image ?? (data.length?`${data[getRandom(0,(data.length-1))].cover.image ?? info.meta.image}?auto=format&amp;w=500`: `${info.meta.image}?auto=format&amp;w=500`)
     }
   };
 }
