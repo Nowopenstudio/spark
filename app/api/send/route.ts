@@ -14,7 +14,7 @@ export async function POST(req: NextRequest, res:NextResponse) {
       from: sender,
       to: email,
       subject: subject,
-      react: EmailTemplate({ firstName: name, message:message }),
+      react: EmailTemplate({ firstName: name, message:message, email:sender  }),
     });
 
     if (error) {
