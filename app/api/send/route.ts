@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, res:NextResponse) {
   try {
 
     const { data, error } = await resend.emails.send({
-      from: sender,
+      from: email,
       to: email,
       subject: subject,
       react: EmailTemplate({ firstName: name, message:message, email:sender  }),

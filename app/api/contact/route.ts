@@ -12,7 +12,7 @@ export async function POST(req: NextRequest, res:NextResponse) {
       from: email,
       to: email,
       subject: subject,
-      react: ContactTemplate({ firstName: name, message:message, email:email }),
+      react: ContactTemplate({ firstName: name, message:message, email:sender }),
     });
 
     if (error) {
