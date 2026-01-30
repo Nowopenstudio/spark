@@ -7,10 +7,10 @@ import {useRef, useEffect,useState, useMemo, useCallback } from "react";
 import * as THREE from "three";
 import { TextureLoader, SRGBColorSpace, Vector2 } from "three";
 import { spherePointToUV, sampleImage } from "../../lib/utils-canvas";
-import { EffectComposer, Bloom, Noise, ToneMapping,Scanline, TiltShift2} from '@react-three/postprocessing'
+import { EffectComposer, Bloom, ToneMapping} from '@react-three/postprocessing'
 import {  ToneMappingMode } from 'postprocessing'
-import vertexShader from "!!raw-loader!./vertexShader.glsl";
-import fragmentShader from "!!raw-loader!./fragmentShader.glsl";
+// import vertexShader from "!!raw-loader!./vertexShader.glsl";
+// import fragmentShader from "!!raw-loader!./fragmentShader.glsl";
 import useResize from "../util/useResize";
 
 
@@ -270,7 +270,7 @@ export function Test() {
                 <Bloom luminanceThreshold={.6} intensity={.5} />
                 {/* <Scanline opacity={.1}/> */}
                 
-                <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+                {/* <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> */}
                 {/* <Noise opacity={.1} /> */}
               
 
