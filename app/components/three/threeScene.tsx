@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client'
 
-import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer, CameraControls,Points, Point, PointMaterial, useTexture } from "@react-three/drei";
+import { useGLTF, MeshTransmissionMaterial, Environment, Lightformer, CameraControls } from "@react-three/drei";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import {useRef, useEffect,useState, useMemo, useCallback } from "react";
 import * as THREE from "three";
