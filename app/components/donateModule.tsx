@@ -9,18 +9,20 @@ import { openConnect } from "./util/sanity";
 export default async function Donate({data}:any) {
 
   return (
-    
-          <div className="hidden md:block w-[100vw] richText text-[--white] py-[--sm] gap-[--sm] z-[100] relative">
-           <div className="grid grid-cols-12 w-full lg:absolute lg:bottom-[0] justify-end pb-[--lrg] left-0">
-              {data.donations.map((item:any,i:number)=>{
-                return(
-                     <Single key={`donate-${i}`} item={item} count={i}/>
-                )
-             
-              })}
-           </div>
-              
-          </div>
+    data?(
+      <div className="hidden md:block w-[100vw] richText text-[--white] py-[--sm] gap-[--sm] z-[100] relative">
+      <div className="grid grid-cols-12 w-full lg:absolute lg:bottom-[0] justify-end pb-[--lrg] left-0">
+         {data.donations.map((item:any,i:number)=>{
+           return(
+                <Single key={`donate-${i}`} item={item} count={i}/>
+           )
+        
+         })}
+      </div>
+         
+     </div>
+    ):('')
+         
                       
      
 

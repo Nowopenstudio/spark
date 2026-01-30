@@ -46,11 +46,12 @@ console.log(params)
 }
 
 
-export async function generateMetadata({params}:{params:{catSlug:string}}) {
+export async function generateMetadata({params}:any) {
+  const {catSlug} = await params
   const query = await getData(`{
     'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
-    'cat':*[_type=="categories" && slug.current=='${params.catSlug}'][0]{slug,title},
-    'data':*[_type=='articles' && '${params.catSlug}' == category->slug.current]{title,category->{slug,title},"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
+    'cat':*[_type=="categories" && slug.current=='${catSlug}'][0]{slug,title},
+    'data':*[_type=='articles' && '${catSlug}' == category->slug.current]{title,category->{slug,title},"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
  }`)
  const {data, info,cat} = query.data  
  const curr = getRandom(0,(data.length-1))

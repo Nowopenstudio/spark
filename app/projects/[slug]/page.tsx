@@ -11,8 +11,9 @@ import Scroller from "@/app/components/scroller";
 
 
 
-export default async function Home({params}:{params:{slug:string}}) {
-    const { data } = await getData(`*[_type=='projects' && slug.current == '${params.slug}'][0]{title,subhead,cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio},"slug":slug.current,copy,content[]{content,text,"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio,gallery[]{'image':asset->url}},donations[]{title,openSlug,summary,"color":color.hex,content[]{content,text,"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio,gallery[]{'image':asset->url}}}}`)
+export default async function Home({params}:any) {
+  const {slug} = await params
+    const { data } = await getData(`*[_type=='projects' && slug.current == '${slug}'][0]{title,subhead,cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio},"slug":slug.current,copy,content[]{content,text,"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio,gallery[]{'image':asset->url}},donations[]{title,openSlug,summary,"color":color.hex,content[]{content,text,"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio,gallery[]{'image':asset->url}}}}`)
    
   return (
       <Reveal styleSet="w-[100vw] min-h-[100dvh]">
@@ -40,10 +41,11 @@ export default async function Home({params}:{params:{slug:string}}) {
 }
 
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({params}:any) {
+  const {slug} = await params
   const query = await getData(`{
     'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
-    'data':*[_type=='projects' && slug.current == '${params.slug}'][0]{title,"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
+    'data':*[_type=='projects' && slug.current == '${slug}'][0]{title,"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
  }`)
  const {data, info} = query.data  
   return {
