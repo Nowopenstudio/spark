@@ -272,7 +272,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
          const backNode = {
           id: `${root+categories.length+1}`,
           type: 'navBut',
-          data: { label: <Link href={`/resources`} key={`art-tri-back`} style={{color:parent.color}} onClick={()=>changeSec(1)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{"0 ENTRIES "}→</p></div> </div></Link> },
+          data: { label: <Link href={`/resources`} key={`art-tri-back`} style={{color:parent?parent.color:'#ffffff'}} onClick={()=>changeSec(1)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{"0 ENTRIES "}→</p></div> </div></Link> },
           position: {  x:((nodeX + nodeGap*2)*opt)*2.7, y:  0},
         }
 
@@ -286,7 +286,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
           type: 'smoothstep',
           animated:true,
           source: `${sec+root}`,
-          style:{stroke:parent.color},
+          style:{stroke:parent?parent.color:'#ffffff'},
           target: `${root+categories.length+1}`,
         }
         getTriEdge.push(backEdge)

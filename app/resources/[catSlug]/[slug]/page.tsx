@@ -125,11 +125,11 @@ export async function generateMetadata({ params }:any) {
  }`)
  const {data, info} = query.data  
   return {
-    title: `${data.meta.title ?? data.title} - ${info.meta.title}`,
-    keywords: data.meta.keywords ?? info.meta.keywords,
-    description:data.meta.description??info.summary,
+    title: `${data.meta?data.meta.title:data.title} - ${info.meta.title}`,
+    keywords: data.meta?data.meta.keywords:info.meta.keywords,
+    description:data.meta?data.meta.description:info.summary,
     openGraph: {
-      images: data.meta && data.meta.image?`${data.meta.image}?auto=format&amp;w=500`: (data.cover.image?`${data.cover.image}?auto=format&amp;w=500`:`${info.meta.image}?auto=format&amp;w=500`)
+      images: data.meta && data.meta.image?`${data.meta.image}?auto=format&amp;w=500`: (data.cover&&data.cover.image?`${data.cover.image}?auto=format&amp;w=500`:`${info.meta.image}?auto=format&amp;w=500`)
     }
   };
 }

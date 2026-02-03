@@ -9,12 +9,13 @@ import { getRandom } from "@/app/components/util/sanity";
 
 
 
-export default async function Home({params}:{params:{catSlug:string}}) {
-    const { data } = await getData(`*[_type=='articles' && '${params.catSlug}' == category->slug.current]{title,'slug':slug.current,author->{firstName},"color":category->color.rgb,"hex":category->color.hex,category->{slug,title},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
-console.log(params)
+export default async function Home({params}:any) {
+  const {catSlug} = await params
+    const { data } = await getData(`*[_type=='articles' && '${catSlug}' == category->slug.current]{title,'slug':slug.current,author->{firstName},"color":category->color.rgb,"hex":category->color.hex,category->{slug,title},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
   return (
     <main className="w-[100vw] grid grid-cols-12 pt-[100px] relative gap-[--xs]  py-[200px] articleStage min-h-[100dvh]" style={{backgroundColor:`rgba(20,20,20,.1)` }}>
-      {/* {data.map((item:any,i:number)=>{
+      {data.length?(
+       data.map((item:any,i:number)=>{
           return( 
             <Link href={`/resources/${params.catSlug}/${item.slug}`} key={`article-${i}`} className="col-span-full md:col-span-6 xl:col-span-4 gridBox relative singleArticle" >
               <Reveal styleSet="w-full  p-[--2xs] relative" count={i}>
@@ -36,11 +37,14 @@ console.log(params)
               </Reveal>
             </Link>
           )
-      })} */}
+      })
+      ):(
+   <div className={`absolute xy-center z-[20] w-full text-center`}>
+   <Scroller text={'COMING SOON'} time={20} />
+  </div>
+      )}
 
-      <div className={`absolute xy-center z-[20] w-full text-center`}>
-                                         <Scroller text={'COMING SOON'} time={20} />
-                                        </div>
+   
     </main>
   );
 }
