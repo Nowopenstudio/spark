@@ -11,8 +11,9 @@ import ListFaqs from "@/app/components/util/listFaq";
 
 
 
-export default async function Home({ params }: { params: { slug: string } }) {
-  const { data } = await getData(`*[_type=='news' && slug.current == '${params.slug}'][0]{title,subTitle,_createdAt,"author":author->{firstName},slug,'imageUrl': cover.asset->url, intro, content[]{content,ordered,list,text,right,columns,caption,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
+export default async function Home({ params }:any) {
+  const {slug} = await params
+  const { data } = await getData(`*[_type=='news' && slug.current == '${slug}'][0]{title,subTitle,_createdAt,"author":author->{firstName},slug,'imageUrl': cover.asset->url, intro, content[]{content,ordered,list,text,right,columns,caption,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
   console.log(data.cover)
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh]">
