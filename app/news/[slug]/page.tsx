@@ -127,10 +127,11 @@ export default async function Home({ params }:any) {
 }
 
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: any) {
+  const {slug} = await params
   const query = await getData(`{
     'info':*[_type=='info'][0]{meta{title,description,keywords,"image":image.asset->url}},
-    'data':*[_type=='news' && slug.current == '${params.slug}'][0]{title,"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
+    'data':*[_type=='news' && slug.current == '${slug}'][0]{title,"summary":pt::text(summary),meta{title,description,keywords,"image":image.asset->url},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}
  }`)
  const {data, info} = query.data  
   return {
