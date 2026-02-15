@@ -18,9 +18,9 @@ export default async function Home({params}:any) {
        data.map((item:any,i:number)=>{
           return( 
             <Link href={`/resources/${catSlug}/${item.slug}`} key={`article-${i}`} className="col-span-full md:col-span-6 xl:col-span-4 gridBox relative singleArticle" >
-              <Reveal styleSet="w-full  p-[--2xs] relative h-full" count={i}>
+              <Reveal styleSet="w-full  p-[--2xs] relative md:h-full" count={i}>
                 
-                <div className="articleStage relative">
+                <div className="relative">
                   <div className="linkBut w-[50px] h-[50px] z-10 top-[--2xs] right-[--2xs] absolute rounded-sm" style={{backgroundColor:`rgba(${item.color.r},${item.color.g},${item.color.b},1)`}}><h1 className="xy-center absolute">→</h1></div>
                   <div className="contentHold p-[--2xs]">
                     <div className='coverHold w-full aspect-video noControl mb-[--2xs]'>
