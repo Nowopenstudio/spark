@@ -11,7 +11,7 @@ import Gallery from "@/app/components/gallery";
 
 
 export default async function Home({ params }: any) {
-  const {slug} = await params
+  const {slug,catSlug} = await params
   const { data } = await getData(`*[_type=='articles' && slug.current == '${slug}'][0]{title,subTitle,_createdAt,"author":author->{firstName},"color":category->color.rgb,slug,'imageUrl': cover.asset->url, intro, content[]{content,desc,right,columns,caption,ordered,list,embed,"image":image.asset->url, "vid":vid.asset->playbackId, "ratio":vid.asset->data.aspect_ratio,gallery[]{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
 
   return (
@@ -38,7 +38,7 @@ export default async function Home({ params }: any) {
           {data.subTitle ? (
             <h2 className="w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] lg:px-0 pb-[--sm]" >{data.subTitle}</h2>
           ) : ('')}
-          <p className="caption w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] lg:px-0 pb-[--sm]">BY {data.author.firstName} - {getDate(data._createdAt)}</p>
+          <p className="caption w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] lg:px-0 pb-[--sm]">BY {data.author?data.author.firstName:'SPARK'} - {getDate(data._createdAt)}</p>
           {data.content ? (
             data.content.map((item: any, i: number) => {
               return (

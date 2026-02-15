@@ -204,10 +204,14 @@ h1.title{
 }
 
 h2{
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-family: 'fk', Arial, Helvetica, sans-serif;
   line-height: 1.225em;
   font-weight: 500;
+}
+
+h2.cardTitles{
+  font-size:1.37rem;
 }
 
 

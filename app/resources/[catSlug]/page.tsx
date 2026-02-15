@@ -17,8 +17,8 @@ export default async function Home({params}:any) {
       {data.length?(
        data.map((item:any,i:number)=>{
           return( 
-            <Link href={`/resources/${params.catSlug}/${item.slug}`} key={`article-${i}`} className="col-span-full md:col-span-6 xl:col-span-4 gridBox relative singleArticle" >
-              <Reveal styleSet="w-full  p-[--2xs] relative" count={i}>
+            <Link href={`/resources/${catSlug}/${item.slug}`} key={`article-${i}`} className="col-span-full md:col-span-6 xl:col-span-4 gridBox relative singleArticle" >
+              <Reveal styleSet="w-full  p-[--2xs] relative h-full" count={i}>
                 
                 <div className="articleStage relative">
                   <div className="linkBut w-[50px] h-[50px] z-10 top-[--2xs] right-[--2xs] absolute rounded-sm" style={{backgroundColor:`rgba(${item.color.r},${item.color.g},${item.color.b},1)`}}><h1 className="xy-center absolute">→</h1></div>
@@ -28,9 +28,9 @@ export default async function Home({params}:any) {
                           <SwitchContent work={item.cover} title={item.title} ratio={item.cover.ratio} cover/>
                         ):('')}
                     </div>
-                    <div className={`infoHold p-[--xs] text-[--white] rounded-sm`} style={{backgroundColor:`rgba(255,255,255,.1)` }}>
-                      <h2>{item.title}</h2>
-                      <p className="caption">{item.author.firstName}</p>
+                    <div className={`infoHold p-[--xs] text-[--white] rounded-sm h-[100px]`} style={{backgroundColor:`rgba(255,255,255,.1)` }}>
+                      <h2 className="cardTitles mb-2">{item.title}</h2>
+                      <p className="caption">{item.author?item.author.firstName:''}</p>
                     </div>
                   </div>
                 </div>
