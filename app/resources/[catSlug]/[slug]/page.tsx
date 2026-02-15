@@ -27,13 +27,13 @@ export default async function Home({ params }: any) {
 
         <div className={`${data.cover ? 'pt-[--sm] lg:pt-[--med]' : 'pt-[--xl]'} items-start col-span-full lg:col-span-6 lg:col-start-4 py-[--xs] uppercase flex-wrap lg:flex-nowrap flex  px-[--xs] lg:px-0 gap-[--xs] md:px-0`}>
           <div className="lg:pt-[5px]"><div className="aspect-square w-[50px] rounded-sm " style={{ backgroundColor: `rgb(${data.color.r},${data.color.g},${data.color.b})` }}></div></div>
-          <div >
+          <div>
             <h1 className="mb-[--xs]">{data.title}</h1>
           </div>
         </div>
 
 
-        <div className="col-span-full grid grid-cols-12  py-[--xs] lg:py-[--sm] contentBlock">
+        <div className="col-span-full grid grid-cols-12  py-[--xs] lg:py-[--sm]">
 
           {data.subTitle ? (
             <h2 className="w-full col-span-full lg:col-span-6 lg:col-start-4 px-[--xs] lg:px-0 pb-[--sm]" >{data.subTitle}</h2>
