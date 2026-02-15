@@ -16,10 +16,10 @@ export default async function Home({ params }: any) {
 
   return (
     <Reveal styleSet="w-[100vw] min-h-[100dvh] ">
-      <div className="w-full  min-h-[100dvh]  grid grid-cols-12 articleStage relative text-[white] p-0 md:p-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
+      <div className="w-full grid grid-cols-12 articleStage relative text-[white] p-0 md:p-[--sm]" style={{ backgroundColor: `rgba(20,20,20,.75)` }}>
 
         {data.cover ? (
-          <div className="w-full  col-span-full  lg:min-h-[50vh]">
+          <div className="w-full  col-span-full md:aspect-video xl:aspect-[3/1]">
             {data.cover ? (<SwitchContent work={data.cover} title={`header`} ratio={data.cover.ratio} cover />) : ''}
 
           </div>
