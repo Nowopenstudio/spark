@@ -166,6 +166,9 @@ export default {
 
                 }
             ]
+        },
+        {
+            name:"orderRank",type:"string",title:"Rank"
         }
 
 

@@ -11,7 +11,7 @@ import { getRandom } from "@/app/components/util/sanity";
 
 export default async function Home({params}:any) {
   const {catSlug} = await params
-    const { data } = await getData(`*[_type=='articles' && '${catSlug}' == category->slug.current]{title,'slug':slug.current,author->{firstName},"color":category->color.rgb,"hex":category->color.hex,category->{slug,title},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
+    const { data } = await getData(`*[_type=='articles' && '${catSlug}' == category->slug.current] | order(orderRank asc) {title,'slug':slug.current,author->{firstName},"color":category->color.rgb,"hex":category->color.hex,category->{slug,title},cover{"image":image.asset->url, "vid":video.asset->playbackId, "ratio":video.asset->data.aspect_ratio}}`)
   return (
     <main className="w-[100vw] grid grid-cols-12 pt-[100px] relative gap-[--xs]  py-[200px] articleStage min-h-[100dvh]" style={{backgroundColor:`rgba(20,20,20,.1)` }}>
       {data.length?(
@@ -60,7 +60,7 @@ export async function generateMetadata({params}:any) {
  const {data, info,cat} = query.data  
  const curr = getRandom(0,(data.length-1))
   return {
-    title: `${cat.title} - ${info.meta.title}`,
+    title: `${cat?`${cat.title} -`:""} ${info.meta.title}`,
     keywords: info.meta.keywords,
     description:info.summary,
     openGraph: {

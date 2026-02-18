@@ -1,21 +1,13 @@
-export const myStructure = (S: any) =>
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list';
+export const myStructure = (S: any,context:any) =>
   S.list()
     .title('Content')
     .items([
-      S.listItem()
-        .title('News')
-        .child(
-          S.documentTypeList('news')
-            .title('News')
-        ),
+     
+      orderableDocumentListDeskItem({type: 'news',title: 'News', S, context}),
       S.divider(),
-      S.listItem()
-        .title('Articles')
-        .child(
-          S.documentTypeList('articles')
-            .title('Articles')
-        )
-      ,
+      orderableDocumentListDeskItem({type: 'articles',title: 'Order Articles', S, context}),
+      
       S.listItem()
         .title('Filter Articles')
         .child(

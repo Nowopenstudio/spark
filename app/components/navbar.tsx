@@ -272,7 +272,7 @@ const changeTri=(items:any,parent:any,sec:number, opt:number, slug:any, x:number
          const backNode = {
           id: `${root+categories.length+1}`,
           type: 'navBut',
-          data: { label: <Link href={`/resources`} key={`art-tri-back`} style={{color:parent?parent.color:'#ffffff'}} onClick={()=>changeSec(1)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{`${items[sec].articles.length?`${items[sec].articles.length}`:"0" }`} {items[sec].articles.length > 1 || items[sec].articles.length ==0?"entries":"entry"} →</p></div> </div></Link> },
+          data: { label: <Link href={`/${slug}`} key={`art-tri-back`} style={{color:parent?parent.color:'#ffffff'}} onClick={()=>changeSec(1)} ><div className="navBut backBut w-full h-full" ><div style={{animationDelay:`${100*items.length}ms`}}><p>{`${items[sec].articles.length?`${items[sec].articles.length}`:"0" }`} {items[sec].articles.length > 1 || items[sec].articles.length ==0?"entries":"entry"} →</p></div> </div></Link> },
           position: {  x:((nodeX + nodeGap*2)*opt)*2.7, y:  0},
         }
 
